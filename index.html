@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>K-Digital Store - Vos abonnements premium au meilleur prix</title>
+    <meta name="description" content="Achetez vos comptes et clés d'activation OneDrive, Office 365, ChatGPT, Perplexity, Crunchyroll et IDM en Afrique par MTN MoMo et Orange Money.">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Background glow elements for rich dark aesthetic -->
+    <div class="bg-glow bg-glow-1"></div>
+    <div class="bg-glow bg-glow-2"></div>
+    <div class="bg-glow bg-glow-3"></div>
+
+    <header class="app-header">
+        <div class="header-container">
+            <a href="#" class="brand">
+                <div class="brand-logo">
+                    <span class="logo-text">K</span>
+                </div>
+                <div class="brand-name">
+                    <h1>K-Digital Store</h1>
+                    <p>Abonnements & Logiciels Premium</p>
+                </div>
+            </a>
+            
+            <div class="search-bar-container">
+                <i class="fa-solid fa-magnifying-glass search-icon"></i>
+                <input type="text" id="search-input" placeholder="Rechercher un produit (ex. ChatGPT, Office)...">
+            </div>
+
+            <button class="cart-trigger-btn" id="cart-trigger" aria-label="Voir le panier">
+                <i class="fa-solid fa-bag-shopping"></i>
+                <span class="cart-badge" id="cart-count">0</span>
+            </button>
+        </div>
+    </header>
+
+    <main class="container">
+        <!-- Hero section with modern typography & messaging -->
+        <section class="hero-section">
+            <h2 class="hero-title">Vos services numériques <span class="gradient-text">préférés</span>, activés instantanément.</h2>
+            <p class="hero-subtitle">Commandez en quelques clics, payez via Mobile Money (MTN & Orange) et recevez vos accès directement sur WhatsApp.</p>
+            
+            <!-- Key Selling Arguments -->
+            <div class="hero-badges">
+                <span class="hero-badge"><i class="fa-solid fa-shield-halved"></i> Pas de VPN requis</span>
+                <span class="hero-badge"><i class="fa-solid fa-puzzle-piece"></i> Pas de plugin à installer</span>
+                <span class="hero-badge"><i class="fa-solid fa-envelope-open-text"></i> Activation directe sur votre email personnel</span>
+            </div>
+
+            <!-- OHADA Legal Trust Banner -->
+            <div class="legal-trust-banner">
+                <div class="trust-badge-header">
+                    <i class="fa-solid fa-shield-halved"></i> Entreprise légale OHADA - Enregistrée au Registre du Commerce du Cameroun
+                </div>
+                <div class="trust-details">
+                    <span><strong>Ets Mr K</strong></span> | 
+                    <span>N° RCCM : <strong>RC/YAE/2023/A/2978</strong></span> | 
+                    <span>NUI : <strong>P019116725095G</strong></span> | 
+                    <span>Cercle Bansoa d'Etoudi</span> | 
+                    <span>WhatsApp : <strong>+237 6 55 08 01 50</strong></span>
+                </div>
+            </div>
+            
+            <!-- Category filter chips -->
+            <div class="filter-chips">
+                <button class="chip active" data-category="all">Tout</button>
+                <button class="chip" data-category="productivity"><i class="fa-solid fa-briefcase"></i> Productivité</button>
+                <button class="chip" data-category="ai"><i class="fa-solid fa-brain"></i> Intelligence Artificielle</button>
+                <button class="chip" data-category="entertainment"><i class="fa-solid fa-tv"></i> Divertissement</button>
+                <button class="chip" data-category="utility"><i class="fa-solid fa-wrench"></i> Utilitaires</button>
+            </div>
+        </section>
+
+        <!-- Product Grid -->
+        <section class="products-section">
+            <div class="grid" id="product-grid">
+                <!-- Products dynamically injected via JavaScript -->
+            </div>
+        </section>
+    </main>
+
+    <!-- Shopping Cart Drawer (Take.app style) -->
+    <div class="cart-drawer-overlay" id="cart-overlay"></div>
+    <div class="cart-drawer" id="cart-drawer">
+        <div class="drawer-header">
+            <h3><i class="fa-solid fa-bag-shopping"></i> Votre Panier</h3>
+            <button class="close-drawer" id="close-cart" aria-label="Fermer le panier">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+        </div>
+
+        <div class="drawer-content">
+            <!-- Empty state -->
+            <div class="empty-cart-state" id="empty-cart-msg">
+                <i class="fa-solid fa-basket-shopping empty-icon"></i>
+                <p>Votre panier est vide.</p>
+                <button class="continue-shopping-btn" id="continue-shopping">Parcourir les produits</button>
+            </div>
+
+            <!-- Cart items list -->
+            <div class="cart-items-container" id="cart-items-list">
+                <!-- Items injected here -->
+            </div>
+
+            <!-- Order form & Checkout summary (only visible when cart not empty) -->
+            <div class="checkout-section" id="checkout-form-section" style="display: none;">
+                <div class="cart-summary-card">
+                    <div class="summary-row">
+                        <span>Sous-total</span>
+                        <span id="summary-subtotal">0 FCFA</span>
+                    </div>
+                    <div class="summary-row delivery-row">
+                        <span>Frais de livraison</span>
+                        <span class="free-badge">Gratuit (Email/WhatsApp)</span>
+                    </div>
+                    <hr class="summary-divider">
+                    <div class="summary-row total-row">
+                        <span>Total</span>
+                        <span id="summary-total" class="gradient-text">0 FCFA</span>
+                    </div>
+                </div>
+
+                <form id="checkout-form" class="checkout-form">
+                    <h4 class="form-section-title"><i class="fa-solid fa-user-pen"></i> Vos Informations</h4>
+                    
+                    <div class="form-group">
+                        <label for="client-name">Nom complet *</label>
+                        <input type="text" id="client-name" required placeholder="Ex: Jean Dupont">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="client-whatsapp">Numéro WhatsApp *</label>
+                        <div class="phone-input-wrapper">
+                            <select id="country-code">
+                                <option value="+237" selected>🇨🇲 +237 (Cameroun)</option>
+                                <option value="+225">🇨🇮 +225 (Côte d'Ivoire)</option>
+                                <option value="+221">🇸🇳 +221 (Sénégal)</option>
+                                <option value="+241">🇬🇦 +241 (Gabon)</option>
+                                <option value="+242">🇨🇬 +242 (Congo)</option>
+                                <option value="+229">🇧🇯 +229 (Bénin)</option>
+                                <option value="+228">🇹🇬 +228 (Togo)</option>
+                                <option value="+223">🇲🇱 +223 (Mali)</option>
+                            </select>
+                            <input type="tel" id="client-whatsapp" required placeholder="681479611">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="client-email">Adresse Email * (Pour l'envoi des codes/comptes)</label>
+                        <input type="email" id="client-email" required placeholder="Ex: client@email.com">
+                    </div>
+
+                    <div class="checkout-paths-tabs">
+                        <button type="button" class="tab-btn active" id="tab-pay-now">
+                            <i class="fa-solid fa-money-bill-wave"></i> Payer maintenant
+                        </button>
+                        <button type="button" class="tab-btn" id="tab-contact-first">
+                            <i class="fa-brands fa-whatsapp"></i> Discuter d'abord
+                        </button>
+                    </div>
+
+                    <!-- PATH 1: Pay Now -->
+                    <div class="path-content" id="path-pay-now-content">
+                        <h4 class="form-section-title"><i class="fa-solid fa-wallet"></i> Mode de Paiement</h4>
+                        
+                        <div class="payment-options">
+                            <label class="payment-card-option selected">
+                                <input type="radio" name="payment-method" value="momo" checked>
+                                <div class="option-content">
+                                    <div class="method-logo-wrapper momo-bg">
+                                        <i class="fa-solid fa-mobile-screen-button"></i>
+                                    </div>
+                                    <div class="method-details">
+                                        <span class="method-title">MTN MoMo</span>
+                                        <span class="beneficiary-tag">Darius Valere</span>
+                                    </div>
+                                    <i class="fa-solid fa-circle-check check-indicator"></i>
+                                </div>
+                            </label>
+
+                            <label class="payment-card-option">
+                                <input type="radio" name="payment-method" value="orange">
+                                <div class="option-content">
+                                    <div class="method-logo-wrapper orange-bg">
+                                        <i class="fa-solid fa-mobile-screen-button"></i>
+                                    </div>
+                                    <div class="method-details">
+                                        <span class="method-title">Orange Money</span>
+                                        <span class="beneficiary-tag">ETS Mr K</span>
+                                    </div>
+                                    <i class="fa-solid fa-circle-check check-indicator"></i>
+                                </div>
+                            </label>
+                        </div>
+
+                        <!-- Dynamic Instruction Box -->
+                        <div class="payment-instruction-box" id="instruction-momo">
+                            <p class="instruction-header">Pour payer via <strong>MTN Mobile Money</strong> :</p>
+                            <ol class="instruction-list">
+                                <li>Composez <strong>*126#</strong> sur votre téléphone.</li>
+                                <li>Envoyez le montant exact de <strong class="momo-total-placeholder">0 FCFA</strong> au numéro : <br><strong class="highlight-number"><i class="fa-solid fa-copy copy-btn" data-copy="681479611"></i> +237 681479611</strong> (Darius Valere).</li>
+                                <li>Prenez une capture d'écran du message de confirmation de transfert.</li>
+                            </ol>
+                        </div>
+
+                        <div class="payment-instruction-box" id="instruction-orange" style="display: none;">
+                            <p class="instruction-header">Pour payer via <strong>Orange Money</strong> :</p>
+                            <ol class="instruction-list">
+                                <li>Composez le code marchand <strong>#150*47#</strong> sur votre téléphone.</li>
+                                <li>Entrez le code marchand : <strong class="highlight-number"><i class="fa-solid fa-copy copy-btn" data-copy="1002072"></i> 1002072</strong> (ETS Mr K).</li>
+                                <li>Entrez le montant exact de <strong class="orange-total-placeholder">0 FCFA</strong> et validez.</li>
+                                <li>Prenez une capture d'écran du reçu de paiement.</li>
+                            </ol>
+                        </div>
+
+                        <!-- Payment proof input -->
+                        <div class="form-group proof-upload-group">
+                            <label for="proof-file">Preuve de paiement * <span class="label-hint">(Capture d'écran obligatoire)</span></label>
+                            <div class="file-dropzone" id="dropzone">
+                                <input type="file" id="proof-file" accept="image/*" required style="display:none;">
+                                <div class="dropzone-prompt" id="dropzone-prompt">
+                                    <i class="fa-solid fa-cloud-arrow-up cloud-icon"></i>
+                                    <span>Cliquez ou glissez le reçu de paiement ici</span>
+                                    <span class="file-specs">Format JPG, PNG (Max 5Mo)</span>
+                                </div>
+                                <div class="dropzone-preview" id="dropzone-preview" style="display:none;">
+                                    <img id="preview-image" src="" alt="Aperçu du reçu">
+                                    <div class="preview-actions">
+                                        <span id="preview-filename">recu.png</span>
+                                        <button type="button" class="remove-file-btn" id="remove-proof"><i class="fa-solid fa-trash"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="submit-order-btn" id="btn-submit-pay">
+                            <i class="fa-brands fa-whatsapp"></i> Envoyer la commande WhatsApp
+                        </button>
+                    </div>
+
+                    <!-- PATH 2: Contact First -->
+                    <div class="path-content" id="path-contact-first-content" style="display: none;">
+                        <div class="info-alert">
+                            <i class="fa-solid fa-circle-info"></i>
+                            <p>Vous souhaitez des éclaircissements sur l'activation avant de procéder au paiement ? Pas de soucis ! Votre panier sera partagé avec le vendeur par WhatsApp pour lancer la discussion.</p>
+                        </div>
+                        <button type="button" class="submit-order-btn contact-btn" id="btn-submit-contact">
+                            <i class="fa-brands fa-whatsapp"></i> Discuter sur WhatsApp
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Finalization Instructions / Modal -->
+    <div class="modal-overlay" id="modal-overlay"></div>
+    <div class="modal" id="instruction-modal">
+        <div class="modal-header">
+            <h3><i class="fa-solid fa-circle-check text-success"></i> Commande Initiée !</h3>
+            <button class="close-modal" id="close-modal-btn"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <div class="modal-body">
+            <div class="success-illustration">
+                <i class="fa-brands fa-whatsapp whatsapp-pulse"></i>
+            </div>
+            
+            <p class="modal-intro">Votre commande est prête. Pour finaliser et recevoir vos codes d'accès rapidement, veuillez suivre ces deux étapes :</p>
+            
+            <div class="modal-steps">
+                <div class="modal-step">
+                    <span class="step-num">1</span>
+                    <div class="step-info">
+                        <strong>Envoyez le message pré-rempli</strong>
+                        <p>Nous allons vous rediriger vers le chat WhatsApp officiel de <strong>K-Digital Store</strong> avec les détails de votre commande déjà saisis.</p>
+                    </div>
+                </div>
+                <div class="modal-step proof-step-instruction">
+                    <span class="step-num">2</span>
+                    <div class="step-info">
+                        <strong>Attachez votre capture d'écran de paiement</strong>
+                        <p>Dans la discussion WhatsApp, veuillez attacher l'image du reçu de paiement que vous venez d'importer pour que le vendeur valide instantanément.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal-actions">
+                <button class="redirect-now-btn" id="whatsapp-redirect-btn">
+                    <span>Ouvrir WhatsApp et Envoyer</span> <i class="fa-solid fa-arrow-right"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sticky Notification Toast -->
+    <div class="toast" id="toast-notification">Produit ajouté au panier !</div>
+
+    <!-- Footer -->
+    <footer class="app-footer">
+        <p>&copy; 2026 K-Digital Store. Réalisé avec ❤️ - Style Take.app. Tous droits réservés.</p>
+        <p class="disclaimer">Tous les logos et marques cités appartiennent à leurs propriétaires respectifs.</p>
+    </footer>
+
+    <!-- App JS -->
+    <script src="app.js"></script>
+</body>
+</html>
