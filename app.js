@@ -20,9 +20,9 @@ const products = [
     },
     {
         id: "gemini-pro",
-        name: "Google Gemini 3.1 Pro (18 Mois)",
+        name: "Google Gemini Pro (18 Mois)",
         category: "ai",
-        image: "assets/gemini_banner.png",
+        image: "assets/gemini_banner.jpg",
         description: "Accédez au modèle d'IA le plus puissant de Google. Analyse avancée de code, de textes volumineux et raisonnement logique. Generation dimages et de video. 5 To de stockage inclus.",
         features: [
             "Accès au modèle Gemini Pro",
@@ -649,3 +649,29 @@ function closeModal() {
     updateCartUI();
     closeDrawer();
 }
+
+// Lightbox Image Zoom Functionality
+document.addEventListener("click", (e) => {
+    if (e.target.classList.contains("product-banner-img")) {
+        const src = e.target.src;
+        const lightbox = document.getElementById("image-lightbox");
+        const lightboxImg = document.getElementById("lightbox-img");
+        
+        lightboxImg.src = src;
+        lightbox.classList.add("active");
+        document.body.style.overflow = "hidden"; // Disable scroll when zoomed
+    }
+});
+
+// Close Lightbox controls
+document.getElementById("close-lightbox-btn").addEventListener("click", () => {
+    document.getElementById("image-lightbox").classList.remove("active");
+    document.body.style.overflow = "auto";
+});
+
+document.getElementById("image-lightbox").addEventListener("click", (e) => {
+    if (e.target.id === "image-lightbox") {
+        document.getElementById("image-lightbox").classList.remove("active");
+        document.body.style.overflow = "auto";
+    }
+});
