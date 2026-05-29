@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- SEO Meta Tags -->
+    <title>Contact & Demande de Devis - EspoirDent | Laboratoire Numérique Yaoundé</title>
+    <meta name="description" content="Débutez votre collaboration avec EspoirDent. Envoyez vos fichiers STL ou demandez notre grille de prix. Service de livraison rapide au Cameroun et en Afrique centrale.">
+    <link rel="canonical" href="https://espoirdent.com/contact.html">
+    
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="style.css">
+    
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+    <!-- Header / Navigation (Scroll-Aware) -->
+    <header class="app-header" id="app-header">
+        <div class="container header-container">
+            <a href="index.html" class="brand">
+                <img src="assets/espoirdent_logo.jpg" alt="Logo de EspoirDent" class="brand-logo-img">
+                <div class="brand-name">
+                    <h1>EspoirDent</h1>
+                    <span>Laboratoire Numérique</span>
+                </div>
+            </a>
+            
+            <nav class="nav-menu" id="nav-menu">
+                <a href="index.html" class="nav-link">Accueil</a>
+                <a href="about.html" class="nav-link">À Propos</a>
+                <a href="services.html" class="nav-link">Services</a>
+                <a href="cases.html" class="nav-link">Études de Cas</a>
+                <a href="resources.html" class="nav-link">Ressources</a>
+                <a href="contact.html" class="nav-link active">Contact</a>
+            </nav>
+            
+            <div class="header-actions">
+                <a href="contact.html" class="btn btn-accent btn-sm" style="padding: 10px 20px; font-size: 0.8rem;">Demander un Devis</a>
+                <button class="burger-menu" id="burger-menu" aria-label="Ouvrir le menu de navigation">
+                    <span class="burger-bar"></span>
+                    <span class="burger-bar"></span>
+                    <span class="burger-bar"></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        
+        <!-- Contact Hero Section -->
+        <section class="contact-hero" id="contact-hero">
+            <div class="section-texture"></div>
+            <div class="container">
+                <div class="section-header" style="max-width: 800px; margin-bottom: 48px;">
+                    <span class="section-tag">Formulaire Clinique</span>
+                    <h1>Débutez votre collaboration avec EspoirDent.</h1>
+                    <p style="font-size: 1.15rem;">Remplissez ce formulaire pour nous soumettre un cas de test STL, demander nos tarifs ou planifier un appel d'introduction avec un technicien conseil.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Layout (Form + Panel) -->
+        <section class="contact-layout-section section-bg-dark" style="padding-top: 0;" id="contact-layout-section">
+            <div class="section-texture"></div>
+            <div class="container contact-layout">
+                
+                <!-- Contact Info Panel -->
+                <div class="contact-info-panel reveal">
+                    <div class="contact-info-block">
+                        <h3>Notre Laboratoire</h3>
+                        <p>Notre plateau technique est accessible aux praticiens. N'hésitez pas à nous appeler pour discuter de cas complexes ou planifier une démonstration en direct.</p>
+                        
+                        <ul class="contact-info-list">
+                            <li>
+                                <i class="fa-solid fa-location-dot"></i>
+                                <div>
+                                    <strong>Adresse physique</strong>
+                                    <span>Rue de l'Hôpital Militaire, Quartier de l'Aviation, Yaoundé, Cameroun</span>
+                                </div>
+                            </li>
+                            <li>
+                                <i class="fa-brands fa-whatsapp"></i>
+                                <div>
+                                    <strong>WhatsApp Technique (Ligne directe)</strong>
+                                    <span>+237 6 55 08 01 50 (Réponse rapide sous 15 min)</span>
+                                </div>
+                            </li>
+                            <li>
+                                <i class="fa-solid fa-envelope"></i>
+                                <div>
+                                    <strong>Support Administratif & Envois</strong>
+                                    <span>contact@espoirdent.com</span>
+                                </div>
+                            </li>
+                            <li>
+                                <i class="fa-solid fa-clock"></i>
+                                <div>
+                                    <strong>Heures d'ouverture</strong>
+                                    <span>Lundi - Vendredi : 8h00 - 18h00<br>Samedi : 9h00 - 13h00</span>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <div style="border: 1px solid var(--border-gold); padding: 16px; border-radius: var(--border-radius); background-color: var(--bg-cream);">
+                        <img src="assets/cta_modern_dental_clinic.png" alt="Salle d'examen d'une clinique dentaire moderne équipée d'empreintes numériques" style="border-radius: calc(var(--border-radius) - 4px); width: 100%; aspect-ratio: 16/9; object-fit: cover;">
+                    </div>
+                </div>
+
+                <!-- Form Panel -->
+                <div class="contact-form-panel reveal">
+                    <form id="devis-form" class="contact-form">
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="doctor-name">Nom complet ou Clinique *</label>
+                                <input type="text" id="doctor-name" required placeholder="Ex: Dr. Jean Dupont">
+                            </div>
+                            <div class="form-group">
+                                <label for="doctor-phone">Téléphone (avec WhatsApp) *</label>
+                                <input type="tel" id="doctor-phone" required placeholder="Ex: +237 655 08 01 50">
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="doctor-email">Adresse Email *</label>
+                                <input type="email" id="doctor-email" required placeholder="Ex: docteur@clinique.com">
+                            </div>
+                            <div class="form-group">
+                                <label for="doctor-city">Ville & Pays *</label>
+                                <input type="text" id="doctor-city" required placeholder="Ex: Douala, Cameroun">
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="doctor-scanner">Scanner intra-oral actuel *</label>
+                                <select id="doctor-scanner" required>
+                                    <option value="Medit">Medit (Medit Link)</option>
+                                    <option value="3Shape">3Shape Communicate</option>
+                                    <option value="iTero">Align/iTero</option>
+                                    <option value="Autre">Autre scanner (Export direct)</option>
+                                    <option value="Aucun">Aucun scanner (Empreintes physiques)</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="request-type">Objet de votre demande *</label>
+                                <select id="request-type" required>
+                                    <option value="Grille Tarifaire">Obtenir la grille tarifaire complète</option>
+                                    <option value="Cas Test Gratuit">Envoyer mon premier cas d'essai gratuit</option>
+                                    <option value="Cas Client Reel">Soumettre un cas client réel</option>
+                                    <option value="Conseil Equipement">Demander conseil pour s'équiper</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-row single-col">
+                            <div class="form-group">
+                                <label for="doctor-message">Instructions prothétiques / Message *</label>
+                                <textarea id="doctor-message" rows="5" required placeholder="Indiquez le type de prothèse (ex: couronne zircone unitaire sur 46), la teinte (ex: A2 VITA), la morphologie souhaitée ou vos questions particulières..."></textarea>
+                            </div>
+                        </div>
+
+                        <!-- Drag-and-drop File Upload Zone -->
+                        <div class="form-group">
+                            <label>Joindre un fichier de cas (STL, PLY, OBJ, ZIP ou PDF) <small style="text-transform: lowercase; font-weight: normal; color: var(--text-muted);">(Max 50Mo)</small></label>
+                            <div class="file-dropzone" id="dropzone">
+                                <input type="file" id="stl-file" accept=".stl,.ply,.obj,.zip,.pdf,.rar" style="display: none;">
+                                <div class="dropzone-prompt" id="dropzone-prompt">
+                                    <i class="fa-solid fa-cloud-arrow-up"></i>
+                                    <span>Glissez-déposez ou cliquez pour sélectionner votre fichier STL</span>
+                                    <span class="file-specs">Formats acceptés : STL, PLY, OBJ, PDF ou ZIP (Max 50 Mo)</span>
+                                </div>
+                                <div class="dropzone-preview" id="dropzone-preview" style="display: none;">
+                                    <i class="fa-solid fa-file-shield"></i>
+                                    <div class="preview-actions">
+                                        <span id="preview-filename">fichier.stl</span>
+                                        <button type="button" class="remove-file-btn" id="remove-file" aria-label="Supprimer le fichier joint"><i class="fa-solid fa-trash"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Simulation upload bar -->
+                            <div class="upload-progress-bar" id="progress-bar-container">
+                                <div class="upload-progress" id="progress-bar"></div>
+                            </div>
+                        </div>
+
+                        <div style="margin-top: 12px;">
+                            <button type="submit" class="btn btn-accent" style="width: 100%; display: flex; justify-content: center; align-items: center;" id="submit-btn">
+                                <span>Envoyer ma Demande</span> <i class="fa-solid fa-paper-plane" style="margin-left: 10px;"></i>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+                
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="app-footer">
+        <div class="container footer-grid">
+            <div class="footer-col">
+                <a href="index.html" class="brand">
+                    <img src="assets/espoirdent_logo.jpg" alt="Logo de EspoirDent" style="height: 38px;">
+                    <div class="brand-name">
+                        <h1 style="font-size: 1.15rem; color: var(--bg-cream);">EspoirDent</h1>
+                        <span style="font-size: 0.65rem;">Laboratoire Numérique</span>
+                    </div>
+                </a>
+                <p class="footer-about-text">Laboratoire de prothèse dentaire numérique de haute technologie basé à Yaoundé. Spécialisé en CAO/FAO (CAD/CAM), impression 3D médicale et intégration de l'IA.</p>
+            </div>
+            
+            <div class="footer-col">
+                <h4>Navigation</h4>
+                <ul class="footer-links">
+                    <li><a href="index.html">Accueil</a></li>
+                    <li><a href="about.html">À Propos</a></li>
+                    <li><a href="services.html">Services</a></li>
+                    <li><a href="cases.html">Études de Cas</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-col">
+                <h4>Ressources</h4>
+                <ul class="footer-links">
+                    <li><a href="resources.html">Guides de préparation</a></li>
+                    <li><a href="resources.html#scanners">Liaisons Scanners</a></li>
+                    <li><a href="contact.html">Demande de devis</a></li>
+                    <li><a href="admin.html">Espace Clinique (Admin)</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-col">
+                <h4>Contact</h4>
+                <div class="footer-contact-item">
+                    <i class="fa-solid fa-location-dot"></i>
+                    <span>Rue de l'Hôpital Militaire, Quartier de l'Aviation, Yaoundé, Cameroun</span>
+                </div>
+                <div class="footer-contact-item">
+                    <i class="fa-brands fa-whatsapp"></i>
+                    <span>+237 6 55 08 01 50</span>
+                </div>
+                <div class="footer-contact-item">
+                    <i class="fa-solid fa-envelope"></i>
+                    <span>contact@espoirdent.com</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="container footer-bottom">
+            <p>&copy; 2026 EspoirDent. Tous droits réservés. Réalisé pour les cabinets dentaires d'Afrique francophone.</p>
+            <div class="footer-bottom-links">
+                <a href="#">Mentions Légales</a>
+                <a href="#">Protection des Données</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- App JS -->
+    <script src="app.js"></script>
+</body>
+</html>

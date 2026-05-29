@@ -3,317 +3,423 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>K-Digital Store - Vos abonnements premium au meilleur prix</title>
-    <meta name="description" content="Achetez vos comptes et clés d'activation OneDrive, Office 365, ChatGPT, Perplexity, Crunchyroll et IDM en Afrique par MTN MoMo et Orange Money.">
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- SEO Meta Tags -->
+    <title>EspoirDent - Laboratoire de Prothèse Dentaire Numérique CAD/CAM Yaoundé</title>
+    <meta name="description" content="Laboratoire de prothèse dentaire numérique à Yaoundé. Spécialiste CAO/FAO (CAD/CAM), impression 3D et IA. Couronnes, bridges, implants et aligneurs en Afrique centrale.">
+    <meta name="keywords" content="prothèse dentaire, laboratoire numérique, CAD/CAM, CAO/FAO, impression 3D dentaire, zircone, e.max, aligneurs invisibles, Yaoundé, Cameroun, Afrique centrale">
+    <link rel="canonical" href="https://espoirdent.com/">
+    
+    <!-- Open Graph Tags -->
+    <meta property="og:title" content="EspoirDent - Laboratoire de Prothèse Dentaire Numérique">
+    <meta property="og:description" content="Votre partenaire prothétique numérique de haute précision basé à Yaoundé. Concoiveillez des couronnes, implants et aligneurs parfaits sous 3 à 5 jours.">
+    <meta property="og:image" content="assets/hero_digital_dental_design.png">
+    <meta property="og:url" content="https://espoirdent.com/">
+    <meta property="og:type" content="website">
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="style.css">
+    
     <!-- FontAwesome for Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="style.css">
+    
+    <!-- Analytics Tracking Script Mock -->
+    <script>
+        // Simulation Google Analytics pour le suivi des conversions (demandes de devis)
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+        ga('create', 'UA-XXXXX-Y', 'auto');
+        ga('send', 'pageview');
+    </script>
 </head>
 <body>
-    <!-- Background glow elements for rich dark aesthetic -->
-    <div class="bg-glow bg-glow-1"></div>
-    <div class="bg-glow bg-glow-2"></div>
-    <div class="bg-glow bg-glow-3"></div>
 
-    <header class="app-header">
-        <div class="header-container">
-            <a href="#" class="brand">
-                <div class="brand-logo">
-                    <span class="logo-text">K</span>
-                </div>
+    <!-- Header / Navigation (Scroll-Aware) -->
+    <header class="app-header" id="app-header">
+        <div class="container header-container">
+            <a href="index.html" class="brand" id="brand-link">
+                <img src="assets/espoirdent_logo.jpg" alt="Logo de EspoirDent" class="brand-logo-img">
                 <div class="brand-name">
-                    <h1>K-Digital Store</h1>
-                    <p>Abonnements & Logiciels Premium</p>
+                    <h1>EspoirDent</h1>
+                    <span>Laboratoire Numérique</span>
                 </div>
             </a>
             
-            <div class="search-bar-container">
-                <i class="fa-solid fa-magnifying-glass search-icon"></i>
-                <input type="text" id="search-input" placeholder="Rechercher un produit (ex. ChatGPT, Office)...">
-            </div>
-
-            <button class="cart-trigger-btn" id="cart-trigger" aria-label="Voir le panier">
-                <i class="fa-solid fa-bag-shopping"></i>
-                <span class="cart-badge" id="cart-count">0</span>
-            </button>
-        </div>
-    </header>
-
-    <main class="container">
-        <!-- Hero section with modern typography & messaging -->
-        <section class="hero-section">
-            <h2 class="hero-title">Vos services numériques <span class="gradient-text">préférés</span>, activés instantanément.</h2>
-            <p class="hero-subtitle">Commandez en quelques clics, payez via Mobile Money (MTN & Orange) et recevez vos accès directement sur WhatsApp.</p>
+            <nav class="nav-menu" id="nav-menu">
+                <a href="index.html" class="nav-link active">Accueil</a>
+                <a href="about.html" class="nav-link">À Propos</a>
+                <a href="services.html" class="nav-link">Services</a>
+                <a href="cases.html" class="nav-link">Études de Cas</a>
+                <a href="resources.html" class="nav-link">Ressources</a>
+                <a href="contact.html" class="nav-link">Contact</a>
+            </nav>
             
-            <!-- Key Selling Arguments -->
-            <div class="hero-badges">
-                <span class="hero-badge"><i class="fa-solid fa-shield-halved"></i> Pas de VPN requis</span>
-                <span class="hero-badge"><i class="fa-solid fa-puzzle-piece"></i> Pas de plugin à installer</span>
-                <span class="hero-badge"><i class="fa-solid fa-envelope-open-text"></i> Activation directe sur votre email personnel</span>
-            </div>
-
-            <!-- OHADA Legal Trust Banner -->
-            <div class="legal-trust-banner">
-                <div class="trust-badge-header">
-                    <i class="fa-solid fa-shield-halved"></i> Entreprise légale OHADA - Enregistrée au Registre du Commerce du Cameroun
-                </div>
-                <div class="trust-details">
-                    <span><strong>Ets Mr K</strong></span> | 
-                    <span>N° RCCM : <strong>RC/YAE/2023/A/2978</strong></span> | 
-                    <span>NUI : <strong>P019116725095G</strong></span> | 
-                    <span>Cercle Bansoa d'Etoudi</span> | 
-                    <span>WhatsApp : <strong>+237 6 55 08 01 50</strong></span>
-                </div>
-            </div>
-            
-            <!-- Category filter chips -->
-            <div class="filter-chips">
-                <button class="chip active" data-category="all">Tout</button>
-                <button class="chip" data-category="productivity"><i class="fa-solid fa-briefcase"></i> Productivité</button>
-                <button class="chip" data-category="ai"><i class="fa-solid fa-brain"></i> Intelligence Artificielle</button>
-                <button class="chip" data-category="entertainment"><i class="fa-solid fa-tv"></i> Divertissement</button>
-                <button class="chip" data-category="utility"><i class="fa-solid fa-wrench"></i> Utilitaires</button>
-            </div>
-        </section>
-
-        <!-- Product Grid -->
-        <section class="products-section">
-            <div class="grid" id="product-grid">
-                <!-- Products dynamically injected via JavaScript -->
-            </div>
-        </section>
-    </main>
-
-    <!-- Shopping Cart Drawer (Take.app style) -->
-    <div class="cart-drawer-overlay" id="cart-overlay"></div>
-    <div class="cart-drawer" id="cart-drawer">
-        <div class="drawer-header">
-            <h3><i class="fa-solid fa-bag-shopping"></i> Votre Panier</h3>
-            <button class="close-drawer" id="close-cart" aria-label="Fermer le panier">
-                <i class="fa-solid fa-xmark"></i>
-            </button>
-        </div>
-
-        <div class="drawer-content">
-            <!-- Empty state -->
-            <div class="empty-cart-state" id="empty-cart-msg">
-                <i class="fa-solid fa-basket-shopping empty-icon"></i>
-                <p>Votre panier est vide.</p>
-                <button class="continue-shopping-btn" id="continue-shopping">Parcourir les produits</button>
-            </div>
-
-            <!-- Cart items list -->
-            <div class="cart-items-container" id="cart-items-list">
-                <!-- Items injected here -->
-            </div>
-
-            <!-- Order form & Checkout summary (only visible when cart not empty) -->
-            <div class="checkout-section" id="checkout-form-section" style="display: none;">
-                <div class="cart-summary-card">
-                    <div class="summary-row">
-                        <span>Sous-total</span>
-                        <span id="summary-subtotal">0 FCFA</span>
-                    </div>
-                    <div class="summary-row delivery-row">
-                        <span>Frais de livraison</span>
-                        <span class="free-badge">Gratuit (Email/WhatsApp)</span>
-                    </div>
-                    <hr class="summary-divider">
-                    <div class="summary-row total-row">
-                        <span>Total</span>
-                        <span id="summary-total" class="gradient-text">0 FCFA</span>
-                    </div>
-                </div>
-
-                <form id="checkout-form" class="checkout-form">
-                    <h4 class="form-section-title"><i class="fa-solid fa-user-pen"></i> Vos Informations</h4>
-                    
-                    <div class="form-group">
-                        <label for="client-name">Nom complet *</label>
-                        <input type="text" id="client-name" required placeholder="Ex: Jean Dupont">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="client-whatsapp">Numéro WhatsApp *</label>
-                        <div class="phone-input-wrapper">
-                            <select id="country-code">
-                                <option value="+237" selected>🇨🇲 +237 (Cameroun)</option>
-                                <option value="+225">🇨🇮 +225 (Côte d'Ivoire)</option>
-                                <option value="+221">🇸🇳 +221 (Sénégal)</option>
-                                <option value="+241">🇬🇦 +241 (Gabon)</option>
-                                <option value="+242">🇨🇬 +242 (Congo)</option>
-                                <option value="+229">🇧🇯 +229 (Bénin)</option>
-                                <option value="+228">🇹🇬 +228 (Togo)</option>
-                                <option value="+223">🇲🇱 +223 (Mali)</option>
-                            </select>
-                            <input type="tel" id="client-whatsapp" required placeholder="681479611">
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="client-email">Adresse Email * (Pour l'envoi des codes/comptes)</label>
-                        <input type="email" id="client-email" required placeholder="Ex: client@email.com">
-                    </div>
-
-                    <div class="checkout-paths-tabs">
-                        <button type="button" class="tab-btn active" id="tab-pay-now">
-                            <i class="fa-solid fa-money-bill-wave"></i> Payer maintenant
-                        </button>
-                        <button type="button" class="tab-btn" id="tab-contact-first">
-                            <i class="fa-brands fa-whatsapp"></i> Discuter d'abord
-                        </button>
-                    </div>
-
-                    <!-- PATH 1: Pay Now -->
-                    <div class="path-content" id="path-pay-now-content">
-                        <h4 class="form-section-title"><i class="fa-solid fa-wallet"></i> Mode de Paiement</h4>
-                        
-                        <div class="payment-options">
-                            <label class="payment-card-option selected">
-                                <input type="radio" name="payment-method" value="momo" checked>
-                                <div class="option-content">
-                                    <div class="method-logo-wrapper momo-bg">
-                                        <i class="fa-solid fa-mobile-screen-button"></i>
-                                    </div>
-                                    <div class="method-details">
-                                        <span class="method-title">MTN MoMo</span>
-                                        <span class="beneficiary-tag">Darius Valere</span>
-                                    </div>
-                                    <i class="fa-solid fa-circle-check check-indicator"></i>
-                                </div>
-                            </label>
-
-                            <label class="payment-card-option">
-                                <input type="radio" name="payment-method" value="orange">
-                                <div class="option-content">
-                                    <div class="method-logo-wrapper orange-bg">
-                                        <i class="fa-solid fa-mobile-screen-button"></i>
-                                    </div>
-                                    <div class="method-details">
-                                        <span class="method-title">Orange Money</span>
-                                        <span class="beneficiary-tag">ETS Mr K</span>
-                                    </div>
-                                    <i class="fa-solid fa-circle-check check-indicator"></i>
-                                </div>
-                            </label>
-                        </div>
-
-                        <!-- Dynamic Instruction Box -->
-                        <div class="payment-instruction-box" id="instruction-momo">
-                            <p class="instruction-header">Pour payer via <strong>MTN Mobile Money</strong> :</p>
-                            <ol class="instruction-list">
-                                <li>Composez <strong>*126#</strong> sur votre téléphone.</li>
-                                <li>Envoyez le montant exact de <strong class="momo-total-placeholder">0 FCFA</strong> au numéro : <br><strong class="highlight-number"><i class="fa-solid fa-copy copy-btn" data-copy="681479611"></i> +237 681479611</strong> (Darius Valere).</li>
-                                <li>Prenez une capture d'écran du message de confirmation de transfert.</li>
-                            </ol>
-                        </div>
-
-                        <div class="payment-instruction-box" id="instruction-orange" style="display: none;">
-                            <p class="instruction-header">Pour payer via <strong>Orange Money</strong> :</p>
-                            <ol class="instruction-list">
-                                <li>Composez le code marchand <strong>#150*47#</strong> sur votre téléphone.</li>
-                                <li>Entrez le code marchand : <strong class="highlight-number"><i class="fa-solid fa-copy copy-btn" data-copy="1002072"></i> 1002072</strong> (ETS Mr K).</li>
-                                <li>Entrez le montant exact de <strong class="orange-total-placeholder">0 FCFA</strong> et validez.</li>
-                                <li>Prenez une capture d'écran du reçu de paiement.</li>
-                            </ol>
-                        </div>
-
-                        <!-- Payment proof input -->
-                        <div class="form-group proof-upload-group">
-                            <label for="proof-file">Preuve de paiement * <span class="label-hint">(Capture d'écran obligatoire)</span></label>
-                            <div class="file-dropzone" id="dropzone">
-                                <input type="file" id="proof-file" accept="image/*" required style="display:none;">
-                                <div class="dropzone-prompt" id="dropzone-prompt">
-                                    <i class="fa-solid fa-cloud-arrow-up cloud-icon"></i>
-                                    <span>Cliquez ou glissez le reçu de paiement ici</span>
-                                    <span class="file-specs">Format JPG, PNG (Max 5Mo)</span>
-                                </div>
-                                <div class="dropzone-preview" id="dropzone-preview" style="display:none;">
-                                    <img id="preview-image" src="" alt="Aperçu du reçu">
-                                    <div class="preview-actions">
-                                        <span id="preview-filename">recu.png</span>
-                                        <button type="button" class="remove-file-btn" id="remove-proof"><i class="fa-solid fa-trash"></i></button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <button type="submit" class="submit-order-btn" id="btn-submit-pay">
-                            <i class="fa-brands fa-whatsapp"></i> Envoyer la commande WhatsApp
-                        </button>
-                    </div>
-
-                    <!-- PATH 2: Contact First -->
-                    <div class="path-content" id="path-contact-first-content" style="display: none;">
-                        <div class="info-alert">
-                            <i class="fa-solid fa-circle-info"></i>
-                            <p>Vous souhaitez des éclaircissements sur l'activation avant de procéder au paiement ? Pas de soucis ! Votre panier sera partagé avec le vendeur par WhatsApp pour lancer la discussion.</p>
-                        </div>
-                        <button type="button" class="submit-order-btn contact-btn" id="btn-submit-contact">
-                            <i class="fa-brands fa-whatsapp"></i> Discuter sur WhatsApp
-                        </button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-
-    <!-- Finalization Instructions / Modal -->
-    <div class="modal-overlay" id="modal-overlay"></div>
-    <div class="modal" id="instruction-modal">
-        <div class="modal-header">
-            <h3><i class="fa-solid fa-circle-check text-success"></i> Commande Initiée !</h3>
-            <button class="close-modal" id="close-modal-btn"><i class="fa-solid fa-xmark"></i></button>
-        </div>
-        <div class="modal-body">
-            <div class="success-illustration">
-                <i class="fa-brands fa-whatsapp whatsapp-pulse"></i>
-            </div>
-            
-            <p class="modal-intro">Votre commande est prête. Pour finaliser et recevoir vos codes d'accès rapidement, veuillez suivre ces deux étapes :</p>
-            
-            <div class="modal-steps">
-                <div class="modal-step">
-                    <span class="step-num">1</span>
-                    <div class="step-info">
-                        <strong>Envoyez le message pré-rempli</strong>
-                        <p>Nous allons vous rediriger vers le chat WhatsApp officiel de <strong>K-Digital Store</strong> avec les détails de votre commande déjà saisis.</p>
-                    </div>
-                </div>
-                <div class="modal-step proof-step-instruction">
-                    <span class="step-num">2</span>
-                    <div class="step-info">
-                        <strong>Attachez votre capture d'écran de paiement</strong>
-                        <p>Dans la discussion WhatsApp, veuillez attacher l'image du reçu de paiement que vous venez d'importer pour que le vendeur valide instantanément.</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="modal-actions">
-                <button class="redirect-now-btn" id="whatsapp-redirect-btn">
-                    <span>Ouvrir WhatsApp et Envoyer</span> <i class="fa-solid fa-arrow-right"></i>
+            <div class="header-actions">
+                <a href="contact.html" class="btn btn-accent btn-sm" style="padding: 10px 20px; font-size: 0.8rem;" id="nav-cta">Demander un Devis</a>
+                <button class="burger-menu" id="burger-menu" aria-label="Ouvrir le menu de navigation">
+                    <span class="burger-bar"></span>
+                    <span class="burger-bar"></span>
+                    <span class="burger-bar"></span>
                 </button>
             </div>
         </div>
-    </div>
+    </header>
 
-    <!-- Sticky Notification Toast -->
-    <div class="toast" id="toast-notification">Produit ajouté au panier !</div>
+    <!-- Main Content -->
+    <main>
+        
+        <!-- Hero Section -->
+        <section class="hero-section" id="hero-section">
+            <div class="section-texture"></div>
+            <div class="container hero-layout">
+                <div class="hero-content">
+                    <span class="section-tag">Technologie CAD/CAM de pointe</span>
+                    <h1>Des prothèses d’une précision micrométrique livrées en quelques jours.</h1>
+                    <p class="subtitle">EspoirDent est votre laboratoire numérique basé à Yaoundé. Nous combinons la CAO/FAO, l'impression 3D et des outils d'intelligence artificielle pour concevoir des couronnes, des bridges et des aligneurs parfaits dès la première pose.</p>
+                    <div class="hero-actions">
+                        <a href="contact.html" class="btn btn-primary" id="hero-primary-cta">Débuter un cas de test</a>
+                        <a href="contact.html?type=call" class="btn btn-secondary" id="hero-secondary-cta">Discuter avec un technicien</a>
+                    </div>
+                    <div class="hero-compatibility">
+                        <i class="fa-solid fa-circle-check"></i>
+                        <span>Compatible avec tous les scanners intra-oraux (Medit, 3Shape, iTero, Carestream).</span>
+                    </div>
+                </div>
+                
+                <!-- Richly Composed Visual Scene -->
+                <div class="hero-scene-wrapper">
+                    <div class="hero-frame">
+                        <img src="assets/hero_digital_dental_design.png" alt="Conception 3D CAO d'une couronne dentaire sur ordinateur" class="hero-image">
+                        <div class="hero-floating-card">
+                            <i class="fa-solid fa-microscope"></i>
+                            <div class="floating-card-text">
+                                <span class="title">Précision à 5 microns</span>
+                                <span class="desc">Ajustement clinique parfait</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-    <!-- Lightbox Modal for Image Zoom -->
-    <div class="lightbox-modal" id="image-lightbox">
-        <span class="close-lightbox" id="close-lightbox-btn">&times;</span>
-        <img class="lightbox-content" id="lightbox-img" alt="Agrandissement de l'image">
-    </div>
+        <!-- Trust Banner (Marquee) -->
+        <div class="trust-banner">
+            <div class="container trust-wrapper">
+                <span class="trust-title">Ils nous font confiance en Afrique centrale</span>
+                <div class="marquee-container">
+                    <div class="marquee-content">
+                        <div class="marquee-item"><i class="fa-solid fa-hospital"></i> Cabinet Dentaire de l'Estuaire (Douala)</div>
+                        <div class="marquee-item"><i class="fa-solid fa-hospital-user"></i> Clinique Dentaire du Centre (Yaoundé)</div>
+                        <div class="marquee-item"><i class="fa-solid fa-house-medical"></i> Centre Médical de l'Espoir (Libreville)</div>
+                        <div class="marquee-item"><i class="fa-solid fa-circle-h"></i> Clinique du Sourire (Brazzaville)</div>
+                        <div class="marquee-item"><i class="fa-solid fa-hospital"></i> Cabinet Dentaire de l'Estuaire (Douala)</div>
+                        <div class="marquee-item"><i class="fa-solid fa-hospital-user"></i> Clinique Dentaire du Centre (Yaoundé)</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Bento Grid Services Section -->
+        <section class="services-section section-bg-dark" id="services-section">
+            <div class="section-texture"></div>
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-tag">Notre expertise clinique</span>
+                    <h2>Solutions prothétiques numériques complètes pour cabinets exigeants.</h2>
+                    <p>Découvrez notre gamme de dispositifs médicaux sur-mesure conçus localement pour optimiser votre flux clinique et éliminer les réfections.</p>
+                </div>
+                
+                <!-- Bento Grid (Tessellates fully with 4-column layout) -->
+                <div class="bento-grid">
+                    
+                    <!-- Card 1: Fixed Prosth (col-2) -->
+                    <div class="bento-card col-2 reveal">
+                        <div class="bento-card-top">
+                            <div class="bento-icon-wrapper">
+                                <i class="fa-solid fa-teeth"></i>
+                            </div>
+                            <h3>Prothèse Fixe (Conjointe)</h3>
+                            <p>Usinage de couronnes et bridges en zircone multicouche haute translucidité, disilicate de lithium (e.max) et PMMA provisoire de haute densité. Modélisation assistée par IA pour respecter l'occlusion naturelle.</p>
+                        </div>
+                        <div class="bento-card-bottom">
+                            <a href="services.html#conjointe" class="text-link">Détails techniques <i class="fa-solid fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                    
+                    <!-- Card 2: Implant (col-2) -->
+                    <div class="bento-card col-2 reveal">
+                        <div class="bento-card-top">
+                            <div class="bento-icon-wrapper">
+                                <i class="fa-solid fa-screwdriver"></i>
+                            </div>
+                            <h3>Implantologie Numérique</h3>
+                            <p>Piliers personnalisés en titane et zircone sur base titane assurant un profil d'émergence idéal. Planification implantaire et impression 3D de guides chirurgicaux en résine biocompatible pour une chirurgie sécurisée.</p>
+                        </div>
+                        <div class="bento-card-bottom">
+                            <a href="services.html#implant" class="text-link">Découvrir la gamme <i class="fa-solid fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                    
+                    <!-- Card 3: Orthodontics (col-2) -->
+                    <div class="bento-card col-2 reveal">
+                        <div class="bento-card-top">
+                            <div class="bento-icon-wrapper">
+                                <i class="fa-solid fa-circle-nodes"></i>
+                            </div>
+                            <h3>Aligneurs Invisibles</h3>
+                            <p>Conception numérique complète de plans de traitement orthodontique et production locale de gouttières transparentes thermoformées. Modélisation précise des mouvements dentaires.</p>
+                        </div>
+                        <div class="bento-card-bottom">
+                            <a href="services.html#aligneurs" class="text-link">En savoir plus <i class="fa-solid fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                    
+                    <!-- Card 4: Removable Prosth (col-2) -->
+                    <div class="bento-card col-2 reveal">
+                        <div class="bento-card-top">
+                            <div class="bento-icon-wrapper">
+                                <i class="fa-solid fa-teeth-open"></i>
+                            </div>
+                            <h3>Prothèse Amovible (Adjointe)</h3>
+                            <p>Modélisation 3D de stellites et châssis métalliques. Coulée numérique ou impression 3D directe par frittage laser de métal pour un ajustement et un confort optimaux sans crochets douloureux.</p>
+                        </div>
+                        <div class="bento-card-bottom">
+                            <a href="services.html#adjointe" class="text-link">Voir les solutions <i class="fa-solid fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        </section>
+
+        <!-- Stats Section (Design Moment) -->
+        <section class="stats-section" id="stats-section">
+            <div class="container stats-layout">
+                <div class="stats-content reveal">
+                    <span class="section-tag">Résultats Cliniques réels</span>
+                    <h2>Faites confiance à un partenaire local aux standards européens.</h2>
+                    <p>Notre laboratoire combine la réactivité de la présence locale à Yaoundé avec la précision de la fabrication robotisée.</p>
+                    
+                    <div class="stats-grid">
+                        <div class="stat-item">
+                            <div class="stat-number counting plus" data-target="1200">0</div>
+                            <div class="stat-label">Prothèses Posées</div>
+                            <div class="stat-desc">Couronnes et implants insérés avec succès par nos cabinets partenaires.</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number counting percent" data-target="98">0</div>
+                            <div class="stat-label">Zéro Retouche</div>
+                            <div class="stat-desc">Taux d'ajustement occlusal parfait dès le premier essai au fauteuil.</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Design Moment Graphic Overlay -->
+                <div class="stats-graphic reveal">
+                    <div class="stats-frame">
+                        <img src="assets/service_3d_printed_dental.png" alt="Modèles de mâchoires dentaires imprimés en 3D dans le laboratoire EspoirDent" class="stats-img">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Testimonial Section -->
+        <section class="testimonial-section" id="testimonial-section">
+            <div class="section-texture"></div>
+            <div class="container">
+                <div class="section-header" style="margin: 0 auto 64px auto; text-align: center;">
+                    <span class="section-tag">Témoignages</span>
+                    <h2>Ce que disent les dentistes partenaires.</h2>
+                </div>
+                
+                <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 40px;" class="reveal">
+                    <!-- Testimonial 1 -->
+                    <div style="background-color: var(--bg-cream-dark); padding: 40px; border-radius: var(--border-radius); border: 1px solid var(--border-gold); display: flex; flex-direction: column; justify-content: space-between; box-shadow: var(--shadow-soft);">
+                        <p style="font-family: var(--font-serif); font-size: 1.25rem; font-style: italic; color: var(--primary-green); line-height: 1.5; margin-bottom: 24px;">"Depuis que j'envoie mes fichiers STL à EspoirDent, j'ai divisé mes délais de livraison par trois. Mais le plus impressionnant reste la précision : je ne fais pratiquement plus aucune retouche occlusale en bouche."</p>
+                        <div style="display: flex; align-items: center; gap: 16px;">
+                            <div style="width: 48px; height: 48px; border-radius: 50%; background-color: var(--primary-green); display: flex; align-items: center; justify-content: center; color: var(--accent-gold);">
+                                <i class="fa-solid fa-user-doctor"></i>
+                            </div>
+                            <div>
+                                <strong style="display: block; font-size: 0.95rem; color: var(--text-dark);">Dr. Sandrine N.</strong>
+                                <span style="font-size: 0.8rem; color: var(--text-muted);">Cabinet Dentaire de l'Estuaire, Douala</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Testimonial 2 -->
+                    <div style="background-color: var(--bg-cream-dark); padding: 40px; border-radius: var(--border-radius); border: 1px solid var(--border-gold); display: flex; flex-direction: column; justify-content: space-between; box-shadow: var(--shadow-soft);">
+                        <p style="font-family: var(--font-serif); font-size: 1.25rem; font-style: italic; color: var(--primary-green); line-height: 1.5; margin-bottom: 24px;">"Le support technique est exceptionnel. Pouvoir discuter du design d'un bridge implantaire complexe directement sur WhatsApp avant la production change complètement la donne."</p>
+                        <div style="display: flex; align-items: center; gap: 16px;">
+                            <div style="width: 48px; height: 48px; border-radius: 50%; background-color: var(--primary-green); display: flex; align-items: center; justify-content: center; color: var(--accent-gold);">
+                                <i class="fa-solid fa-user-doctor"></i>
+                            </div>
+                            <div>
+                                <strong style="display: block; font-size: 0.95rem; color: var(--text-dark);">Dr. Marc K.</strong>
+                                <span style="font-size: 0.8rem; color: var(--text-muted);">Clinique Dentaire du Centre, Yaoundé</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ Section -->
+        <section class="faq-section section-bg-dark" id="faq-section">
+            <div class="section-texture"></div>
+            <div class="container faq-layout">
+                <div class="faq-intro">
+                    <span class="section-tag">Des réponses claires</span>
+                    <h2>Une transition numérique en toute confiance.</h2>
+                    <p>Découvrez comment nous collaborons au quotidien avec les praticiens, équipés ou non d'un scanner 3D intra-oral.</p>
+                    <a href="contact.html" class="btn btn-secondary">Poser une autre question</a>
+                </div>
+                
+                <div class="faq-list">
+                    <!-- FAQ 1 -->
+                    <div class="faq-item">
+                        <button class="faq-trigger">
+                            <span class="faq-question">Quels sont vos délais de livraison réels ?</span>
+                            <div class="faq-icon-box"><i class="fa-solid fa-plus"></i></div>
+                        </button>
+                        <div class="faq-content">
+                            <div class="faq-content-inner">
+                                <p>Pour Yaoundé et Douala, le délai standard est de 3 à 5 jours ouvrés à compter de la validation du modèle numérique. Pour les villes et pays de la sous-région (Libreville, Brazzaville, N'Djamena), comptez 5 à 7 jours de transport via nos partenaires logistiques express (DHL/GP).</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- FAQ 2 -->
+                    <div class="faq-item">
+                        <button class="faq-trigger">
+                            <span class="faq-question">Je n’ai pas de scanner intra-oral. Puis-je travailler avec vous ?</span>
+                            <div class="faq-icon-box"><i class="fa-solid fa-plus"></i></div>
+                        </button>
+                        <div class="faq-content">
+                            <div class="faq-content-inner">
+                                <p>Tout à fait. Vous pouvez nous envoyer vos empreintes traditionnelles en silicone ou alginate par coursier. Nous les coulons et les numérisons dans notre laboratoire à l'aide de nos scanners de modèles 3D pour réintégrer le flux numérique.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- FAQ 3 -->
+                    <div class="faq-item">
+                        <button class="faq-trigger">
+                            <span class="faq-question">Avec quelles marques de scanners intra-oraux êtes-vous compatibles ?</span>
+                            <div class="faq-icon-box"><i class="fa-solid fa-plus"></i></div>
+                        </button>
+                        <div class="faq-content">
+                            <div class="faq-content-inner">
+                                <p>Nous acceptons les fichiers ouverts de n'importe quel scanner intra-oral. Que vous utilisiez Medit, 3Shape, iTero, Carestream, Dexis ou Dentsply Sirona, il vous suffit de nous exporter vos fichiers au format standard STL ou PLY.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- FAQ 4 -->
+                    <div class="faq-item">
+                        <button class="faq-trigger">
+                            <span class="faq-question">Quels matériaux utilisez-vous et sont-ils certifiés ?</span>
+                            <div class="faq-icon-box"><i class="fa-solid fa-plus"></i></div>
+                        </button>
+                        <div class="faq-content">
+                            <div class="faq-content-inner">
+                                <p>Nous utilisons exclusivement des blocs de zircone multicouche haut de gamme et des résines d'impression 3D biocompatibles certifiés CE et FDA. Chaque prothèse est livrée avec une déclaration de conformité et une fiche de traçabilité indiquant la marque et le lot des matériaux utilisés.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- FAQ 5 -->
+                    <div class="faq-item">
+                        <button class="faq-trigger">
+                            <span class="faq-question">Comment fonctionne le paiement et le suivi de commande ?</span>
+                            <div class="faq-icon-box"><i class="fa-solid fa-plus"></i></div>
+                        </button>
+                        <div class="faq-content">
+                            <div class="faq-content-inner">
+                                <p>Vous pouvez demander un devis en ligne ou nous envoyer un cas. Le paiement s'effectue par Mobile Money (Orange Money, MTN MoMo), virement bancaire ou chèque (pour les cabinets partenaires). Vous recevez des notifications automatiques (par email ou WhatsApp) à chaque étape : réception du fichier, validation du design, usinage et expédition.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Final CTA Section -->
+        <section style="background-color: var(--primary-green); color: var(--bg-cream); text-align: center; position: relative; overflow: hidden;" id="cta-section">
+            <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0.1; background-image: radial-gradient(var(--accent-gold) 1.5px, transparent 0); background-size: 32px 32px;"></div>
+            <div class="container reveal" style="position: relative; z-index: 2; max-width: 800px;">
+                <span class="section-tag" style="color: var(--accent-gold-light);">Prêt à passer au flux numérique ?</span>
+                <h2 style="color: var(--bg-cream); margin-bottom: 24px;">Essayez notre précision sans aucun risque.</h2>
+                <p style="color: rgba(250, 248, 245, 0.85); margin: 0 auto 40px auto;">Envoyez-nous votre premier fichier STL d'empreinte optique pour un cas unitaire. Nous réalisons votre première couronne d'essai gratuitement pour vous prouver notre niveau d'ajustement occlusal.</p>
+                <div style="display: flex; justify-content: center; gap: 16px; flex-wrap: wrap;">
+                    <a href="contact.html?type=free" class="btn btn-accent">Demander mon cas d'essai gratuit</a>
+                    <a href="resources.html" class="btn btn-secondary" style="border-color: var(--bg-cream); color: var(--bg-cream);">Télécharger notre guide de préparation</a>
+                </div>
+            </div>
+        </section>
+
+    </main>
 
     <!-- Footer -->
     <footer class="app-footer">
-        <p>&copy; 2026 K-Digital Store. Réalisé avec ❤️ - Style Take.app. Tous droits réservés.</p>
-        <p class="disclaimer">Tous les logos et marques cités appartiennent à leurs propriétaires respectifs.</p>
+        <div class="container footer-grid">
+            <div class="footer-col">
+                <a href="index.html" class="brand">
+                    <img src="assets/espoirdent_logo.jpg" alt="Logo de EspoirDent" style="height: 38px;">
+                    <div class="brand-name">
+                        <h1 style="font-size: 1.15rem; color: var(--bg-cream);">EspoirDent</h1>
+                        <span style="font-size: 0.65rem;">Laboratoire Numérique</span>
+                    </div>
+                </a>
+                <p class="footer-about-text">Laboratoire de prothèse dentaire numérique de haute technologie basé à Yaoundé. Spécialisé en CAO/FAO (CAD/CAM), impression 3D médicale et intégration de l'IA.</p>
+            </div>
+            
+            <div class="footer-col">
+                <h4>Navigation</h4>
+                <ul class="footer-links">
+                    <li><a href="index.html">Accueil</a></li>
+                    <li><a href="about.html">À Propos</a></li>
+                    <li><a href="services.html">Services</a></li>
+                    <li><a href="cases.html">Études de Cas</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-col">
+                <h4>Ressources</h4>
+                <ul class="footer-links">
+                    <li><a href="resources.html">Guides de préparation</a></li>
+                    <li><a href="resources.html#scanners">Liaisons Scanners</a></li>
+                    <li><a href="contact.html">Demande de devis</a></li>
+                    <li><a href="admin.html">Espace Clinique (Admin)</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-col">
+                <h4>Contact</h4>
+                <div class="footer-contact-item">
+                    <i class="fa-solid fa-location-dot"></i>
+                    <span>Rue de l'Hôpital Militaire, Quartier de l'Aviation, Yaoundé, Cameroun</span>
+                </div>
+                <div class="footer-contact-item">
+                    <i class="fa-brands fa-whatsapp"></i>
+                    <span>+237 6 55 08 01 50</span>
+                </div>
+                <div class="footer-contact-item">
+                    <i class="fa-solid fa-envelope"></i>
+                    <span>contact@espoirdent.com</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="container footer-bottom">
+            <p>&copy; 2026 EspoirDent. Tous droits réservés. Réalisé pour les cabinets dentaires d'Afrique francophone.</p>
+            <div class="footer-bottom-links">
+                <a href="#">Mentions Légales</a>
+                <a href="#">Protection des Données</a>
+            </div>
+        </div>
     </footer>
 
     <!-- App JS -->

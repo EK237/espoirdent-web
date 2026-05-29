@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- SEO Meta Tags -->
+    <title>Études de Cas - EspoirDent | Réalisations Cliniques de Précision</title>
+    <meta name="description" content="Découvrez nos réussites cliniques en Afrique centrale. Facettes e.max, bridges zircone sur implants et guides chirurgicaux 3D réalisés sans retouche.">
+    <link rel="canonical" href="https://espoirdent.com/cases.html">
+    
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="style.css">
+    
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+    <!-- Header / Navigation (Scroll-Aware) -->
+    <header class="app-header" id="app-header">
+        <div class="container header-container">
+            <a href="index.html" class="brand">
+                <img src="assets/espoirdent_logo.jpg" alt="Logo de EspoirDent" class="brand-logo-img">
+                <div class="brand-name">
+                    <h1>EspoirDent</h1>
+                    <span>Laboratoire Numérique</span>
+                </div>
+            </a>
+            
+            <nav class="nav-menu" id="nav-menu">
+                <a href="index.html" class="nav-link">Accueil</a>
+                <a href="about.html" class="nav-link">À Propos</a>
+                <a href="services.html" class="nav-link">Services</a>
+                <a href="cases.html" class="nav-link active">Études de Cas</a>
+                <a href="resources.html" class="nav-link">Ressources</a>
+                <a href="contact.html" class="nav-link">Contact</a>
+            </nav>
+            
+            <div class="header-actions">
+                <a href="contact.html" class="btn btn-accent btn-sm" style="padding: 10px 20px; font-size: 0.8rem;">Demander un Devis</a>
+                <button class="burger-menu" id="burger-menu" aria-label="Ouvrir le menu de navigation">
+                    <span class="burger-bar"></span>
+                    <span class="burger-bar"></span>
+                    <span class="burger-bar"></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        
+        <!-- Case Studies Hero Section -->
+        <section class="cases-hero" id="cases-hero">
+            <div class="section-texture"></div>
+            <div class="container">
+                <div class="section-header" style="max-width: 800px; margin: 0 auto; text-align: center;">
+                    <span class="section-tag">Preuves Cliniques</span>
+                    <h1>Cas cliniques réels et intégration du flux numérique.</h1>
+                    <p>Découvrez comment nos cliniques partenaires ont optimisé leurs traitements esthétiques et chirurgicaux grâce à la CAO/FAO locale.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Case Studies Grid with Category Filter Chips -->
+        <section class="cases-section section-bg-dark" style="padding-top: 0;" id="cases-section">
+            <div class="section-texture"></div>
+            <div class="container">
+                
+                <!-- Category Filters (Chips) -->
+                <div class="filter-chips">
+                    <button class="chip active" data-category="all">Tout</button>
+                    <button class="chip" data-category="fixe">Prothèse Fixe</button>
+                    <button class="chip" data-category="implant">Implantologie</button>
+                    <button class="chip" data-category="aligneurs">Aligneurs</button>
+                </div>
+                
+                <!-- Cases Grid (Max 3 columns) -->
+                <div class="cases-grid">
+                    
+                    <!-- Case 1: Fixed Aesthetic e.max -->
+                    <div class="case-card reveal" data-category="fixe" style="display: flex;">
+                        <div class="case-image-wrapper">
+                            <img src="assets/service_3d_printed_dental.png" alt="Modèle 3D de facettes dentaires en disilicate de lithium" class="case-card-img">
+                            <span class="case-card-tag">Prothèse Fixe</span>
+                        </div>
+                        <div class="case-card-content">
+                            <h3 class="case-card-title">Restauration esthétique de 13 à 23 en facettes e.max</h3>
+                            <p class="case-card-desc">Patiente présentant des facettes composites décolorées et inesthétiques. Réalisation de 6 facettes ultra-fines en disilicate de lithium (IPS e.max Press) conçues par CAO.</p>
+                            <div class="case-card-footer">
+                                <span>Dr. Sandrine N. (Douala)</span>
+                                <span><i class="fa-solid fa-star"></i> 5.0 (Ajusté)</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Case 2: Guided Implant Surgery -->
+                    <div class="case-card reveal" data-category="implant" style="display: flex;">
+                        <div class="case-image-wrapper">
+                            <img src="assets/hero_digital_dental_design.png" alt="Conception CAO d'un guide chirurgical implantaire 3D" class="case-card-img">
+                            <span class="case-card-tag">Implantologie</span>
+                        </div>
+                        <div class="case-card-content">
+                            <h3 class="case-card-title">Chirurgie guidée et mise en charge implantaire unitaire</h3>
+                            <p class="case-card-desc">Fusion de fichiers DICOM du scanner CBCT et STL d'empreinte optique. Impression 3D d'un guide chirurgical et usinage d'une couronne transvissée provisoire PMMA.</p>
+                            <div class="case-card-footer">
+                                <span>Dr. Marc K. (Yaoundé)</span>
+                                <span><i class="fa-solid fa-star"></i> 5.0 (Posé)</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Case 3: Clear Aligners Orthodontics -->
+                    <div class="case-card reveal" data-category="aligneurs" style="display: flex;">
+                        <div class="case-image-wrapper">
+                            <img src="assets/about_dental_lab_team.png" alt="Techniciens modélisant le déplacement dentaire pour aligneurs" class="case-card-img">
+                            <span class="case-card-tag">Aligneurs</span>
+                        </div>
+                        <div class="case-card-content">
+                            <h3 class="case-card-title">Alignement esthétique maxillaire en 14 étapes</h3>
+                            <p class="case-card-desc">Traitement d'un encombrement antérieur modéré. Modélisation 3D séquentielle des déplacements et thermoformage de 14 aligneurs transparents successifs.</p>
+                            <div class="case-card-footer">
+                                <span>Clinique du Sourire (Brazzaville)</span>
+                                <span><i class="fa-solid fa-star"></i> 5.0 (Traité)</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="app-footer">
+        <div class="container footer-grid">
+            <div class="footer-col">
+                <a href="index.html" class="brand">
+                    <img src="assets/espoirdent_logo.jpg" alt="Logo de EspoirDent" style="height: 38px;">
+                    <div class="brand-name">
+                        <h1 style="font-size: 1.15rem; color: var(--bg-cream);">EspoirDent</h1>
+                        <span style="font-size: 0.65rem;">Laboratoire Numérique</span>
+                    </div>
+                </a>
+                <p class="footer-about-text">Laboratoire de prothèse dentaire numérique de haute technologie basé à Yaoundé. Spécialisé en CAO/FAO (CAD/CAM), impression 3D médicale et intégration de l'IA.</p>
+            </div>
+            
+            <div class="footer-col">
+                <h4>Navigation</h4>
+                <ul class="footer-links">
+                    <li><a href="index.html">Accueil</a></li>
+                    <li><a href="about.html">À Propos</a></li>
+                    <li><a href="services.html">Services</a></li>
+                    <li><a href="cases.html">Études de Cas</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-col">
+                <h4>Ressources</h4>
+                <ul class="footer-links">
+                    <li><a href="resources.html">Guides de préparation</a></li>
+                    <li><a href="resources.html#scanners">Liaisons Scanners</a></li>
+                    <li><a href="contact.html">Demande de devis</a></li>
+                    <li><a href="admin.html">Espace Clinique (Admin)</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-col">
+                <h4>Contact</h4>
+                <div class="footer-contact-item">
+                    <i class="fa-solid fa-location-dot"></i>
+                    <span>Rue de l'Hôpital Militaire, Quartier de l'Aviation, Yaoundé, Cameroun</span>
+                </div>
+                <div class="footer-contact-item">
+                    <i class="fa-brands fa-whatsapp"></i>
+                    <span>+237 6 55 08 01 50</span>
+                </div>
+                <div class="footer-contact-item">
+                    <i class="fa-solid fa-envelope"></i>
+                    <span>contact@espoirdent.com</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="container footer-bottom">
+            <p>&copy; 2026 EspoirDent. Tous droits réservés. Réalisé pour les cabinets dentaires d'Afrique francophone.</p>
+            <div class="footer-bottom-links">
+                <a href="#">Mentions Légales</a>
+                <a href="#">Protection des Données</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- App JS -->
+    <script src="app.js"></script>
+</body>
+</html>

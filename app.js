@@ -1,677 +1,511 @@
-// K-Digital Store Configuration & Logic
-const MERCHANT_PHONE = "237655080150"; // Updated WhatsApp number for ETS Mr K
+/**
+ * EspoirDent - Interactive Website Logic
+ */
 
-// 9 Premium Digital Products List
-const products = [
-    {
-        id: "office365-onedrive-lifetime",
-        name: "Office 365 Pro Plus + OneDrive 5TB (Lifetime)",
-        category: "productivity",
-        image: "assets/office365_onedrive_banner.png",
-        description: "Stockage cloud sécurisé à vie. Dites adieu aux abonnements mensuels. Espace privé de 5 To accessible sur tous vos appareils(jusqu'a 5).",
-        features: [
-            "5 To (5000 Go) de stockage",
-            "Accès à vie sans frais mensuels",
-            "Compatible PC, Mac, Android, iOS",
-            "Partage sécurisé de fichiers",
-            "Templates et formation complete en microsoft office"
-        ],
-        price: 8500
-    },
-    {
-        id: "gemini-pro",
-        name: "Google Gemini Pro (18 Mois)",
-        category: "ai",
-        image: "assets/gemini_banner.jpg",
-        description: "Accédez au modèle d'IA le plus puissant de Google. Analyse avancée de code, de textes volumineux et raisonnement logique. Generation dimages et de video. 5 To de stockage inclus.",
-        features: [
-            "Accès au modèle Gemini Pro",
-            "Acces a Antigravity (le claude code/codex Google)",
-            "10$ de credit mensuel API Google AIStudio",
-            "1000 token de AI credit si tu epuise tes tokens",
-            "Credit mensuel d'apprentissage et de certification Google",
-            "Fenêtre contextuelle géante (Gemini 1.5/2)",
-            "Génération de code, d'images et video avancée",
-            "Intégration de gemini a lecosystem Google",
-            "Formation complète en IA (prompting, creation sites/app, autom.)",
-            "Formation Veo 3"
-        ],
-        price: 25000
-    },
-    {
-        id: "chatgpt-plus",
-        name: "ChatGPT Plus (1 An)",
-        category: "ai",
-        image: "assets/chatgpt_banner.png",
-        description: "La meilleure IA generaliste. Profitez de l'accès prioritaire au futurs modèles GPT-5, aux outils de création de GPTs personnalisés et au mode voix avancé.",
-        features: [
-            "Priorité d'accès aux nouveaux modèles (GPT-5, GPT-4o)",
-            "Acces a codex (le claude code/codex de chez open ai)",
-            "Génération de code et d'images et video avancée",
-            "Création et utilisation des GPTs",
-            "Mode voix avancé hyper-réaliste",
-            "Plus de limites de messages",
-            "Formation complète en IA (prompting, creation sites/app, autom.)"
-        ],
-        price: 55000
-    },
-    {
-        id: "biblical-cartoons",
-        name: "500 Dessins Animés Bibliques",
-        category: "entertainment",
-        image: "assets/bible_cartoons_banner.png",
-        description: "Découvrez 500 dessins animés bibliques complets pour enfants. Un contenu éducatif de qualité pour transmettre les valeurs chrétiennes de façon ludique.",
-        features: [
-            "500 épisodes complets en HD",
-            "Noah's Ark, Moses, David, Jesus and more",
-            "Accès illimité et à vie en téléchargement",
-            "Idéal pour l'éducation chrétienne et familiale"
-        ],
-        price: 5500
-    },
-    {
-        id: "canva-lifetime",
-        name: "Canva Pro à Vie",
-        category: "productivity",
-        image: "assets/canva_banner.png",
-        description: "Libérez votre potentiel créatif. Profitez de toutes les fonctionnalités professionnelles de Canva sans aucun abonnement récurrent.",
-        features: [
-            "Accès Canva Pro à vie",
-            "Modèles et designs premium illimités",
-            "Suppression d'arrière-plan instantanée en 1 clic",
-            "Identité visuelle et kits de marque intégrés"
-        ],
-        price: 15000
-    },
-    {
-        id: "earn-money-pack",
-        name: "Pack Formation Gagner sa vie en ligne",
-        category: "productivity",
-        image: "assets/training_pack_banner.png",
-        description: "Le pack ultime regroupant 8 formations clés en business en ligne pour lancer des sources de revenus durables sur internet.",
-        features: [
-            "Marketing 360°",
-            "Trading des indices synthétiques",
-            "Art Oratoire",
-            "Création des bots whatsapp",
-            "Achat en Chine",
-            "Machine à Cash",
-            "REVENTE PRODUITS DIGITAUX",
-            "CRÉATION CONTENU AVEC IA"
-        ],
-        price: 5000
-    },
-    {
-        id: "crunchyroll-6m",
-        name: "Crunchyroll Premium (6 Mois)",
-        category: "entertainment",
-        image: "assets/crunchyroll_banner.png",
-        description: "Regardez vos animés préférés en haute définition (HD) sans aucune publicité. Accès illimité au catalogue complet en simulcast.",
-        features: ["Abonnement Mega Fan de 6 Mois", "Pas de publicités", "Lecture hors-ligne (téléchargement)", "Accès immédiat après diffusion au Japon"],
-        price: 5000
-    },
-    {
-        id: "idm-1year",
-        name: "Internet Download Manager (1 An)",
-        category: "utility",
-        image: "assets/idm_banner.png",
-        description: "Le meilleur accélérateur de téléchargement au monde. Multiplie votre vitesse de téléchargement par 5. Clé d'activation officielle.",
-        features: ["Licence officielle d'un an", "Vitesse de téléchargement augmentée de 500%", "Reprise des téléchargements interrompus", "Intégration transparente aux navigateurs"],
-        price: 4000
-    },
-    {
-        id: "perplexity-pro",
-        name: "Perplexity Pro (1 An)",
-        category: "ai",
-        image: "assets/perplexity_banner.png",
-        description: "Le moteur de recherche IA par excellence. Réponses précises avec citations. Accès à Claude 3.5 Sonnet, GPT-4o et recherche Web en direct.",
-        features: ["Recherche Copilot illimitée", "Choix du modèle d'IA (Claude, GPT)", "Upload de documents (PDF, images, etc.)", "Génération d'images et de code"],
-        price: 12000
+document.addEventListener('DOMContentLoaded', () => {
+    // ----------------------------------------------------
+    // 1. Navigation Menu Mobile & Scroll-Aware Header
+    // ----------------------------------------------------
+    const header = document.querySelector('.app-header');
+    const burgerMenu = document.getElementById('burger-menu');
+    const navMenu = document.getElementById('nav-menu');
+    let lastScrollY = window.scrollY;
+
+    // Hamburger Toggle
+    if (burgerMenu && navMenu) {
+        burgerMenu.addEventListener('click', () => {
+            burgerMenu.classList.toggle('open');
+            navMenu.classList.toggle('open');
+        });
+
+        // Close menu on link click
+        navMenu.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', () => {
+                burgerMenu.classList.remove('open');
+                navMenu.classList.remove('open');
+            });
+        });
     }
-];
 
-// App State Management
-let cart = JSON.parse(localStorage.getItem("k_store_cart")) || [];
-let activeCategory = "all";
-let searchQuery = "";
-let selectedPaymentMethod = "momo"; // default
-let currentCheckoutPath = "pay"; // "pay" or "contact"
-let uploadedProofFile = null;
-let redirectUrl = "";
+    // Scroll-aware Hide/Show Header
+    window.addEventListener('scroll', () => {
+        const currentScrollY = window.scrollY;
 
-// DOM Elements
-const productGrid = document.getElementById("product-grid");
-const searchInput = document.getElementById("search-input");
-const filterChips = document.querySelectorAll(".chip");
-const cartTrigger = document.getElementById("cart-trigger");
-const closeCartBtn = document.getElementById("close-cart");
-const cartOverlay = document.getElementById("cart-overlay");
-const cartDrawer = document.getElementById("cart-drawer");
-const cartCount = document.getElementById("cart-count");
-const emptyCartMsg = document.getElementById("empty-cart-msg");
-const cartItemsList = document.getElementById("cart-items-list");
-const checkoutFormSection = document.getElementById("checkout-form-section");
-const continueShoppingBtn = document.getElementById("continue-shopping");
+        // Class toggling for scrolled state
+        if (currentScrollY > 20) {
+            header.classList.add('header-scrolled');
+        } else {
+            header.classList.remove('header-scrolled');
+        }
 
-const summarySubtotal = document.getElementById("summary-subtotal");
-const summaryTotal = document.getElementById("summary-total");
-const checkoutForm = document.getElementById("checkout-form");
-const clientName = document.getElementById("client-name");
-const clientWhatsapp = document.getElementById("client-whatsapp");
-const clientEmail = document.getElementById("client-email");
-const countryCode = document.getElementById("country-code");
+        // Hide on scroll down, show on scroll up
+        if (currentScrollY > lastScrollY && currentScrollY > 100) {
+            header.classList.add('header-hidden');
+            // Close mobile menu if open
+            if (navMenu && navMenu.classList.contains('open')) {
+                burgerMenu.classList.remove('open');
+                navMenu.classList.remove('open');
+            }
+        } else {
+            header.classList.remove('header-hidden');
+        }
 
-const tabPayNow = document.getElementById("tab-pay-now");
-const tabContactFirst = document.getElementById("tab-contact-first");
-const pathPayNowContent = document.getElementById("path-pay-now-content");
-const pathContactFirstContent = document.getElementById("path-contact-first-content");
-
-const paymentMethodRadios = document.querySelectorAll('input[name="payment-method"]');
-const paymentInstructionMomo = document.getElementById("instruction-momo");
-const paymentInstructionOrange = document.getElementById("instruction-orange");
-const momoTotalPlaceholders = document.querySelectorAll(".momo-total-placeholder");
-const orangeTotalPlaceholders = document.querySelectorAll(".orange-total-placeholder");
-
-const dropzone = document.getElementById("dropzone");
-const proofFileInput = document.getElementById("proof-file");
-const dropzonePrompt = document.getElementById("dropzone-prompt");
-const dropzonePreview = document.getElementById("dropzone-preview");
-const previewImage = document.getElementById("preview-image");
-const previewFilename = document.getElementById("preview-filename");
-const removeProofBtn = document.getElementById("remove-proof");
-
-const btnSubmitPay = document.getElementById("btn-submit-pay");
-const btnSubmitContact = document.getElementById("btn-submit-contact");
-
-const modalOverlay = document.getElementById("modal-overlay");
-const instructionModal = document.getElementById("instruction-modal");
-const closeModalBtn = document.getElementById("close-modal-btn");
-const whatsappRedirectBtn = document.getElementById("whatsapp-redirect-btn");
-const toast = document.getElementById("toast-notification");
-const proofStepInstruction = document.querySelector(".proof-step-instruction");
-
-// Initialize application
-document.addEventListener("DOMContentLoaded", () => {
-    renderProducts();
-    updateCartUI();
-    setupEventListeners();
-});
-
-// Event Listeners Configuration
-function setupEventListeners() {
-    // Search
-    searchInput.addEventListener("input", (e) => {
-        searchQuery = e.target.value.toLowerCase().trim();
-        renderProducts();
+        lastScrollY = currentScrollY;
     });
 
-    // Categories
-    filterChips.forEach(chip => {
-        chip.addEventListener("click", () => {
-            filterChips.forEach(c => c.classList.remove("active"));
-            chip.classList.add("active");
-            activeCategory = chip.dataset.category;
-            renderProducts();
+    // ----------------------------------------------------
+    // 2. Scroll Reveal Animations & Number Counters
+    // ----------------------------------------------------
+    const revealElements = document.querySelectorAll('.reveal');
+    const statsSection = document.querySelector('.stats-section');
+    let countersAnimated = false;
+
+    const checkReveal = () => {
+        const triggerBottom = window.innerHeight * 0.85;
+
+        // General slide fade-in
+        revealElements.forEach(el => {
+            const elTop = el.getBoundingClientRect().top;
+            if (elTop < triggerBottom) {
+                el.classList.add('active');
+            }
         });
-    });
 
-    // Drawer triggers
-    cartTrigger.addEventListener("click", openDrawer);
-    closeCartBtn.addEventListener("click", closeDrawer);
-    cartOverlay.addEventListener("click", closeDrawer);
-    continueShoppingBtn.addEventListener("click", closeDrawer);
+        // Number Counters
+        if (statsSection) {
+            const rect = statsSection.getBoundingClientRect();
+            if (rect.top < triggerBottom && !countersAnimated) {
+                animateCounters();
+                countersAnimated = true;
+            }
+        }
+    };
 
-    // Path switching (Pay Now vs Contact Seller)
-    tabPayNow.addEventListener("click", () => setCheckoutPath("pay"));
-    tabContactFirst.addEventListener("click", () => setCheckoutPath("contact"));
+    const animateCounters = () => {
+        const counters = document.querySelectorAll('.stat-number');
+        counters.forEach(counter => {
+            const target = parseInt(counter.getAttribute('data-target'), 10);
+            const duration = 2000; // ms
+            const stepTime = 30; // ms
+            const steps = duration / stepTime;
+            const increment = target / steps;
+            let current = 0;
 
-    // Payment methods
-    paymentMethodRadios.forEach(radio => {
-        radio.addEventListener("change", (e) => {
-            setPaymentMethod(e.target.value);
+            const updateCounter = () => {
+                current += increment;
+                if (current >= target) {
+                    counter.innerText = target.toLocaleString();
+                    if (counter.classList.contains('plus')) counter.innerText += '+';
+                    if (counter.classList.contains('percent')) counter.innerText += '%';
+                } else {
+                    counter.innerText = Math.floor(current).toLocaleString();
+                    if (counter.classList.contains('plus')) counter.innerText += '+';
+                    if (counter.classList.contains('percent')) counter.innerText += '%';
+                    setTimeout(updateCounter, stepTime);
+                }
+            };
+
+            updateCounter();
         });
-    });
+    };
 
-    // Custom copy code listener
-    document.addEventListener("click", (e) => {
-        if (e.target.classList.contains("copy-btn")) {
-            const textToCopy = e.target.dataset.copy;
-            navigator.clipboard.writeText(textToCopy).then(() => {
-                showToast("Copié dans le presse-papiers !");
+    window.addEventListener('scroll', checkReveal);
+    checkReveal(); // Initial check on load
+
+    // ----------------------------------------------------
+    // 3. FAQ Accordion (Accueil)
+    // ----------------------------------------------------
+    const faqItems = document.querySelectorAll('.faq-item');
+
+    faqItems.forEach(item => {
+        const trigger = item.querySelector('.faq-trigger');
+        const content = item.querySelector('.faq-content');
+
+        if (trigger && content) {
+            trigger.addEventListener('click', () => {
+                const isActive = item.classList.contains('active');
+
+                // Close all others
+                faqItems.forEach(otherItem => {
+                    otherItem.classList.remove('active');
+                    otherItem.querySelector('.faq-content').style.maxHeight = null;
+                });
+
+                // Toggle current
+                if (!isActive) {
+                    item.classList.add('active');
+                    content.style.maxHeight = content.scrollHeight + 'px';
+                } else {
+                    item.classList.remove('active');
+                    content.style.maxHeight = null;
+                }
             });
         }
     });
 
-    // File Drag & Drop Handlers
-    dropzone.addEventListener("click", () => proofFileInput.click());
-    
-    proofFileInput.addEventListener("change", (e) => {
-        handleFileSelect(e.target.files[0]);
-    });
+    // ----------------------------------------------------
+    // 4. Case Studies Filters (Page : Études de Cas)
+    // ----------------------------------------------------
+    const filterButtons = document.querySelectorAll('.chip');
+    const caseCards = document.querySelectorAll('.case-card');
 
-    dropzone.addEventListener("dragover", (e) => {
-        e.preventDefault();
-        dropzone.classList.add("dragover");
-    });
+    if (filterButtons.length > 0 && caseCards.length > 0) {
+        filterButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                // Set active class
+                filterButtons.forEach(btn => btn.classList.remove('active'));
+                button.classList.add('active');
 
-    dropzone.addEventListener("dragleave", () => {
-        dropzone.classList.remove("dragover");
-    });
+                const category = button.getAttribute('data-category');
 
-    dropzone.addEventListener("drop", (e) => {
-        e.preventDefault();
-        dropzone.classList.remove("dragover");
-        if (e.dataTransfer.files.length > 0) {
-            handleFileSelect(e.dataTransfer.files[0]);
-        }
-    });
-
-    removeProofBtn.addEventListener("click", (e) => {
-        e.stopPropagation(); // Avoid triggering file selection dialog
-        clearProofFile();
-    });
-
-    // Form Submission
-    checkoutForm.addEventListener("submit", (e) => {
-        e.preventDefault();
-        processOrder();
-    });
-
-    btnSubmitContact.addEventListener("click", () => {
-        if (validateContactFields()) {
-            processOrderInquiry();
-        }
-    });
-
-    // Modal controls
-    closeModalBtn.addEventListener("click", closeModal);
-    modalOverlay.addEventListener("click", closeModal);
-    whatsappRedirectBtn.addEventListener("click", () => {
-        window.open(redirectUrl, "_blank");
-        closeModal();
-    });
-}
-
-// Render product list dynamically
-function renderProducts() {
-    productGrid.innerHTML = "";
-    
-    const filteredProducts = products.filter(p => {
-        const matchesCategory = activeCategory === "all" || p.category === activeCategory;
-        const matchesSearch = p.name.toLowerCase().includes(searchQuery) || p.description.toLowerCase().includes(searchQuery);
-        return matchesCategory && matchesSearch;
-    });
-
-    if (filteredProducts.length === 0) {
-        productGrid.innerHTML = `
-            <div class="no-products-msg">
-                <i class="fa-solid fa-face-frown"></i>
-                <p>Aucun produit ne correspond à votre recherche.</p>
-            </div>
-        `;
-        return;
+                caseCards.forEach(card => {
+                    const cardCategory = card.getAttribute('data-category');
+                    if (category === 'all' || cardCategory === category) {
+                        card.style.display = 'flex';
+                        // Add fade-in effect
+                        card.style.opacity = '0';
+                        setTimeout(() => {
+                            card.style.opacity = '1';
+                        }, 50);
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            });
+        });
     }
 
-    filteredProducts.forEach(p => {
-        const card = document.createElement("div");
-        card.className = "product-card";
-        
-        const featuresHTML = p.features.map(f => `<li><i class="fa-solid fa-check"></i> ${f}</li>`).join("");
+    // ----------------------------------------------------
+    // 5. B2B Contact / Devis Form & File Upload
+    // ----------------------------------------------------
+    const contactForm = document.getElementById('devis-form');
+    const fileDropzone = document.getElementById('dropzone');
+    const fileInput = document.getElementById('stl-file');
+    const dropzonePrompt = document.getElementById('dropzone-prompt');
+    const dropzonePreview = document.getElementById('dropzone-preview');
+    const previewFilename = document.getElementById('preview-filename');
+    const removeFileBtn = document.getElementById('remove-file');
+    const progressBarContainer = document.getElementById('progress-bar-container');
+    const progressBar = document.getElementById('progress-bar');
+    let selectedFile = null;
 
-        card.innerHTML = `
-            <div class="product-card-header">
-                <span class="category-badge">${p.category.toUpperCase()}</span>
-                <img src="${p.image}" alt="${p.name}" class="product-banner-img">
-                <div class="product-header-overlay">
-                    <span class="overlay-price">${formatCFA(p.price)}</span>
-                    <div class="overlay-right-info">
-                        <div class="overlay-payment-icons">
-                            <i class="fa-solid fa-mobile-screen-button" title="Mobile Money (MoMo/Orange)"></i>
-                            <i class="fa-solid fa-credit-card" title="Carte Bancaire (Visa/Mastercard)"></i>
-                        </div>
-                        <div class="overlay-contact">
-                            <i class="fa-brands fa-whatsapp"></i> +237 655080150
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="product-card-body">
-                <h3 class="product-title">${p.name}</h3>
-                <p class="product-description">${p.description}</p>
-                <ul class="product-features">
-                    ${featuresHTML}
-                </ul>
-                <div class="product-card-footer">
-                    <div class="price-container">
-                        <span class="price-label">Prix</span>
-                        <span class="product-price">${formatCFA(p.price)}</span>
-                    </div>
-                    <button class="add-to-cart-btn" onclick="addToCart('${p.id}')">
-                        <i class="fa-solid fa-cart-plus"></i> Ajouter
-                    </button>
-                </div>
-            </div>
-        `;
-        productGrid.appendChild(card);
-    });
-}
+    // Load LocalStorage prefilled dentist info
+    if (contactForm) {
+        const savedName = localStorage.getItem('espoirdent_name');
+        const savedPhone = localStorage.getItem('espoirdent_phone');
+        const savedEmail = localStorage.getItem('espoirdent_email');
+        const savedCity = localStorage.getItem('espoirdent_city');
+        const savedScanner = localStorage.getItem('espoirdent_scanner');
 
-// Cart State Controllers
-function addToCart(productId) {
-    const product = products.find(p => p.id === productId);
-    const existingItem = cart.find(item => item.id === productId);
-
-    if (existingItem) {
-        existingItem.quantity += 1;
-    } else {
-        cart.push({ ...product, quantity: 1 });
+        if (savedName) document.getElementById('doctor-name').value = savedName;
+        if (savedPhone) document.getElementById('doctor-phone').value = savedPhone;
+        if (savedEmail) document.getElementById('doctor-email').value = savedEmail;
+        if (savedCity) document.getElementById('doctor-city').value = savedCity;
+        if (savedScanner) document.getElementById('doctor-scanner').value = savedScanner;
     }
 
-    saveCart();
-    updateCartUI();
-    showToast(`${product.name} ajouté au panier !`);
-}
-
-function updateQuantity(productId, change) {
-    const itemIndex = cart.findIndex(item => item.id === productId);
-    if (itemIndex > -1) {
-        cart[itemIndex].quantity += change;
-        if (cart[itemIndex].quantity <= 0) {
-            cart.splice(itemIndex, 1);
-        }
-        saveCart();
-        updateCartUI();
-    }
-}
-
-function removeFromCart(productId) {
-    cart = cart.filter(item => item.id !== productId);
-    saveCart();
-    updateCartUI();
-}
-
-function saveCart() {
-    localStorage.setItem("k_store_cart", JSON.stringify(cart));
-}
-
-// UI State Updates
-function updateCartUI() {
-    // Cart Badge
-    const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
-    cartCount.innerText = totalItems;
-    cartCount.style.display = totalItems > 0 ? "flex" : "none";
-
-    if (cart.length === 0) {
-        emptyCartMsg.style.display = "flex";
-        cartItemsList.style.display = "none";
-        checkoutFormSection.style.display = "none";
-    } else {
-        emptyCartMsg.style.display = "none";
-        cartItemsList.style.display = "block";
-        checkoutFormSection.style.display = "block";
-
-        // Render Cart Items
-        cartItemsList.innerHTML = "";
-        cart.forEach(item => {
-            const itemElement = document.createElement("div");
-            itemElement.className = "cart-item";
-            itemElement.innerHTML = `
-                <img src="${item.image}" alt="${item.name}" class="cart-item-thumb">
-                <div class="cart-item-details">
-                    <div class="cart-item-name">${item.name}</div>
-                    <div class="cart-item-price">${formatCFA(item.price)}</div>
-                </div>
-                <div class="cart-item-quantity">
-                    <button type="button" class="quantity-btn" onclick="updateQuantity('${item.id}', -1)"><i class="fa-solid fa-minus"></i></button>
-                    <span class="quantity-num">${item.quantity}</span>
-                    <button type="button" class="quantity-btn" onclick="updateQuantity('${item.id}', 1)"><i class="fa-solid fa-plus"></i></button>
-                </div>
-                <button type="button" class="remove-item-btn" onclick="removeFromCart('${item.id}')" aria-label="Supprimer"><i class="fa-solid fa-trash-can"></i></button>
-            `;
-            cartItemsList.appendChild(itemElement);
+    // Trigger file select click
+    if (fileDropzone && fileInput) {
+        fileDropzone.addEventListener('click', (e) => {
+            if (e.target !== removeFileBtn && !removeFileBtn.contains(e.target)) {
+                fileInput.click();
+            }
         });
 
-        // Summary Calculations
-        const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-        const formattedTotal = formatCFA(total);
-        
-        summarySubtotal.innerText = formattedTotal;
-        summaryTotal.innerText = formattedTotal;
+        // Drag & Drop event bindings
+        ['dragenter', 'dragover'].forEach(eventName => {
+            fileDropzone.addEventListener(eventName, (e) => {
+                e.preventDefault();
+                fileDropzone.classList.add('dragover');
+            }, false);
+        });
 
-        // Update Dial instructions placeholders
-        momoTotalPlaceholders.forEach(el => el.innerText = formattedTotal);
-        orangeTotalPlaceholders.forEach(el => el.innerText = formattedTotal);
+        ['dragleave', 'drop'].forEach(eventName => {
+            fileDropzone.addEventListener(eventName, (e) => {
+                e.preventDefault();
+                fileDropzone.classList.remove('dragover');
+            }, false);
+        });
+
+        // Handle file drop
+        fileDropzone.addEventListener('drop', (e) => {
+            const dt = e.dataTransfer;
+            const files = dt.files;
+            if (files.length > 0) {
+                handleFileSelect(files[0]);
+            }
+        });
+
+        // Handle file click select
+        fileInput.addEventListener('change', () => {
+            if (fileInput.files.length > 0) {
+                handleFileSelect(fileInput.files[0]);
+            }
+        });
+
+        // Remove selected file
+        removeFileBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            selectedFile = null;
+            fileInput.value = '';
+            dropzonePreview.style.display = 'none';
+            dropzonePrompt.style.display = 'flex';
+        });
     }
-}
 
-// Format currency in CFA
-function formatCFA(value) {
-    return new Intl.NumberFormat('fr-FR').format(value) + " FCFA";
-}
+    const handleFileSelect = (file) => {
+        // Validate file extensions
+        const validExtensions = ['.stl', '.ply', '.obj', '.zip', '.pdf', '.rar'];
+        const fileName = file.name.toLowerCase();
+        const isValid = validExtensions.some(ext => fileName.endsWith(ext));
 
-// Drawer Visibility Helpers
-function openDrawer() {
-    cartDrawer.classList.add("active");
-    cartOverlay.classList.add("active");
-    document.body.style.overflow = "hidden"; // disable scroll
-}
-
-function closeDrawer() {
-    cartDrawer.classList.remove("active");
-    cartOverlay.classList.remove("active");
-    document.body.style.overflow = "auto";
-}
-
-// Toast notification trigger
-function showToast(message) {
-    toast.innerText = message;
-    toast.classList.add("show");
-    setTimeout(() => {
-        toast.classList.remove("show");
-    }, 2500);
-}
-
-// Toggle checkout tab path (Direct pay vs chat first)
-function setCheckoutPath(path) {
-    currentCheckoutPath = path;
-    
-    if (path === "pay") {
-        tabPayNow.classList.add("active");
-        tabContactFirst.classList.remove("active");
-        pathPayNowContent.style.display = "block";
-        pathContactFirstContent.style.display = "none";
-        
-        // Make proof file required again
-        proofFileInput.required = true;
-    } else {
-        tabPayNow.classList.remove("active");
-        tabContactFirst.classList.add("active");
-        pathPayNowContent.style.display = "none";
-        pathContactFirstContent.style.display = "block";
-        
-        // Disable required inputs for payment path
-        proofFileInput.required = false;
-    }
-}
-
-// Handle payment option toggle
-function setPaymentMethod(method) {
-    selectedPaymentMethod = method;
-    const cards = document.querySelectorAll(".payment-card-option");
-    
-    cards.forEach(card => {
-        const input = card.querySelector('input');
-        if (input.value === method) {
-            card.classList.add("selected");
-        } else {
-            card.classList.remove("selected");
+        if (!isValid) {
+            alert('Format de fichier invalide. Veuillez sélectionner un fichier STL, PLY, OBJ, PDF ou ZIP.');
+            return;
         }
-    });
 
-    if (method === "momo") {
-        paymentInstructionMomo.style.display = "block";
-        paymentInstructionOrange.style.display = "none";
-    } else {
-        paymentInstructionMomo.style.display = "none";
-        paymentInstructionOrange.style.display = "block";
-    }
-}
+        // Limit size (50MB)
+        if (file.size > 50 * 1024 * 1024) {
+            alert('Le fichier est trop volumineux. La taille maximale autorisée est de 50 Mo.');
+            return;
+        }
 
-// Upload handlers
-function handleFileSelect(file) {
-    if (!file) return;
-
-    // Check size limit: 5MB
-    if (file.size > 5 * 1024 * 1024) {
-        showToast("L'image est trop volumineuse (Max 5Mo)");
-        return;
-    }
-
-    uploadedProofFile = file;
-    previewFilename.innerText = file.name;
-
-    const reader = new FileReader();
-    reader.onload = (e) => {
-        previewImage.src = e.target.result;
-        dropzonePrompt.style.display = "none";
-        dropzonePreview.style.display = "flex";
-        proofFileInput.required = false; // satisfied
+        selectedFile = file;
+        previewFilename.innerText = `${file.name} (${(file.size / (1024 * 1024)).toFixed(2)} Mo)`;
+        dropzonePrompt.style.display = 'none';
+        dropzonePreview.style.display = 'flex';
     };
-    reader.readAsDataURL(file);
-}
 
-function clearProofFile() {
-    uploadedProofFile = null;
-    proofFileInput.value = "";
-    previewImage.src = "";
-    previewFilename.innerText = "";
-    dropzonePrompt.style.display = "flex";
-    dropzonePreview.style.display = "none";
-    
-    if (currentCheckoutPath === "pay") {
-        proofFileInput.required = true;
+    // Handle Form Submission
+    if (contactForm) {
+        contactForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+
+            // Collect form fields
+            const name = document.getElementById('doctor-name').value;
+            const phone = document.getElementById('doctor-phone').value;
+            const email = document.getElementById('doctor-email').value;
+            const city = document.getElementById('doctor-city').value;
+            const scanner = document.getElementById('doctor-scanner').value;
+            const requestType = document.getElementById('request-type').value;
+            const message = document.getElementById('doctor-message').value;
+            const fileName = selectedFile ? selectedFile.name : 'Aucun fichier joint';
+
+            // Store info in LocalStorage to prefill next time
+            localStorage.setItem('espoirdent_name', name);
+            localStorage.setItem('espoirdent_phone', phone);
+            localStorage.setItem('espoirdent_email', email);
+            localStorage.setItem('espoirdent_city', city);
+            localStorage.setItem('espoirdent_scanner', scanner);
+
+            // Simulation of uploading
+            if (progressBarContainer && progressBar) {
+                progressBarContainer.style.display = 'block';
+                progressBar.style.width = '0%';
+                
+                let width = 0;
+                const interval = setInterval(() => {
+                    if (width >= 100) {
+                        clearInterval(interval);
+                        saveLeadAndRedirect();
+                    } else {
+                        width += 10;
+                        progressBar.style.width = width + '%';
+                    }
+                }, 150);
+            } else {
+                saveLeadAndRedirect();
+            }
+
+            function saveLeadAndRedirect() {
+                // Save leads in LocalStorage database for admin view
+                const leads = JSON.parse(localStorage.getItem('espoirdent_leads') || '[]');
+                const newLead = {
+                    id: Date.now(),
+                    name,
+                    phone,
+                    email,
+                    city,
+                    scanner,
+                    requestType,
+                    message,
+                    fileName,
+                    date: new Date().toLocaleString('fr-FR'),
+                    status: 'new'
+                };
+                leads.push(newLead);
+                localStorage.setItem('espoirdent_leads', JSON.stringify(leads));
+
+                // Clean file display
+                if (progressBarContainer) progressBarContainer.style.display = 'none';
+                selectedFile = null;
+                if (fileInput) fileInput.value = '';
+                if (dropzonePreview) dropzonePreview.style.display = 'none';
+                if (dropzonePrompt) dropzonePrompt.style.display = 'flex';
+                contactForm.reset();
+
+                alert('Votre demande a bien été enregistrée localement ! Vous allez maintenant être redirigé vers WhatsApp pour finaliser le contact avec notre équipe technique.');
+
+                // WhatsApp redirection string
+                const messageText = `Bonjour EspoirDent! Je suis le praticien ${name} de la clinique (${city}). Je viens de soumettre une demande sur le site:\n\n` +
+                                    `- Type : ${requestType}\n` +
+                                    `- Fichier : ${fileName}\n` +
+                                    `- Équipement : ${scanner}\n` +
+                                    `- Message : ${message}\n\n` +
+                                    `Pouvez-vous valider et me recontacter ? Merci.`;
+
+                const encodedText = encodeURIComponent(messageText);
+                const whatsappUrl = `https://wa.me/237655080150?text=${encodedText}`;
+                
+                window.open(whatsappUrl, '_blank');
+            }
+        });
     }
-}
 
-// Validate Contact Input Fields manually for "Contact First" path
-function validateContactFields() {
-    if (!clientName.value.trim()) {
-        showToast("Veuillez saisir votre nom.");
-        clientName.focus();
-        return false;
-    }
-    if (!clientWhatsapp.value.trim()) {
-        showToast("Veuillez saisir votre numéro WhatsApp.");
-        clientWhatsapp.focus();
-        return false;
-    }
-    return true;
-}
+    // ----------------------------------------------------
+    // 6. Admin Panel Dashboard (Page : admin.html)
+    // ----------------------------------------------------
+    const adminTableBody = document.getElementById('admin-table-body');
+    const emptyAdminMsg = document.getElementById('admin-empty-msg');
+    const totalLeadsCount = document.getElementById('total-leads-count');
+    const activeLeadsCount = document.getElementById('active-leads-count');
+    const resetLeadsBtn = document.getElementById('reset-leads-btn');
 
-// Compile order text and handle submission
-function processOrder() {
-    if (currentCheckoutPath === "pay" && !uploadedProofFile) {
-        showToast("Veuillez importer votre capture d'écran de paiement.");
-        return;
-    }
+    // Admin Details Modal Elements
+    const adminModal = document.getElementById('admin-modal');
+    const adminModalOverlay = document.getElementById('admin-modal-overlay');
+    const closeModalBtn = document.getElementById('close-admin-modal');
 
-    const name = clientName.value.trim();
-    const phone = countryCode.value + " " + clientWhatsapp.value.trim();
-    const email = clientEmail.value.trim();
-    const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+    const renderAdminDashboard = () => {
+        if (!adminTableBody) return;
 
-    const itemsText = cart.map(item => `- ${item.quantity}x ${item.name} (${formatCFA(item.price * item.quantity)})`).join("\n");
-
-    const paymentLabel = selectedPaymentMethod === "momo" 
-        ? "MTN MoMo (Darius Valere)" 
-        : "Orange Money (ETS Mr K)";
-
-    const message = `🛍️ *Nouvelle Commande - K-Digital Store*
-------------------------------------
-👤 *Client:* ${name}
-📞 *WhatsApp:* ${phone}
-📧 *Email:* ${email}
-💰 *Mode de paiement:* ${paymentLabel}
-📸 *Preuve de paiement:* [Screenshot importé. Pièce jointe dans la discussion.]
-
-🛒 *Articles:*
-${itemsText}
-
-💵 *Total:* ${formatCFA(total)}
-------------------------------------
-Veuillez me fournir mes accès/codes d'activation. Merci !`;
-
-    redirectUrl = `https://wa.me/${MERCHANT_PHONE}?text=${encodeURIComponent(message)}`;
-    
-    // Show proof step description in instructions modal
-    proofStepInstruction.style.display = "flex";
-    
-    openModal();
-}
-
-// Compile inquiry text and redirect
-function processOrderInquiry() {
-    const name = clientName.value.trim();
-    const phone = countryCode.value + " " + clientWhatsapp.value.trim();
-    const itemsText = cart.map(item => `- ${item.quantity}x ${item.name}`).join("\n");
-
-    const message = `👋 *Demande d'information - K-Digital Store*
-------------------------------------
-👤 *Client:* ${name}
-📞 *WhatsApp:* ${phone}
-
-🛒 *Articles d'intérêt:*
-${itemsText}
-
-💬 *Message:* Bonjour, je souhaite en savoir plus sur ces produits et finaliser mon achat avec vous directement.`;
-
-    redirectUrl = `https://wa.me/${MERCHANT_PHONE}?text=${encodeURIComponent(message)}`;
-    
-    // Hide proof step instruction in the instructions modal
-    proofStepInstruction.style.display = "none";
-    
-    openModal();
-}
-
-// Modal handling logic
-function openModal() {
-    instructionModal.classList.add("active");
-    modalOverlay.classList.add("active");
-}
-
-function closeModal() {
-    instructionModal.classList.remove("active");
-    modalOverlay.classList.remove("active");
-    
-    // Empty the cart after successful order initialization
-    cart = [];
-    saveCart();
-    updateCartUI();
-    closeDrawer();
-}
-
-// Lightbox Image Zoom Functionality
-document.addEventListener("click", (e) => {
-    if (e.target.classList.contains("product-banner-img")) {
-        const src = e.target.src;
-        const lightbox = document.getElementById("image-lightbox");
-        const lightboxImg = document.getElementById("lightbox-img");
+        const leads = JSON.parse(localStorage.getItem('espoirdent_leads') || '[]');
         
-        lightboxImg.src = src;
-        lightbox.classList.add("active");
-        document.body.style.overflow = "hidden"; // Disable scroll when zoomed
-    }
-});
+        // Update stats counters
+        if (totalLeadsCount) totalLeadsCount.innerText = leads.length;
+        if (activeLeadsCount) {
+            const activeCount = leads.filter(l => l.status === 'new').length;
+            activeLeadsCount.innerText = activeCount;
+        }
 
-// Close Lightbox controls
-document.getElementById("close-lightbox-btn").addEventListener("click", () => {
-    document.getElementById("image-lightbox").classList.remove("active");
-    document.body.style.overflow = "auto";
-});
+        // Render list
+        adminTableBody.innerHTML = '';
+        if (leads.length === 0) {
+            if (emptyAdminMsg) emptyAdminMsg.style.display = 'block';
+            return;
+        }
 
-document.getElementById("image-lightbox").addEventListener("click", (e) => {
-    if (e.target.id === "image-lightbox") {
-        document.getElementById("image-lightbox").classList.remove("active");
-        document.body.style.overflow = "auto";
+        if (emptyAdminMsg) emptyAdminMsg.style.display = 'none';
+
+        // Display newest first
+        leads.reverse().forEach(lead => {
+            const tr = document.createElement('tr');
+            tr.innerHTML = `
+                <td>${lead.date}</td>
+                <td><strong>${lead.name}</strong><br><small>${lead.email}</small></td>
+                <td>${lead.city}</td>
+                <td><small>${lead.requestType}</small></td>
+                <td><span class="badge-status ${lead.status}">${lead.status === 'new' ? 'Nouveau' : 'Traité'}</span></td>
+                <td>
+                    <div class="admin-actions-cell">
+                        <button class="admin-btn admin-btn-view" data-id="${lead.id}">Détails</button>
+                        <button class="admin-btn admin-btn-delete" style="background-color: transparent;" data-id="${lead.id}">Supprimer</button>
+                    </div>
+                </td>
+            `;
+            adminTableBody.appendChild(tr);
+        });
+
+        // Re-bind actions
+        bindAdminActions();
+    };
+
+    const bindAdminActions = () => {
+        // Details Button
+        document.querySelectorAll('.admin-btn-view').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const leadId = parseInt(btn.getAttribute('data-id'), 10);
+                showLeadDetails(leadId);
+            });
+        });
+
+        // Delete Button
+        document.querySelectorAll('.admin-btn-delete').forEach(btn => {
+            btn.addEventListener('click', () => {
+                if (confirm('Voulez-vous vraiment supprimer cette demande ?')) {
+                    const leadId = parseInt(btn.getAttribute('data-id'), 10);
+                    let leads = JSON.parse(localStorage.getItem('espoirdent_leads') || '[]');
+                    leads = leads.filter(l => l.id !== leadId);
+                    localStorage.setItem('espoirdent_leads', JSON.stringify(leads));
+                    renderAdminDashboard();
+                }
+            });
+        });
+    };
+
+    const showLeadDetails = (leadId) => {
+        const leads = JSON.parse(localStorage.getItem('espoirdent_leads') || '[]');
+        const lead = leads.find(l => l.id === leadId);
+
+        if (!lead) return;
+
+        // Populate modal text
+        document.getElementById('modal-lead-date').innerText = lead.date;
+        document.getElementById('modal-lead-name').innerText = lead.name;
+        document.getElementById('modal-lead-phone').innerText = lead.phone;
+        document.getElementById('modal-lead-email').innerText = lead.email;
+        document.getElementById('modal-lead-city').innerText = lead.city;
+        document.getElementById('modal-lead-scanner').innerText = lead.scanner;
+        document.getElementById('modal-lead-type').innerText = lead.requestType;
+        document.getElementById('modal-lead-file').innerText = lead.fileName;
+        document.getElementById('modal-lead-msg').innerText = lead.message || 'Aucun message particulier.';
+
+        // Toggle status action button in modal
+        const toggleStatusBtn = document.getElementById('modal-toggle-status');
+        if (toggleStatusBtn) {
+            toggleStatusBtn.innerText = lead.status === 'new' ? 'Marquer comme traité' : 'Marquer comme nouveau';
+            toggleStatusBtn.onclick = () => {
+                // Toggle status
+                const leadsDb = JSON.parse(localStorage.getItem('espoirdent_leads') || '[]');
+                const targetIdx = leadsDb.findIndex(l => l.id === leadId);
+                if (targetIdx !== -1) {
+                    leadsDb[targetIdx].status = leadsDb[targetIdx].status === 'new' ? 'processed' : 'new';
+                    localStorage.setItem('espoirdent_leads', JSON.stringify(leadsDb));
+                }
+                closeModal();
+                renderAdminDashboard();
+            };
+        }
+
+        // Open modal
+        if (adminModal && adminModalOverlay) {
+            adminModal.classList.add('open');
+            adminModalOverlay.classList.add('open');
+        }
+    };
+
+    const closeModal = () => {
+        if (adminModal && adminModalOverlay) {
+            adminModal.classList.remove('open');
+            adminModalOverlay.classList.remove('open');
+        }
+    };
+
+    if (closeModalBtn && adminModalOverlay) {
+        closeModalBtn.addEventListener('click', closeModal);
+        adminModalOverlay.addEventListener('click', closeModal);
     }
+
+    // Reset Dashboard Button
+    if (resetLeadsBtn) {
+        resetLeadsBtn.addEventListener('click', () => {
+            if (confirm('Voulez-vous réinitialiser toutes les données ? Cette action effacera toutes les demandes enregistrées.')) {
+                localStorage.removeItem('espoirdent_leads');
+                renderAdminDashboard();
+            }
+        });
+    }
+
+    // Init Admin view if we are on admin page
+    renderAdminDashboard();
 });
