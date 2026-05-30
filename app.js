@@ -201,7 +201,9 @@ document.addEventListener('DOMContentLoaded', () => {
         if (savedPhone) document.getElementById('doctor-phone').value = savedPhone;
         if (savedEmail) document.getElementById('doctor-email').value = savedEmail;
         if (savedCity) document.getElementById('doctor-city').value = savedCity;
-        if (savedScanner) document.getElementById('doctor-scanner').value = savedScanner;
+        
+        const scannerEl = document.getElementById('doctor-scanner');
+        if (savedScanner && scannerEl) scannerEl.value = savedScanner;
     }
 
     // Trigger file select click
@@ -286,7 +288,10 @@ document.addEventListener('DOMContentLoaded', () => {
             const phone = document.getElementById('doctor-phone').value;
             const email = document.getElementById('doctor-email').value;
             const city = document.getElementById('doctor-city').value;
-            const scanner = document.getElementById('doctor-scanner').value;
+            
+            const scannerEl = document.getElementById('doctor-scanner');
+            const scanner = scannerEl ? scannerEl.value : 'Non renseigné';
+            
             const requestType = document.getElementById('request-type').value;
             const message = document.getElementById('doctor-message').value;
             const fileName = selectedFile ? selectedFile.name : 'Aucun fichier joint';
@@ -296,7 +301,9 @@ document.addEventListener('DOMContentLoaded', () => {
             localStorage.setItem('espoirdent_phone', phone);
             localStorage.setItem('espoirdent_email', email);
             localStorage.setItem('espoirdent_city', city);
-            localStorage.setItem('espoirdent_scanner', scanner);
+            if (scannerEl) {
+                localStorage.setItem('espoirdent_scanner', scanner);
+            }
 
             // Simulation of uploading
             if (progressBarContainer && progressBar) {
@@ -1135,50 +1142,6 @@ document.addEventListener('DOMContentLoaded', () => {
         if (savedEmail && document.getElementById('cart-client-email')) document.getElementById('cart-client-email').value = savedEmail;
         if (savedCity && document.getElementById('cart-client-city')) document.getElementById('cart-client-city').value = savedCity;
         if (savedScanner && document.getElementById('cart-client-scanner')) document.getElementById('cart-client-scanner').value = savedScanner;
-    };
-
-    // ----------------------------------------------------
-    // 8. Lightbox for Case Studies / Portfolio Gallery
-    // ----------------------------------------------------
-    window.openLightbox = (src, captionText) => {
-        let lightbox = document.getElementById('portfolio-lightbox');
-        if (!lightbox) {
-            lightbox = document.createElement('div');
-            lightbox.id = 'portfolio-lightbox';
-            lightbox.className = 'lightbox-modal';
-            lightbox.innerHTML = `
-                <span class="lightbox-close">&times;</span>
-                <div class="lightbox-container">
-                    <img class="lightbox-content" id="lightbox-img" src="" alt="">
-                    <div class="lightbox-caption" id="lightbox-caption"></div>
-                </div>
-            `;
-            document.body.appendChild(lightbox);
-
-            // Close events
-            lightbox.querySelector('.lightbox-close').addEventListener('click', () => {
-                lightbox.classList.remove('open');
-            });
-            lightbox.addEventListener('click', (e) => {
-                if (e.target === lightbox || e.target.classList.contains('lightbox-container')) {
-                    lightbox.classList.remove('open');
-                }
-            });
-            // ESC key close
-            document.addEventListener('keydown', (e) => {
-                if (e.key === 'Escape' && lightbox.classList.contains('open')) {
-                    lightbox.classList.remove('open');
-                }
-            });
-        }
-
-        const img = lightbox.querySelector('#lightbox-img');
-        const caption = lightbox.querySelector('#lightbox-caption');
-        img.src = src;
-        img.alt = captionText;
-        caption.innerText = captionText;
-
-        lightbox.classList.add('open');
     };
 
     loadPrefilledCartFields();
