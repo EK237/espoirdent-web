@@ -1137,6 +1137,50 @@ document.addEventListener('DOMContentLoaded', () => {
         if (savedScanner && document.getElementById('cart-client-scanner')) document.getElementById('cart-client-scanner').value = savedScanner;
     };
 
+    // ----------------------------------------------------
+    // 8. Lightbox for Case Studies / Portfolio Gallery
+    // ----------------------------------------------------
+    window.openLightbox = (src, captionText) => {
+        let lightbox = document.getElementById('portfolio-lightbox');
+        if (!lightbox) {
+            lightbox = document.createElement('div');
+            lightbox.id = 'portfolio-lightbox';
+            lightbox.className = 'lightbox-modal';
+            lightbox.innerHTML = `
+                <span class="lightbox-close">&times;</span>
+                <div class="lightbox-container">
+                    <img class="lightbox-content" id="lightbox-img" src="" alt="">
+                    <div class="lightbox-caption" id="lightbox-caption"></div>
+                </div>
+            `;
+            document.body.appendChild(lightbox);
+
+            // Close events
+            lightbox.querySelector('.lightbox-close').addEventListener('click', () => {
+                lightbox.classList.remove('open');
+            });
+            lightbox.addEventListener('click', (e) => {
+                if (e.target === lightbox || e.target.classList.contains('lightbox-container')) {
+                    lightbox.classList.remove('open');
+                }
+            });
+            // ESC key close
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && lightbox.classList.contains('open')) {
+                    lightbox.classList.remove('open');
+                }
+            });
+        }
+
+        const img = lightbox.querySelector('#lightbox-img');
+        const caption = lightbox.querySelector('#lightbox-caption');
+        img.src = src;
+        img.alt = captionText;
+        caption.innerText = captionText;
+
+        lightbox.classList.add('open');
+    };
+
     loadPrefilledCartFields();
     bindAddToCartButtons();
     updateCartUI();
