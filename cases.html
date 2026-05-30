@@ -39,7 +39,11 @@
             
             <div class="header-actions">
                 <a href="contact.html" class="btn btn-accent btn-sm" style="padding: 10px 20px; font-size: 0.8rem;">Demander un Devis</a>
-                <button class="burger-menu" id="burger-menu" aria-label="Ouvrir le menu de navigation">
+                                <button class="cart-trigger-btn" id="cart-trigger" aria-label="Voir le panier">
+                    <i class="fa-solid fa-bag-shopping"></i>
+                    <span class="cart-count-badge" id="cart-count">0</span>
+                </button>
+<button class="burger-menu" id="burger-menu" aria-label="Ouvrir le menu de navigation">
                     <span class="burger-bar"></span>
                     <span class="burger-bar"></span>
                     <span class="burger-bar"></span>
@@ -194,6 +198,206 @@
     </footer>
 
     <!-- App JS -->
+        <div class="cart-drawer-overlay" id="cart-overlay"></div>
+    <div class="cart-drawer" id="cart-drawer">
+        <div class="drawer-header">
+            <h3><i class="fa-solid fa-bag-shopping"></i> Votre Panier B2B</h3>
+            <button class="close-drawer" id="close-cart" aria-label="Fermer le panier">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+        </div>
+
+        <div class="drawer-content">
+            <!-- Empty state -->
+            <div class="empty-cart-state" id="empty-cart-msg">
+                <i class="fa-solid fa-basket-shopping empty-icon"></i>
+                <p>Votre panier de commande est vide.</p>
+                <button class="btn btn-primary" id="continue-shopping">Parcourir les tarifs</button>
+            </div>
+
+            <!-- Cart items list -->
+            <div class="cart-items-container" id="cart-items-list" style="display: none;">
+                <!-- Injected dynamically by JavaScript -->
+            </div>
+
+            <!-- Order form & Checkout summary -->
+            <div class="checkout-section" id="checkout-form-section" style="display: none;">
+                <div class="cart-summary-card">
+                    <div class="summary-row">
+                        <span>Sous-total</span>
+                        <span id="summary-subtotal">0 FCFA</span>
+                    </div>
+                    <div class="summary-row">
+                        <span>Frais de livraison</span>
+                        <span class="free-badge">Gratuit (Yaoundé/Douala)</span>
+                    </div>
+                    <div class="summary-row total-row">
+                        <span>Total</span>
+                        <span id="summary-total" style="color: var(--accent-gold);">0 FCFA</span>
+                    </div>
+                </div>
+
+                <form id="cart-checkout-form" class="contact-form">
+                    <h4 style="font-family: var(--font-sans); font-size: 0.85rem; font-weight: 700; text-transform: uppercase; color: var(--primary-green); margin-bottom: 8px; border-bottom: 1px solid var(--border-gold); padding-bottom: 8px;"><i class="fa-solid fa-user-doctor"></i> Informations Clinique</h4>
+                    
+                    <div class="form-group">
+                        <label for="cart-client-name">Nom complet ou Clinique *</label>
+                        <input type="text" id="cart-client-name" required placeholder="Ex: Dr. Sandrine N.">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="cart-client-whatsapp">Numéro WhatsApp *</label>
+                        <input type="tel" id="cart-client-whatsapp" required placeholder="Ex: +237 655 08 01 50">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="cart-client-email">Adresse Email *</label>
+                        <input type="email" id="cart-client-email" required placeholder="Ex: docteur@clinique.com">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="cart-client-city">Ville & Pays *</label>
+                        <input type="text" id="cart-client-city" required placeholder="Ex: Douala, Cameroun">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="cart-client-scanner">Scanner intra-oral actuel *</label>
+                        <select id="cart-client-scanner" required>
+                            <option value="Medit">Medit (Medit Link)</option>
+                            <option value="3Shape">3Shape Communicate</option>
+                            <option value="iTero">Align/iTero</option>
+                            <option value="Autre">Autre scanner (Export direct)</option>
+                            <option value="Aucun">Aucun scanner (Empreintes physiques)</option>
+                        </select>
+                    </div>
+
+                    <!-- Drag-and-drop STL Cas File -->
+                    <div class="form-group">
+                        <label>Fichiers STL d'empreinte optique</label>
+                        <div class="file-dropzone" id="cart-dropzone-stl" style="padding: 16px;">
+                            <input type="file" id="cart-stl-file" accept=".stl,.ply,.obj,.zip" style="display: none;">
+                            <div class="dropzone-prompt" id="cart-prompt-stl">
+                                <i class="fa-solid fa-file-export" style="font-size: 1.5rem; color: var(--accent-gold);"></i>
+                                <span style="font-size: 0.8rem; font-weight: 600;">Glisser ou cliquer pour joindre les scans STL</span>
+                                <span class="file-specs" style="font-size: 0.65rem;">STL, PLY, OBJ, ZIP (Max 50 Mo)</span>
+                            </div>
+                            <div class="dropzone-preview" id="cart-preview-stl" style="display: none;">
+                                <i class="fa-solid fa-file-shield" style="font-size: 2rem; color: var(--primary-green);"></i>
+                                <div class="preview-actions">
+                                    <span id="cart-preview-filename-stl" style="font-size: 0.8rem;">scan.stl</span>
+                                    <button type="button" class="remove-file-btn" id="cart-remove-stl"><i class="fa-solid fa-trash"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="checkout-paths-tabs" style="margin-top: 16px;">
+                        <button type="button" class="tab-btn active" id="tab-pay-now">
+                            <i class="fa-solid fa-money-bill-wave"></i> Payer maintenant
+                        </button>
+                        <button type="button" class="tab-btn" id="tab-contact-first">
+                            <i class="fa-brands fa-whatsapp"></i> Discuter d'abord
+                        </button>
+                    </div>
+
+                    <!-- PATH 1: Pay Now -->
+                    <div class="path-content" id="path-pay-now-content">
+                        <h4 style="font-family: var(--font-sans); font-size: 0.85rem; font-weight: 700; text-transform: uppercase; color: var(--primary-green); margin-bottom: 12px;"><i class="fa-solid fa-wallet"></i> Mode de Paiement</h4>
+                        
+                        <div class="payment-options">
+                            <label class="payment-card-option selected">
+                                <input type="radio" name="cart-payment-method" value="momo" checked>
+                                <div class="option-content">
+                                    <div class="method-logo-wrapper momo-bg">
+                                        <i class="fa-solid fa-mobile-screen-button"></i>
+                                    </div>
+                                    <div class="method-details">
+                                        <span class="method-title">MTN MoMo</span>
+                                        <span class="beneficiary-tag">Darius Valere</span>
+                                    </div>
+                                    <i class="fa-solid fa-circle-check check-indicator"></i>
+                                </div>
+                            </label>
+
+                            <label class="payment-card-option">
+                                <input type="radio" name="cart-payment-method" value="orange">
+                                <div class="option-content">
+                                    <div class="method-logo-wrapper orange-bg">
+                                        <i class="fa-solid fa-mobile-screen-button"></i>
+                                    </div>
+                                    <div class="method-details">
+                                        <span class="method-title">Orange Money</span>
+                                        <span class="beneficiary-tag">Code Marchand : 1002072</span>
+                                    </div>
+                                    <i class="fa-solid fa-circle-check check-indicator"></i>
+                                </div>
+                            </label>
+                        </div>
+
+                        <!-- Dynamic Instruction Box -->
+                        <div class="payment-instruction-box" id="instruction-momo">
+                            <p>Pour payer via <strong>MTN Mobile Money</strong> :</p>
+                            <ol class="instruction-list">
+                                <li>Composez <strong>*126#</strong> sur votre téléphone.</li>
+                                <li>Envoyez le montant de <strong class="momo-total-placeholder">0 FCFA</strong> au numéro : <br><strong class="highlight-number"><i class="fa-solid fa-copy copy-btn" data-copy="681479611"></i> +237 681479611</strong> (Darius Valere).</li>
+                                <li>Prenez une capture d'écran du message de confirmation de transfert.</li>
+                            </ol>
+                        </div>
+
+                        <div class="payment-instruction-box" id="instruction-orange" style="display: none;">
+                            <p>Pour payer via <strong>Orange Money</strong> :</p>
+                            <ol class="instruction-list">
+                                <li>Composez le code marchand <strong>#150*47#</strong> sur votre téléphone.</li>
+                                <li>Entrez le code marchand : <strong class="highlight-number"><i class="fa-solid fa-copy copy-btn" data-copy="1002072"></i> 1002072</strong> (ETS Mr K).</li>
+                                <li>Entrez le montant de <strong class="orange-total-placeholder">0 FCFA</strong> et validez.</li>
+                                <li>Prenez une capture d'écran du reçu de paiement.</li>
+                            </ol>
+                        </div>
+
+                        <!-- Payment proof input -->
+                        <div class="form-group">
+                            <label>Capture d'écran de preuve de transfert *</label>
+                            <div class="file-dropzone" id="cart-dropzone-proof" style="padding: 16px;">
+                                <input type="file" id="cart-proof-file" accept="image/*" required style="display:none;">
+                                <div class="dropzone-prompt" id="cart-prompt-proof">
+                                    <i class="fa-solid fa-image" style="font-size: 1.5rem; color: var(--accent-gold);"></i>
+                                    <span style="font-size: 0.8rem; font-weight: 600;">Glisser ou cliquer pour importer le reçu</span>
+                                    <span class="file-specs" style="font-size: 0.65rem;">Capture d'écran (Format JPG, PNG)</span>
+                                 </div>
+                                <div class="dropzone-preview" id="cart-preview-proof" style="display:none;">
+                                    <i class="fa-solid fa-file-invoice" style="font-size: 2rem; color: var(--primary-green);"></i>
+                                    <div class="preview-actions">
+                                        <span id="cart-preview-filename-proof" style="font-size: 0.8rem;">recu.png</span>
+                                        <button type="button" class="remove-file-btn" id="cart-remove-proof"><i class="fa-solid fa-trash"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn btn-accent" style="width: 100%; display: flex; justify-content: center; align-items: center; margin-top: 12px;" id="btn-submit-pay">
+                            <i class="fa-brands fa-whatsapp" style="margin-right: 8px;"></i> Envoyer la commande WhatsApp
+                        </button>
+                    </div>
+
+                    <!-- PATH 2: Contact First -->
+                    <div class="path-content" id="path-contact-first-content" style="display: none;">
+                        <div style="background-color: rgba(11, 60, 38, 0.05); border: 1px solid var(--border-gold); padding: 16px; border-radius: var(--border-radius); font-size: 0.85rem; line-height: 1.5; color: var(--text-muted); margin-bottom: 20px;">
+                            <p><i class="fa-solid fa-circle-info" style="color: var(--accent-gold); margin-right: 6px;"></i> Vous souhaitez valider les détails techniques ou de transport avec notre technicien avant le paiement ? Votre panier sera partagé dans la discussion WhatsApp pour démarrer l'échange.</p>
+                        </div>
+                        <button type="button" class="btn btn-primary" style="width: 100%; display: flex; justify-content: center; align-items: center;" id="btn-submit-contact">
+                            <i class="fa-brands fa-whatsapp" style="margin-right: 8px;"></i> Valider et discuter sur WhatsApp
+                        </button>
+                    </div>
+                </form>
+                
+                <!-- Simulation upload bar inside Cart -->
+                <div class="upload-progress-bar" id="cart-progress-bar-container" style="margin-top: 12px;">
+                    <div class="upload-progress" id="cart-progress-bar"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script src="app.js"></script>
 </body>
 </html>

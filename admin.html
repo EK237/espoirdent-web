@@ -83,10 +83,20 @@
                     </div>
                 </div>
 
+                <!-- Tabs for Leads vs Orders -->
+                <div class="admin-tabs-container" style="margin-top: 32px; margin-bottom: 24px; border-bottom: 1px solid var(--border-gold); display: flex; gap: 8px;">
+                    <button type="button" class="admin-tab-btn active" id="admin-tab-leads" style="background: none; border: none; font-family: var(--font-serif); font-size: 1.05rem; font-weight: 700; color: var(--primary-green); padding: 12px 24px; cursor: pointer; border-bottom: 3px solid var(--accent-gold); margin-bottom: -2px; transition: all 0.3s ease;">
+                        <i class="fa-solid fa-envelope-open-text" style="margin-right: 8px;"></i> Demandes de Devis (<span id="count-leads-tab">0</span>)
+                    </button>
+                    <button type="button" class="admin-tab-btn" id="admin-tab-orders" style="background: none; border: none; font-family: var(--font-serif); font-size: 1.05rem; font-weight: 700; color: var(--text-muted); padding: 12px 24px; cursor: pointer; border-bottom: 3px solid transparent; margin-bottom: -2px; transition: all 0.3s ease;">
+                        <i class="fa-solid fa-cart-shopping" style="margin-right: 8px;"></i> Commandes Express (<span id="count-orders-tab">0</span>)
+                    </button>
+                </div>
+
                 <!-- Admin Table -->
                 <div class="admin-table-wrapper">
                     <table class="admin-table">
-                        <thead>
+                        <thead id="admin-table-thead">
                             <tr>
                                 <th>Date de soumission</th>
                                 <th>Praticien / Clinique</th>
@@ -104,8 +114,8 @@
                     <!-- Table empty state -->
                     <div class="admin-empty-state" id="admin-empty-msg" style="display: none;">
                         <i class="fa-solid fa-folder-open"></i>
-                        <h3>Aucune demande enregistrée</h3>
-                        <p>Les demandes de devis que vous soumettez via le formulaire de contact s'afficheront ici en temps réel.</p>
+                        <h3>Aucune donnée enregistrée</h3>
+                        <p>Les données de cette catégorie s'afficheront ici en temps réel.</p>
                     </div>
                 </div>
 
@@ -143,7 +153,7 @@
                     <strong>Scanner clinique</strong>
                     <span id="modal-lead-scanner">Medit</span>
                 </div>
-                <div class="admin-detail-item">
+                <div class="admin-detail-item" id="modal-lead-type-container">
                     <strong>Objet</strong>
                     <span id="modal-lead-type">Cas Test</span>
                 </div>
@@ -154,7 +164,29 @@
                 <span id="modal-lead-file" style="font-weight: 600; color: var(--primary-green);"><i class="fa-solid fa-file-arrow-up" style="margin-right: 6px;"></i> cas_dentaire.stl</span>
             </div>
 
-            <div class="admin-detail-item" style="border-top: 1px solid var(--border-gold); padding-top: 16px;">
+            <!-- Order-specific fields (hidden by default) -->
+            <div id="modal-order-specifics" style="display: none; border-top: 1px solid var(--border-gold); padding-top: 16px;">
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 16px;">
+                    <div class="admin-detail-item">
+                        <strong>Total Commande</strong>
+                        <span id="modal-order-total" style="font-weight: 700; color: var(--accent-gold);">0 FCFA</span>
+                    </div>
+                    <div class="admin-detail-item">
+                        <strong>Mode de Règlement</strong>
+                        <span id="modal-order-paymethod">MOMO</span>
+                    </div>
+                </div>
+                <div class="admin-detail-item" style="margin-bottom: 16px;">
+                    <strong>Détail des Prothèses Commandées</strong>
+                    <div id="modal-order-items" style="background-color: rgba(11, 60, 38, 0.05); padding: 12px; border-radius: 6px; font-size: 0.88rem; font-weight: 600; color: var(--primary-green);"></div>
+                </div>
+                <div class="admin-detail-item">
+                    <strong>Preuve de Paiement (Reçu)</strong>
+                    <span id="modal-order-proof" style="font-weight: 600; color: var(--accent-gold);">N/A</span>
+                </div>
+            </div>
+
+            <div class="admin-detail-item" id="modal-lead-msg-container" style="border-top: 1px solid var(--border-gold); padding-top: 16px;">
                 <strong>Message / Prescription technique</strong>
                 <p id="modal-lead-msg" style="white-space: pre-wrap; font-size: 0.9rem; line-height: 1.5; color: var(--text-muted);">Instructions clinique.</p>
             </div>

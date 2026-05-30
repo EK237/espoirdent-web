@@ -371,106 +371,225 @@ document.addEventListener('DOMContentLoaded', () => {
     const activeLeadsCount = document.getElementById('active-leads-count');
     const resetLeadsBtn = document.getElementById('reset-leads-btn');
 
+    // Admin Tabs
+    const tabLeads = document.getElementById('admin-tab-leads');
+    const tabOrders = document.getElementById('admin-tab-orders');
+    const countLeadsTab = document.getElementById('count-leads-tab');
+    const countOrdersTab = document.getElementById('count-orders-tab');
+    const adminTableThead = document.getElementById('admin-table-thead');
+
     // Admin Details Modal Elements
     const adminModal = document.getElementById('admin-modal');
     const adminModalOverlay = document.getElementById('admin-modal-overlay');
     const closeModalBtn = document.getElementById('close-admin-modal');
 
+    let activeAdminTab = "leads"; // "leads" or "orders"
+
+    const updateAdminTabCounts = () => {
+        const leads = JSON.parse(localStorage.getItem('espoirdent_leads') || '[]');
+        const orders = JSON.parse(localStorage.getItem('espoirdent_orders') || '[]');
+        if (countLeadsTab) countLeadsTab.innerText = leads.length;
+        if (countOrdersTab) countOrdersTab.innerText = orders.length;
+
+        // Update top widgets stats
+        if (totalLeadsCount) totalLeadsCount.innerText = leads.length + orders.length;
+        if (activeLeadsCount) {
+            const activeLeads = leads.filter(l => l.status === 'new').length;
+            const activeOrders = orders.filter(o => o.status === 'new').length;
+            activeLeadsCount.innerText = activeLeads + activeOrders;
+        }
+    };
+
     const renderAdminDashboard = () => {
         if (!adminTableBody) return;
 
-        const leads = JSON.parse(localStorage.getItem('espoirdent_leads') || '[]');
-        
-        // Update stats counters
-        if (totalLeadsCount) totalLeadsCount.innerText = leads.length;
-        if (activeLeadsCount) {
-            const activeCount = leads.filter(l => l.status === 'new').length;
-            activeLeadsCount.innerText = activeCount;
-        }
+        updateAdminTabCounts();
 
-        // Render list
         adminTableBody.innerHTML = '';
-        if (leads.length === 0) {
-            if (emptyAdminMsg) emptyAdminMsg.style.display = 'block';
-            return;
+
+        if (activeAdminTab === "leads") {
+            // Render Leads
+            const leads = JSON.parse(localStorage.getItem('espoirdent_leads') || '[]');
+            
+            // Set Table Head
+            if (adminTableThead) {
+                adminTableThead.innerHTML = `
+                    <tr>
+                        <th>Date de soumission</th>
+                        <th>Praticien / Clinique</th>
+                        <th>Ville</th>
+                        <th>Objet</th>
+                        <th>Statut</th>
+                        <th>Actions</th>
+                    </tr>
+                `;
+            }
+
+            if (leads.length === 0) {
+                if (emptyAdminMsg) emptyAdminMsg.style.display = 'block';
+                return;
+            }
+            if (emptyAdminMsg) emptyAdminMsg.style.display = 'none';
+
+            // Render Rows
+            [...leads].reverse().forEach(lead => {
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td>${lead.date}</td>
+                    <td><strong>Dr. ${lead.name}</strong><br><small>${lead.email}</small></td>
+                    <td>${lead.city}</td>
+                    <td><small>${lead.requestType}</small></td>
+                    <td><span class="badge-status ${lead.status}">${lead.status === 'new' ? 'Nouveau' : 'Traité'}</span></td>
+                    <td>
+                        <div class="admin-actions-cell">
+                            <button class="admin-btn admin-btn-view" data-id="${lead.id}">Détails</button>
+                            <button class="admin-btn admin-btn-delete" style="background-color: transparent; border: 1px solid #ef4444; color: #ef4444;" data-id="${lead.id}">Supprimer</button>
+                        </div>
+                    </td>
+                `;
+                adminTableBody.appendChild(tr);
+            });
+
+        } else {
+            // Render Orders
+            const orders = JSON.parse(localStorage.getItem('espoirdent_orders') || '[]');
+            
+            // Set Table Head
+            if (adminTableThead) {
+                adminTableThead.innerHTML = `
+                    <tr>
+                        <th>Date de commande</th>
+                        <th>Clinique / Praticien</th>
+                        <th>Ville</th>
+                        <th>Total</th>
+                        <th>Paiement</th>
+                        <th>Statut</th>
+                        <th>Actions</th>
+                    </tr>
+                `;
+            }
+
+            if (orders.length === 0) {
+                if (emptyAdminMsg) emptyAdminMsg.style.display = 'block';
+                return;
+            }
+            if (emptyAdminMsg) emptyAdminMsg.style.display = 'none';
+
+            // Render Rows
+            [...orders].reverse().forEach(order => {
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td>${order.date}</td>
+                    <td><strong>${order.name}</strong><br><small>${order.email}</small></td>
+                    <td>${order.city}</td>
+                    <td style="font-weight: 700; color: var(--accent-gold);">${order.total.toLocaleString()} FCFA</td>
+                    <td><small>${order.paymentMethod}</small></td>
+                    <td><span class="badge-status ${order.status}">${order.status === 'new' ? 'Nouveau' : 'Traité'}</span></td>
+                    <td>
+                        <div class="admin-actions-cell">
+                            <button class="admin-btn admin-btn-view" data-id="${order.id}">Détails</button>
+                            <button class="admin-btn admin-btn-delete" style="background-color: transparent; border: 1px solid #ef4444; color: #ef4444;" data-id="${order.id}">Supprimer</button>
+                        </div>
+                    </td>
+                `;
+                adminTableBody.appendChild(tr);
+            });
         }
 
-        if (emptyAdminMsg) emptyAdminMsg.style.display = 'none';
-
-        // Display newest first
-        leads.reverse().forEach(lead => {
-            const tr = document.createElement('tr');
-            tr.innerHTML = `
-                <td>${lead.date}</td>
-                <td><strong>${lead.name}</strong><br><small>${lead.email}</small></td>
-                <td>${lead.city}</td>
-                <td><small>${lead.requestType}</small></td>
-                <td><span class="badge-status ${lead.status}">${lead.status === 'new' ? 'Nouveau' : 'Traité'}</span></td>
-                <td>
-                    <div class="admin-actions-cell">
-                        <button class="admin-btn admin-btn-view" data-id="${lead.id}">Détails</button>
-                        <button class="admin-btn admin-btn-delete" style="background-color: transparent;" data-id="${lead.id}">Supprimer</button>
-                    </div>
-                </td>
-            `;
-            adminTableBody.appendChild(tr);
-        });
-
-        // Re-bind actions
         bindAdminActions();
     };
 
     const bindAdminActions = () => {
-        // Details Button
+        // View Details
         document.querySelectorAll('.admin-btn-view').forEach(btn => {
             btn.addEventListener('click', () => {
-                const leadId = parseInt(btn.getAttribute('data-id'), 10);
-                showLeadDetails(leadId);
+                const itemId = parseInt(btn.getAttribute('data-id'), 10);
+                showItemDetails(itemId);
             });
         });
 
-        // Delete Button
+        // Delete
         document.querySelectorAll('.admin-btn-delete').forEach(btn => {
             btn.addEventListener('click', () => {
-                if (confirm('Voulez-vous vraiment supprimer cette demande ?')) {
-                    const leadId = parseInt(btn.getAttribute('data-id'), 10);
-                    let leads = JSON.parse(localStorage.getItem('espoirdent_leads') || '[]');
-                    leads = leads.filter(l => l.id !== leadId);
-                    localStorage.setItem('espoirdent_leads', JSON.stringify(leads));
+                const itemId = parseInt(btn.getAttribute('data-id'), 10);
+                const dbName = activeAdminTab === "leads" ? 'espoirdent_leads' : 'espoirdent_orders';
+                const confirmMsg = activeAdminTab === "leads" 
+                    ? 'Voulez-vous vraiment supprimer cette demande de devis ?' 
+                    : 'Voulez-vous vraiment supprimer cette commande express ?';
+
+                if (confirm(confirmMsg)) {
+                    let items = JSON.parse(localStorage.getItem(dbName) || '[]');
+                    items = items.filter(item => item.id !== itemId);
+                    localStorage.setItem(dbName, JSON.stringify(items));
                     renderAdminDashboard();
                 }
             });
         });
     };
 
-    const showLeadDetails = (leadId) => {
-        const leads = JSON.parse(localStorage.getItem('espoirdent_leads') || '[]');
-        const lead = leads.find(l => l.id === leadId);
+    const showItemDetails = (itemId) => {
+        const dbName = activeAdminTab === "leads" ? 'espoirdent_leads' : 'espoirdent_orders';
+        const items = JSON.parse(localStorage.getItem(dbName) || '[]');
+        const item = items.find(i => i.id === itemId);
 
-        if (!lead) return;
+        if (!item) return;
 
-        // Populate modal text
-        document.getElementById('modal-lead-date').innerText = lead.date;
-        document.getElementById('modal-lead-name').innerText = lead.name;
-        document.getElementById('modal-lead-phone').innerText = lead.phone;
-        document.getElementById('modal-lead-email').innerText = lead.email;
-        document.getElementById('modal-lead-city').innerText = lead.city;
-        document.getElementById('modal-lead-scanner').innerText = lead.scanner;
-        document.getElementById('modal-lead-type').innerText = lead.requestType;
-        document.getElementById('modal-lead-file').innerText = lead.fileName;
-        document.getElementById('modal-lead-msg').innerText = lead.message || 'Aucun message particulier.';
+        // Populate common fields
+        document.getElementById('modal-lead-date').innerText = item.date;
+        document.getElementById('modal-lead-name').innerText = item.name;
+        document.getElementById('modal-lead-phone').innerText = item.phone;
+        document.getElementById('modal-lead-email').innerText = item.email;
+        document.getElementById('modal-lead-city').innerText = item.city;
+        document.getElementById('modal-lead-scanner').innerText = item.scanner;
 
-        // Toggle status action button in modal
+        const typeContainer = document.getElementById('modal-lead-type-container');
+        const fileLabel = document.getElementById('modal-lead-file');
+        const orderSpecifics = document.getElementById('modal-order-specifics');
+        const msgContainer = document.getElementById('modal-lead-msg-container');
+
+        if (activeAdminTab === "leads") {
+            // Show lead specifics
+            if (typeContainer) typeContainer.style.display = 'block';
+            document.getElementById('modal-lead-type').innerText = item.requestType;
+            fileLabel.innerText = item.fileName || 'Aucun fichier joint';
+            if (orderSpecifics) orderSpecifics.style.display = 'none';
+            if (msgContainer) {
+                msgContainer.style.display = 'block';
+                document.getElementById('modal-lead-msg').innerText = item.message || 'Aucun message particulier.';
+            }
+        } else {
+            // Show order specifics
+            if (typeContainer) typeContainer.style.display = 'none';
+            fileLabel.innerText = item.fileNameSTL || 'Aucun fichier STL';
+            if (msgContainer) msgContainer.style.display = 'none';
+
+            if (orderSpecifics) {
+                orderSpecifics.style.display = 'block';
+                document.getElementById('modal-order-total').innerText = `${item.total.toLocaleString()} FCFA`;
+                document.getElementById('modal-order-paymethod').innerText = item.paymentMethod;
+                
+                const itemsDiv = document.getElementById('modal-order-items');
+                if (itemsDiv) {
+                    itemsDiv.innerHTML = item.items.map(it => `• ${it.name} (x${it.qty}) - ${(it.price * it.qty).toLocaleString()} FCFA`).join('<br>');
+                }
+                
+                const proofSpan = document.getElementById('modal-order-proof');
+                if (proofSpan) {
+                    proofSpan.innerText = item.fileNameProof || 'N/A';
+                }
+            }
+        }
+
+        // Toggle status button in modal
         const toggleStatusBtn = document.getElementById('modal-toggle-status');
         if (toggleStatusBtn) {
-            toggleStatusBtn.innerText = lead.status === 'new' ? 'Marquer comme traité' : 'Marquer comme nouveau';
+            toggleStatusBtn.innerText = item.status === 'new' ? 'Marquer comme traité' : 'Marquer comme nouveau';
             toggleStatusBtn.onclick = () => {
-                // Toggle status
-                const leadsDb = JSON.parse(localStorage.getItem('espoirdent_leads') || '[]');
-                const targetIdx = leadsDb.findIndex(l => l.id === leadId);
-                if (targetIdx !== -1) {
-                    leadsDb[targetIdx].status = leadsDb[targetIdx].status === 'new' ? 'processed' : 'new';
-                    localStorage.setItem('espoirdent_leads', JSON.stringify(leadsDb));
+                const db = JSON.parse(localStorage.getItem(dbName) || '[]');
+                const idx = db.findIndex(i => i.id === itemId);
+                if (idx !== -1) {
+                    db[idx].status = db[idx].status === 'new' ? 'processed' : 'new';
+                    localStorage.setItem(dbName, JSON.stringify(db));
                 }
                 closeModal();
                 renderAdminDashboard();
@@ -491,21 +610,534 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
+    // Close buttons for modal
     if (closeModalBtn && adminModalOverlay) {
         closeModalBtn.addEventListener('click', closeModal);
         adminModalOverlay.addEventListener('click', closeModal);
     }
 
-    // Reset Dashboard Button
+    // Reset local database
     if (resetLeadsBtn) {
         resetLeadsBtn.addEventListener('click', () => {
-            if (confirm('Voulez-vous réinitialiser toutes les données ? Cette action effacera toutes les demandes enregistrées.')) {
-                localStorage.removeItem('espoirdent_leads');
+            const dbName = activeAdminTab === "leads" ? 'espoirdent_leads' : 'espoirdent_orders';
+            const confirmMsg = activeAdminTab === "leads"
+                ? 'Voulez-vous réinitialiser toutes les demandes de devis locales ?'
+                : 'Voulez-vous réinitialiser toutes les commandes express locales ?';
+
+            if (confirm(confirmMsg)) {
+                localStorage.removeItem(dbName);
                 renderAdminDashboard();
             }
         });
     }
 
-    // Init Admin view if we are on admin page
+    // Tabs Event Listeners
+    if (tabLeads && tabOrders) {
+        tabLeads.addEventListener('click', () => {
+            activeAdminTab = "leads";
+            tabLeads.classList.add('active');
+            tabOrders.classList.remove('active');
+            tabLeads.style.color = "var(--primary-green)";
+            tabLeads.style.borderBottomColor = "var(--accent-gold)";
+            tabOrders.style.color = "var(--text-muted)";
+            tabOrders.style.borderBottomColor = "transparent";
+            renderAdminDashboard();
+        });
+
+        tabOrders.addEventListener('click', () => {
+            activeAdminTab = "orders";
+            tabOrders.classList.add('active');
+            tabLeads.classList.remove('active');
+            tabOrders.style.color = "var(--primary-green)";
+            tabOrders.style.borderBottomColor = "var(--accent-gold)";
+            tabLeads.style.color = "var(--text-muted)";
+            tabLeads.style.borderBottomColor = "transparent";
+            renderAdminDashboard();
+        });
+    }
+
+    // Initialize Admin dashboard
     renderAdminDashboard();
+
+    // ----------------------------------------------------
+    // 7. B2B online Shopping Cart Drawer (Take.app WhatsApp funnel)
+    // ----------------------------------------------------
+    const products = [
+        { id: "zircone-ht", name: "Zircone HT", price: 55000 },
+        { id: "ips-emax", name: "IPS e.max", price: 70000 },
+        { id: "pmma", name: "PMMA", price: 20000 },
+        { id: "guide-3d", name: "Guide 3D", price: 45000 },
+        { id: "aligneur", name: "Aligneur", price: 35000 },
+        { id: "stellite", name: "Stellite", price: 75000 }
+    ];
+
+    let cart = JSON.parse(localStorage.getItem('espoirdent_cart')) || [];
+    let selectedPaymentMethod = "momo"; // default
+    let currentCheckoutPath = "pay"; // "pay" or "contact"
+    let uploadedSTLFile = null;
+    let uploadedProofFile = null;
+
+    const cartTrigger = document.getElementById('cart-trigger');
+    const closeCart = document.getElementById('close-cart');
+    const cartDrawer = document.getElementById('cart-drawer');
+    const cartOverlay = document.getElementById('cart-overlay');
+    const cartCount = document.getElementById('cart-count');
+    const cartItemsList = document.getElementById('cart-items-list');
+    const emptyCartMsg = document.getElementById('empty-cart-msg');
+    const checkoutFormSection = document.getElementById('checkout-form-section');
+
+    const toggleCartDrawer = () => {
+        if (cartDrawer && cartOverlay) {
+            cartDrawer.classList.toggle('open');
+            cartOverlay.classList.toggle('open');
+        }
+    };
+
+    if (cartTrigger) cartTrigger.addEventListener('click', toggleCartDrawer);
+    if (closeCart) closeCart.addEventListener('click', toggleCartDrawer);
+    if (cartOverlay) cartOverlay.addEventListener('click', toggleCartDrawer);
+
+    const continueShopping = document.getElementById('continue-shopping');
+    if (continueShopping) continueShopping.addEventListener('click', toggleCartDrawer);
+
+    // Bind addToCart buttons on products grid
+    const bindAddToCartButtons = () => {
+        document.querySelectorAll('.add-to-cart-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.preventDefault();
+                const productId = btn.getAttribute('data-id');
+                addToCart(productId);
+            });
+        });
+    };
+
+    const addToCart = (productId) => {
+        const product = products.find(p => p.id === productId);
+        if (!product) return;
+
+        const existing = cart.find(item => item.id === productId);
+        if (existing) {
+            existing.qty += 1;
+        } else {
+            cart.push({
+                id: product.id,
+                name: product.name,
+                price: product.price,
+                qty: 1
+            });
+        }
+
+        saveCart();
+        updateCartUI();
+
+        // Auto open drawer
+        setTimeout(() => {
+            if (cartDrawer && !cartDrawer.classList.contains('open')) {
+                toggleCartDrawer();
+            }
+        }, 150);
+    };
+
+    const saveCart = () => {
+        localStorage.setItem('espoirdent_cart', JSON.stringify(cart));
+    };
+
+    const updateCartUI = () => {
+        const totalItems = cart.reduce((acc, i) => acc + i.qty, 0);
+        const subtotal = cart.reduce((acc, i) => acc + (i.price * i.qty), 0);
+
+        if (cartCount) cartCount.innerText = totalItems;
+        
+        const subtotalEl = document.getElementById('summary-subtotal');
+        const totalEl = document.getElementById('summary-total');
+        if (subtotalEl) subtotalEl.innerText = `${subtotal.toLocaleString('fr-FR')} FCFA`;
+        if (totalEl) totalEl.innerText = `${subtotal.toLocaleString('fr-FR')} FCFA`;
+
+        // Update MOMO and Orange instructions placeholders
+        document.querySelectorAll('.momo-total-placeholder').forEach(el => {
+            el.innerText = `${subtotal.toLocaleString('fr-FR')} FCFA`;
+        });
+        document.querySelectorAll('.orange-total-placeholder').forEach(el => {
+            el.innerText = `${subtotal.toLocaleString('fr-FR')} FCFA`;
+        });
+
+        if (totalItems === 0) {
+            if (emptyCartMsg) emptyCartMsg.style.display = 'flex';
+            if (checkoutFormSection) checkoutFormSection.style.display = 'none';
+            if (cartItemsList) cartItemsList.style.display = 'none';
+        } else {
+            if (emptyCartMsg) emptyCartMsg.style.display = 'none';
+            if (checkoutFormSection) checkoutFormSection.style.display = 'block';
+            if (cartItemsList) {
+                cartItemsList.style.display = 'block';
+                renderCartItems();
+            }
+        }
+    };
+
+    const renderCartItems = () => {
+        if (!cartItemsList) return;
+        cartItemsList.innerHTML = '';
+
+        cart.forEach(item => {
+            const div = document.createElement('div');
+            div.className = 'cart-item';
+            div.style.display = 'flex';
+            div.style.justifyContent = 'space-between';
+            div.style.alignItems = 'center';
+            div.style.padding = '12px 0';
+            div.style.borderBottom = '1px solid var(--border-gold)';
+            
+            div.innerHTML = `
+                <div class="cart-item-details" style="display: flex; flex-direction: column; gap: 4px;">
+                    <span class="cart-item-title" style="font-weight: 700; font-size: 0.95rem;">${item.name}</span>
+                    <span class="cart-item-price" style="font-size: 0.88rem; color: var(--accent-gold); font-weight: 600;">${(item.price * item.qty).toLocaleString('fr-FR')} FCFA</span>
+                </div>
+                <div class="cart-item-actions" style="display: flex; align-items: center; gap: 8px;">
+                    <button type="button" class="qty-btn" data-id="${item.id}" data-action="minus">-</button>
+                    <span class="cart-item-qty" style="font-size: 0.9rem; font-weight: 600; min-width: 16px; text-align: center;">${item.qty}</span>
+                    <button type="button" class="qty-btn" data-id="${item.id}" data-action="plus">+</button>
+                    <button type="button" class="remove-item-btn" data-id="${item.id}" style="background: none; border: none; color: #ef4444; cursor: pointer; padding: 4px;"><i class="fa-solid fa-trash-can"></i></button>
+                </div>
+            `;
+            cartItemsList.appendChild(div);
+        });
+
+        // Add action listeners to qty buttons
+        cartItemsList.querySelectorAll('.qty-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const id = btn.getAttribute('data-id');
+                const action = btn.getAttribute('data-action');
+                const item = cart.find(i => i.id === id);
+                if (item) {
+                    if (action === 'plus') {
+                        item.qty += 1;
+                    } else {
+                        item.qty -= 1;
+                        if (item.qty <= 0) {
+                            cart = cart.filter(i => i.id !== id);
+                        }
+                    }
+                    saveCart();
+                    updateCartUI();
+                }
+            });
+        });
+
+        // Add action listeners to remove buttons
+        cartItemsList.querySelectorAll('.remove-item-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const id = btn.getAttribute('data-id');
+                cart = cart.filter(i => i.id !== id);
+                saveCart();
+                updateCartUI();
+            });
+        });
+    };
+
+    // Tab buttons checkout paths
+    const tabPayNow = document.getElementById('tab-pay-now');
+    const tabContactFirst = document.getElementById('tab-contact-first');
+    const pathPayNowContent = document.getElementById('path-pay-now-content');
+    const pathContactFirstContent = document.getElementById('path-contact-first-content');
+
+    if (tabPayNow && tabContactFirst) {
+        tabPayNow.addEventListener('click', () => {
+            tabPayNow.classList.add('active');
+            tabContactFirst.classList.remove('active');
+            if (pathPayNowContent) pathPayNowContent.style.display = 'block';
+            if (pathContactFirstContent) pathContactFirstContent.style.display = 'none';
+            currentCheckoutPath = "pay";
+        });
+
+        tabContactFirst.addEventListener('click', () => {
+            tabPayNow.classList.remove('active');
+            tabContactFirst.classList.add('active');
+            if (pathPayNowContent) pathPayNowContent.style.display = 'none';
+            if (pathContactFirstContent) pathContactFirstContent.style.display = 'block';
+            currentCheckoutPath = "contact";
+        });
+    }
+
+    // Payment methods toggles
+    const paymentMethods = document.querySelectorAll('.payment-card-option input[type="radio"]');
+    const instructionMomo = document.getElementById('instruction-momo');
+    const instructionOrange = document.getElementById('instruction-orange');
+
+    paymentMethods.forEach(radio => {
+        radio.addEventListener('change', () => {
+            selectedPaymentMethod = radio.value;
+            document.querySelectorAll('.payment-card-option').forEach(card => {
+                card.classList.remove('selected');
+            });
+            radio.closest('.payment-card-option').classList.add('selected');
+
+            if (selectedPaymentMethod === 'momo') {
+                if (instructionMomo) instructionMomo.style.display = 'block';
+                if (instructionOrange) instructionOrange.style.display = 'none';
+            } else {
+                if (instructionMomo) instructionMomo.style.display = 'none';
+                if (instructionOrange) instructionOrange.style.display = 'block';
+            }
+        });
+    });
+
+    // Copy to clipboard helper
+    document.addEventListener('click', (e) => {
+        const copyBtn = e.target.closest('.copy-btn');
+        if (copyBtn) {
+            const num = copyBtn.getAttribute('data-copy');
+            navigator.clipboard.writeText(num).then(() => {
+                const originalHTML = copyBtn.outerHTML;
+                copyBtn.innerHTML = '<i class="fa-solid fa-check" style="color: #10b981;"></i>';
+                setTimeout(() => {
+                    copyBtn.innerHTML = '<i class="fa-solid fa-copy"></i>';
+                }, 1500);
+            });
+        }
+    });
+
+    // File Drag/Drop inside Cart Drawer (STL scan & Payment Proof)
+    const bindCartDropzone = (dropzone, fileInput, promptEl, previewEl, filenameEl, removeBtn, acceptedTypes, onFileSelected) => {
+        if (!dropzone || !fileInput) return;
+
+        dropzone.addEventListener('click', () => fileInput.click());
+
+        fileInput.addEventListener('change', () => {
+            if (fileInput.files.length > 0) {
+                handleFile(fileInput.files[0]);
+            }
+        });
+
+        dropzone.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            dropzone.style.borderColor = 'var(--accent-gold)';
+        });
+
+        dropzone.addEventListener('dragleave', () => {
+            dropzone.style.borderColor = 'rgba(176, 152, 82, 0.2)';
+        });
+
+        dropzone.addEventListener('drop', (e) => {
+            e.preventDefault();
+            dropzone.style.borderColor = 'rgba(176, 152, 82, 0.2)';
+            if (e.dataTransfer.files.length > 0) {
+                handleFile(e.dataTransfer.files[0]);
+            }
+        });
+
+        if (removeBtn) {
+            removeBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                fileInput.value = '';
+                if (promptEl) promptEl.style.display = 'flex';
+                if (previewEl) previewEl.style.display = 'none';
+                onFileSelected(null);
+            });
+        }
+
+        const handleFile = (file) => {
+            const fileName = file.name.toLowerCase();
+            let isValid = false;
+
+            if (acceptedTypes === 'image/*') {
+                isValid = file.type.startsWith('image/');
+            } else {
+                const exts = acceptedTypes.split(',');
+                isValid = exts.some(ext => fileName.endsWith(ext));
+            }
+
+            if (!isValid) {
+                alert(`Format de fichier invalide. Types acceptés : ${acceptedTypes}`);
+                return;
+            }
+
+            if (file.size > 50 * 1024 * 1024) {
+                alert('Fichier trop volumineux. Limite de 50 Mo.');
+                return;
+            }
+
+            if (filenameEl) filenameEl.innerText = `${file.name} (${(file.size / (1024 * 1024)).toFixed(2)} Mo)`;
+            if (promptEl) promptEl.style.display = 'none';
+            if (previewEl) previewEl.style.display = 'flex';
+            onFileSelected(file);
+        };
+    };
+
+    const cartDropzoneSTL = document.getElementById('cart-dropzone-stl');
+    const cartInputSTL = document.getElementById('cart-stl-file');
+    const cartPromptSTL = document.getElementById('cart-prompt-stl');
+    const cartPreviewSTL = document.getElementById('cart-preview-stl');
+    const cartPreviewFilenameSTL = document.getElementById('cart-preview-filename-stl');
+    const cartRemoveSTL = document.getElementById('cart-remove-stl');
+
+    bindCartDropzone(cartDropzoneSTL, cartInputSTL, cartPromptSTL, cartPreviewSTL, cartPreviewFilenameSTL, cartRemoveSTL, '.stl,.ply,.obj,.zip', (file) => {
+        uploadedSTLFile = file;
+    });
+
+    const cartDropzoneProof = document.getElementById('cart-dropzone-proof');
+    const cartInputProof = document.getElementById('cart-proof-file');
+    const cartPromptProof = document.getElementById('cart-prompt-proof');
+    const cartPreviewProof = document.getElementById('cart-preview-proof');
+    const cartPreviewFilenameProof = document.getElementById('cart-preview-filename-proof');
+    const cartRemoveProof = document.getElementById('cart-remove-proof');
+
+    bindCartDropzone(cartDropzoneProof, cartInputProof, cartPromptProof, cartPreviewProof, cartPreviewFilenameProof, cartRemoveProof, 'image/*', (file) => {
+        uploadedProofFile = file;
+    });
+
+    // Form Submission for Order
+    const cartForm = document.getElementById('cart-checkout-form');
+    const cartProgressBarContainer = document.getElementById('cart-progress-bar-container');
+    const cartProgressBar = document.getElementById('cart-progress-bar');
+    const submitPayBtn = document.getElementById('btn-submit-pay');
+    const submitContactBtn = document.getElementById('btn-submit-contact');
+
+    const submitOrder = (isDiscussOnly) => {
+        const name = document.getElementById('cart-client-name').value;
+        const phone = document.getElementById('cart-client-whatsapp').value;
+        const email = document.getElementById('cart-client-email').value;
+        const city = document.getElementById('cart-client-city').value;
+        const scanner = document.getElementById('cart-client-scanner').value;
+
+        if (!name || !phone || !email || !city || !scanner) {
+            alert('Veuillez renseigner tous les champs obligatoires (*).');
+            return;
+        }
+
+        if (!isDiscussOnly && !uploadedProofFile) {
+            alert('Veuillez attacher une capture d\'écran du reçu de transfert pour valider le paiement.');
+            return;
+        }
+
+        const runSubmission = () => {
+            const subtotal = cart.reduce((acc, i) => acc + (i.price * i.qty), 0);
+            const itemsListStr = cart.map(i => `- ${i.name} (x${i.qty}) : ${(i.price * i.qty).toLocaleString()} FCFA`).join('\n');
+            const fileSTLName = uploadedSTLFile ? uploadedSTLFile.name : 'Aucun scan joint (Empreintes physiques)';
+            const fileProofName = uploadedProofFile ? uploadedProofFile.name : 'N/A';
+
+            // Save order in local storage (leads/orders database)
+            const orders = JSON.parse(localStorage.getItem('espoirdent_orders') || '[]');
+            const newOrder = {
+                id: Date.now(),
+                name,
+                phone,
+                email,
+                city,
+                scanner,
+                items: cart,
+                total: subtotal,
+                paymentMethod: isDiscussOnly ? 'Discussion avant paiement' : selectedPaymentMethod.toUpperCase(),
+                fileNameSTL: fileSTLName,
+                fileNameProof: fileProofName,
+                date: new Date().toLocaleString('fr-FR'),
+                status: 'new'
+            };
+            orders.push(newOrder);
+            localStorage.setItem('espoirdent_orders', JSON.stringify(orders));
+
+            // Prefill dentist coordinates for next orders
+            localStorage.setItem('espoirdent_name', name);
+            localStorage.setItem('espoirdent_phone', phone);
+            localStorage.setItem('espoirdent_email', email);
+            localStorage.setItem('espoirdent_city', city);
+            localStorage.setItem('espoirdent_scanner', scanner);
+
+            // WhatsApp Message Compile
+            let message = `🛒 *NOUVELLE COMMANDE - ESPOIRDENT B2B*\n`;
+            message += `------------------------------------\n`;
+            message += `👤 *Clinique* : ${name}\n`;
+            message += `📞 *WhatsApp* : ${phone}\n`;
+            message += `✉️ *Email* : ${email}\n`;
+            message += `📍 *Ville* : ${city}\n`;
+            message += `🔬 *Scanner* : ${scanner}\n\n`;
+            message += `📦 *Prothèses Commandées* :\n${itemsListStr}\n\n`;
+            message += `📎 *Scan STL* : ${fileSTLName}\n`;
+            message += `💵 *Total Commande* : *${subtotal.toLocaleString()} FCFA*\n`;
+            
+            if (isDiscussOnly) {
+                message += `💬 *Mode* : Discuter et valider avant paiement\n`;
+            } else {
+                message += `💳 *Mode de Règlement* : ${selectedPaymentMethod.toUpperCase()}\n`;
+                message += `📸 *Preuve de Paiement* : ${fileProofName} (Envoyée ci-joint)\n`;
+            }
+            message += `------------------------------------\n`;
+            message += `Ets Mr K • RCCM : RC/YAE/2023/A/2978`;
+
+            const waUrl = `https://wa.me/237655080150?text=${encodeURIComponent(message)}`;
+            
+            alert('Votre récapitulatif de commande est validé localement. Vous allez être redirigé vers WhatsApp pour finaliser l\'envoi des fichiers et du paiement.');
+            window.open(waUrl, '_blank');
+
+            // Reset cart
+            cart = [];
+            saveCart();
+            updateCartUI();
+            toggleCartDrawer();
+
+            // Reset file upload prompts
+            uploadedSTLFile = null;
+            uploadedProofFile = null;
+            if (cartInputSTL) cartInputSTL.value = '';
+            if (cartInputProof) cartInputProof.value = '';
+            if (cartPreviewSTL) cartPreviewSTL.style.display = 'none';
+            if (cartPreviewProof) cartPreviewProof.style.display = 'none';
+            if (cartPromptSTL) cartPromptSTL.style.display = 'flex';
+            if (cartPromptProof) cartPromptProof.style.display = 'flex';
+            if (cartForm) cartForm.reset();
+        };
+
+        // Simulate upload bar
+        if (cartProgressBarContainer && cartProgressBar) {
+            cartProgressBarContainer.style.display = 'block';
+            cartProgressBar.style.width = '0%';
+            
+            let width = 0;
+            const interval = setInterval(() => {
+                if (width >= 100) {
+                    clearInterval(interval);
+                    cartProgressBarContainer.style.display = 'none';
+                    runSubmission();
+                } else {
+                    width += 15;
+                    cartProgressBar.style.width = width + '%';
+                }
+            }, 100);
+        } else {
+            runSubmission();
+        }
+    };
+
+    if (cartForm) {
+        cartForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            submitOrder(false);
+        });
+    }
+
+    if (submitContactBtn) {
+        submitContactBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            submitOrder(true);
+        });
+    }
+
+    // Load prefilled client details in Cart
+    const loadPrefilledCartFields = () => {
+        const savedName = localStorage.getItem('espoirdent_name');
+        const savedPhone = localStorage.getItem('espoirdent_phone');
+        const savedEmail = localStorage.getItem('espoirdent_email');
+        const savedCity = localStorage.getItem('espoirdent_city');
+        const savedScanner = localStorage.getItem('espoirdent_scanner');
+
+        if (savedName && document.getElementById('cart-client-name')) document.getElementById('cart-client-name').value = savedName;
+        if (savedPhone && document.getElementById('cart-client-whatsapp')) document.getElementById('cart-client-whatsapp').value = savedPhone;
+        if (savedEmail && document.getElementById('cart-client-email')) document.getElementById('cart-client-email').value = savedEmail;
+        if (savedCity && document.getElementById('cart-client-city')) document.getElementById('cart-client-city').value = savedCity;
+        if (savedScanner && document.getElementById('cart-client-scanner')) document.getElementById('cart-client-scanner').value = savedScanner;
+    };
+
+    loadPrefilledCartFields();
+    bindAddToCartButtons();
+    updateCartUI();
 });
