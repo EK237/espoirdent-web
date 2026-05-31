@@ -406,6 +406,20 @@
                                     <i class="fa-solid fa-circle-check check-indicator"></i>
                                 </div>
                             </label>
+
+                            <label class="payment-card-option">
+                                <input type="radio" name="cart-payment-method" value="neero">
+                                <div class="option-content">
+                                    <div class="method-logo-wrapper neero-bg" style="background-color: #4f46e5; color: white; display: flex; align-items: center; justify-content: center; width: 36px; height: 36px; border-radius: 50%; font-size: 1rem;">
+                                        <i class="fa-solid fa-credit-card"></i>
+                                    </div>
+                                    <div class="method-details">
+                                        <span class="method-title">Carte / Neero</span>
+                                        <span class="beneficiary-tag">Lien envoyé par WhatsApp</span>
+                                    </div>
+                                    <i class="fa-solid fa-circle-check check-indicator"></i>
+                                </div>
+                            </label>
                         </div>
 
                         <!-- Dynamic Instruction Box -->
@@ -428,27 +442,44 @@
                             </ol>
                         </div>
 
-                        <!-- Payment proof input -->
-                        <div class="form-group">
-                            <label>Capture d'écran de preuve de transfert *</label>
-                            <div class="file-dropzone" id="cart-dropzone-proof" style="padding: 16px;">
-                                <input type="file" id="cart-proof-file" accept="image/*" required style="display:none;">
-                                <div class="dropzone-prompt" id="cart-prompt-proof">
-                                    <i class="fa-solid fa-image" style="font-size: 1.5rem; color: var(--accent-gold);"></i>
-                                    <span style="font-size: 0.8rem; font-weight: 600;">Glisser ou cliquer pour importer le reçu</span>
-                                    <span class="file-specs" style="font-size: 0.65rem;">Capture d'écran (Format JPG, PNG)</span>
-                                 </div>
-                                <div class="dropzone-preview" id="cart-preview-proof" style="display:none;">
-                                    <i class="fa-solid fa-file-invoice" style="font-size: 2rem; color: var(--primary-green);"></i>
-                                    <div class="preview-actions">
-                                        <span id="cart-preview-filename-proof" style="font-size: 0.8rem;">recu.png</span>
-                                        <button type="button" class="remove-file-btn" id="cart-remove-proof"><i class="fa-solid fa-trash"></i></button>
+                        <div class="payment-instruction-box" id="instruction-neero" style="display: none;">
+                            <p>Pour payer par <strong>Carte Bancaire (Neero)</strong> :</p>
+                            <ol class="instruction-list">
+                                <li>Soumettez votre panier pour enregistrer la commande.</li>
+                                <li>Un conseiller vous enverra un lien de paiement sécurisé <strong>Neero</strong> directement par WhatsApp pour finaliser le règlement.</li>
+                            </ol>
+                        </div>
+
+                        <!-- Proof of payment fields (Hidden if Neero is selected) -->
+                        <div id="payment-proof-fields-container">
+                            <!-- Transaction ID Input -->
+                            <div class="form-group" style="margin-bottom: 16px;">
+                                <label for="cart-transaction-id">ID de Transaction Mobile Money</label>
+                                <input type="text" id="cart-transaction-id" placeholder="Ex: 20481729482 ou AP260531...">
+                            </div>
+
+                            <!-- Payment proof input -->
+                            <div class="form-group" style="margin-bottom: 16px;">
+                                <label>Ou Capture d'écran de preuve de transfert</label>
+                                <div class="file-dropzone" id="cart-dropzone-proof" style="padding: 16px;">
+                                    <input type="file" id="cart-proof-file" accept="image/*" style="display:none;">
+                                    <div class="dropzone-prompt" id="cart-prompt-proof">
+                                        <i class="fa-solid fa-image" style="font-size: 1.5rem; color: var(--accent-gold);"></i>
+                                        <span style="font-size: 0.8rem; font-weight: 600;">Glisser ou cliquer pour importer le reçu</span>
+                                        <span class="file-specs" style="font-size: 0.65rem;">Capture d'écran (Format JPG, PNG)</span>
+                                     </div>
+                                    <div class="dropzone-preview" id="cart-preview-proof" style="display:none;">
+                                        <i class="fa-solid fa-file-invoice" style="font-size: 2rem; color: var(--primary-green);"></i>
+                                        <div class="preview-actions">
+                                            <span id="cart-preview-filename-proof" style="font-size: 0.8rem;">recu.png</span>
+                                            <button type="button" class="remove-file-btn" id="cart-remove-proof"><i class="fa-solid fa-trash"></i></button>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
 
-                        <button type="submit" class="btn btn-accent" style="width: 100%; display: flex; justify-content: center; align-items: center; margin-top: 12px;" id="btn-submit-pay">
+                        <button type="submit" class="btn btn-accent" style="width: 100%; display: flex; justify-content: center; align-items: center; margin-top: 12px; opacity: 0.5; cursor: not-allowed;" id="btn-submit-pay" disabled>
                             <i class="fa-brands fa-whatsapp" style="margin-right: 8px;"></i> Envoyer la commande WhatsApp
                         </button>
                     </div>
@@ -471,7 +502,6 @@
             </div>
         </div>
     </div>
-
     <script src="app.js"></script>
 </body>
 </html>
