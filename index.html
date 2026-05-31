@@ -599,11 +599,17 @@
                             </ol>
                         </div>
 
+                        <!-- Transaction ID Input -->
+                        <div class="form-group" style="margin-bottom: 16px;">
+                            <label for="cart-transaction-id">ID de Transaction Mobile Money</label>
+                            <input type="text" id="cart-transaction-id" placeholder="Ex: 20481729482 ou AP260531...">
+                        </div>
+
                         <!-- Payment proof input -->
-                        <div class="form-group">
-                            <label>Capture d'écran de preuve de transfert *</label>
+                        <div class="form-group" style="margin-bottom: 16px;">
+                            <label>Ou Capture d'écran de preuve de transfert</label>
                             <div class="file-dropzone" id="cart-dropzone-proof" style="padding: 16px;">
-                                <input type="file" id="cart-proof-file" accept="image/*" required style="display:none;">
+                                <input type="file" id="cart-proof-file" accept="image/*" style="display:none;">
                                 <div class="dropzone-prompt" id="cart-prompt-proof">
                                     <i class="fa-solid fa-image" style="font-size: 1.5rem; color: var(--accent-gold);"></i>
                                     <span style="font-size: 0.8rem; font-weight: 600;">Glisser ou cliquer pour importer le reçu</span>
@@ -619,7 +625,7 @@
                             </div>
                         </div>
 
-                        <button type="submit" class="btn btn-accent" style="width: 100%; display: flex; justify-content: center; align-items: center; margin-top: 12px;" id="btn-submit-pay">
+                        <button type="submit" class="btn btn-accent" style="width: 100%; display: flex; justify-content: center; align-items: center; margin-top: 12px; opacity: 0.5; cursor: not-allowed;" id="btn-submit-pay" disabled>
                             <i class="fa-brands fa-whatsapp" style="margin-right: 8px;"></i> Envoyer la commande WhatsApp
                         </button>
                     </div>

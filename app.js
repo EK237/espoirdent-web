@@ -1038,16 +1038,39 @@ document.addEventListener('DOMContentLoaded', () => {
     const cartPreviewProof = document.getElementById('cart-preview-proof');
     const cartPreviewFilenameProof = document.getElementById('cart-preview-filename-proof');
     const cartRemoveProof = document.getElementById('cart-remove-proof');
+    const cartTransactionInput = document.getElementById('cart-transaction-id');
+    const submitPayBtn = document.getElementById('btn-submit-pay');
+
+    const updateSubmitButtonState = () => {
+        const transactionId = cartTransactionInput ? cartTransactionInput.value.trim() : '';
+        const hasProof = !!uploadedProofFile || transactionId.length > 0;
+        
+        if (submitPayBtn) {
+            if (hasProof) {
+                submitPayBtn.disabled = false;
+                submitPayBtn.style.opacity = '1';
+                submitPayBtn.style.cursor = 'pointer';
+            } else {
+                submitPayBtn.disabled = true;
+                submitPayBtn.style.opacity = '0.5';
+                submitPayBtn.style.cursor = 'not-allowed';
+            }
+        }
+    };
+
+    if (cartTransactionInput) {
+        cartTransactionInput.addEventListener('input', updateSubmitButtonState);
+    }
 
     bindCartDropzone(cartDropzoneProof, cartInputProof, cartPromptProof, cartPreviewProof, cartPreviewFilenameProof, cartRemoveProof, 'image/*', (file) => {
         uploadedProofFile = file;
+        updateSubmitButtonState();
     });
 
     // Form Submission for Order
     const cartForm = document.getElementById('cart-checkout-form');
     const cartProgressBarContainer = document.getElementById('cart-progress-bar-container');
     const cartProgressBar = document.getElementById('cart-progress-bar');
-    const submitPayBtn = document.getElementById('btn-submit-pay');
     const submitContactBtn = document.getElementById('btn-submit-contact');
 
     const submitOrder = (isDiscussOnly) => {
@@ -1056,14 +1079,15 @@ document.addEventListener('DOMContentLoaded', () => {
         const email = document.getElementById('cart-client-email').value;
         const city = document.getElementById('cart-client-city').value;
         const scanner = document.getElementById('cart-client-scanner').value;
+        const transactionId = cartTransactionInput ? cartTransactionInput.value.trim() : '';
 
         if (!name || !phone || !email || !city || !scanner) {
             alert('Veuillez renseigner tous les champs obligatoires (*).');
             return;
         }
 
-        if (!isDiscussOnly && !uploadedProofFile) {
-            alert('Veuillez attacher une capture d\'écran du reçu de transfert pour valider le paiement.');
+        if (!isDiscussOnly && !uploadedProofFile && !transactionId) {
+            alert('Veuillez renseigner un ID de transaction ou attacher une capture d\'écran du reçu pour valider le paiement.');
             return;
         }
 
@@ -1085,6 +1109,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 items: cart,
                 total: subtotal,
                 paymentMethod: isDiscussOnly ? 'Discussion avant paiement' : selectedPaymentMethod.toUpperCase(),
+                transactionId: isDiscussOnly ? 'N/A' : (transactionId || 'N/A'),
                 fileNameSTL: fileSTLName,
                 fileNameProof: fileProofName,
                 date: new Date().toLocaleString('fr-FR'),
@@ -1101,7 +1126,7 @@ document.addEventListener('DOMContentLoaded', () => {
             localStorage.setItem('k_dental_lab_scanner', scanner);
 
             // WhatsApp Message Compile
-            let message = `🛒 *NOUVELLE COMMANDE - ESPOIRDENT B2B*\n`;
+            let message = `🛒 *NOUVELLE COMMANDE - K DENTAL LAB B2B*\n`;
             message += `------------------------------------\n`;
             message += `👤 *Clinique* : ${name}\n`;
             message += `📞 *WhatsApp* : ${phone}\n`;
@@ -1116,6 +1141,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 message += `💬 *Mode* : Discuter et valider avant paiement\n`;
             } else {
                 message += `💳 *Mode de Règlement* : ${selectedPaymentMethod.toUpperCase()}\n`;
+                if (transactionId) {
+                    message += `🆔 *ID Transaction* : \`${transactionId}\`\n`;
+                }
                 message += `📸 *Preuve de Paiement* : ${fileProofName} (Envoyée ci-joint)\n`;
             }
             message += `------------------------------------\n`;
