@@ -920,6 +920,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const paymentMethods = document.querySelectorAll('.payment-card-option input[type="radio"]');
     const instructionMomo = document.getElementById('instruction-momo');
     const instructionOrange = document.getElementById('instruction-orange');
+    const instructionNeero = document.getElementById('instruction-neero');
+    const proofFieldsContainer = document.getElementById('payment-proof-fields-container');
 
     paymentMethods.forEach(radio => {
         radio.addEventListener('change', () => {
@@ -929,12 +931,16 @@ document.addEventListener('DOMContentLoaded', () => {
             });
             radio.closest('.payment-card-option').classList.add('selected');
 
-            if (selectedPaymentMethod === 'momo') {
-                if (instructionMomo) instructionMomo.style.display = 'block';
-                if (instructionOrange) instructionOrange.style.display = 'none';
-            } else {
-                if (instructionMomo) instructionMomo.style.display = 'none';
-                if (instructionOrange) instructionOrange.style.display = 'block';
+            if (instructionMomo) instructionMomo.style.display = selectedPaymentMethod === 'momo' ? 'block' : 'none';
+            if (instructionOrange) instructionOrange.style.display = selectedPaymentMethod === 'orange' ? 'block' : 'none';
+            if (instructionNeero) instructionNeero.style.display = selectedPaymentMethod === 'neero' ? 'block' : 'none';
+
+            if (proofFieldsContainer) {
+                proofFieldsContainer.style.display = selectedPaymentMethod === 'neero' ? 'none' : 'block';
+            }
+
+            if (typeof updateSubmitButtonState === 'function') {
+                updateSubmitButtonState();
             }
         });
     });
@@ -1041,9 +1047,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const cartTransactionInput = document.getElementById('cart-transaction-id');
     const submitPayBtn = document.getElementById('btn-submit-pay');
 
-    const updateSubmitButtonState = () => {
+    window.updateSubmitButtonState = () => {
         const transactionId = cartTransactionInput ? cartTransactionInput.value.trim() : '';
-        const hasProof = !!uploadedProofFile || transactionId.length > 0;
+        const hasProof = selectedPaymentMethod === 'neero' || !!uploadedProofFile || transactionId.length > 0;
         
         if (submitPayBtn) {
             if (hasProof) {
@@ -1059,12 +1065,12 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     if (cartTransactionInput) {
-        cartTransactionInput.addEventListener('input', updateSubmitButtonState);
+        cartTransactionInput.addEventListener('input', window.updateSubmitButtonState);
     }
 
     bindCartDropzone(cartDropzoneProof, cartInputProof, cartPromptProof, cartPreviewProof, cartPreviewFilenameProof, cartRemoveProof, 'image/*', (file) => {
         uploadedProofFile = file;
-        updateSubmitButtonState();
+        window.updateSubmitButtonState();
     });
 
     // Form Submission for Order
@@ -1086,7 +1092,7 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
-        if (!isDiscussOnly && !uploadedProofFile && !transactionId) {
+        if (!isDiscussOnly && selectedPaymentMethod !== 'neero' && !uploadedProofFile && !transactionId) {
             alert('Veuillez renseigner un ID de transaction ou attacher une capture d\'écran du reçu pour valider le paiement.');
             return;
         }
@@ -1109,7 +1115,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 items: cart,
                 total: subtotal,
                 paymentMethod: isDiscussOnly ? 'Discussion avant paiement' : selectedPaymentMethod.toUpperCase(),
-                transactionId: isDiscussOnly ? 'N/A' : (transactionId || 'N/A'),
+                transactionId: (isDiscussOnly || selectedPaymentMethod === 'neero') ? 'N/A' : (transactionId || 'N/A'),
                 fileNameSTL: fileSTLName,
                 fileNameProof: fileProofName,
                 date: new Date().toLocaleString('fr-FR'),
