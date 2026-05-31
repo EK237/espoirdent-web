@@ -1,5 +1,5 @@
 /**
- * EspoirDent - Interactive Website Logic
+ * K Dental Lab - Interactive Website Logic
  */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -191,11 +191,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Load LocalStorage prefilled dentist info
     if (contactForm) {
-        const savedName = localStorage.getItem('espoirdent_name');
-        const savedPhone = localStorage.getItem('espoirdent_phone');
-        const savedEmail = localStorage.getItem('espoirdent_email');
-        const savedCity = localStorage.getItem('espoirdent_city');
-        const savedScanner = localStorage.getItem('espoirdent_scanner');
+        const savedName = localStorage.getItem('k_dental_lab_name');
+        const savedPhone = localStorage.getItem('k_dental_lab_phone');
+        const savedEmail = localStorage.getItem('k_dental_lab_email');
+        const savedCity = localStorage.getItem('k_dental_lab_city');
+        const savedScanner = localStorage.getItem('k_dental_lab_scanner');
 
         if (savedName) document.getElementById('doctor-name').value = savedName;
         if (savedPhone) document.getElementById('doctor-phone').value = savedPhone;
@@ -297,12 +297,12 @@ document.addEventListener('DOMContentLoaded', () => {
             const fileName = selectedFile ? selectedFile.name : 'Aucun fichier joint';
 
             // Store info in LocalStorage to prefill next time
-            localStorage.setItem('espoirdent_name', name);
-            localStorage.setItem('espoirdent_phone', phone);
-            localStorage.setItem('espoirdent_email', email);
-            localStorage.setItem('espoirdent_city', city);
+            localStorage.setItem('k_dental_lab_name', name);
+            localStorage.setItem('k_dental_lab_phone', phone);
+            localStorage.setItem('k_dental_lab_email', email);
+            localStorage.setItem('k_dental_lab_city', city);
             if (scannerEl) {
-                localStorage.setItem('espoirdent_scanner', scanner);
+                localStorage.setItem('k_dental_lab_scanner', scanner);
             }
 
             // Simulation of uploading
@@ -326,7 +326,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             function saveLeadAndRedirect() {
                 // Save leads in LocalStorage database for admin view
-                const leads = JSON.parse(localStorage.getItem('espoirdent_leads') || '[]');
+                const leads = JSON.parse(localStorage.getItem('k_dental_lab_leads') || '[]');
                 const newLead = {
                     id: Date.now(),
                     name,
@@ -341,7 +341,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     status: 'new'
                 };
                 leads.push(newLead);
-                localStorage.setItem('espoirdent_leads', JSON.stringify(leads));
+                localStorage.setItem('k_dental_lab_leads', JSON.stringify(leads));
 
                 // Clean file display
                 if (progressBarContainer) progressBarContainer.style.display = 'none';
@@ -354,7 +354,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 alert('Votre demande a bien été enregistrée localement ! Vous allez maintenant être redirigé vers WhatsApp pour finaliser le contact avec notre équipe technique.');
 
                 // WhatsApp redirection string
-                const messageText = `Bonjour EspoirDent! Je suis le praticien ${name} de la clinique (${city}). Je viens de soumettre une demande sur le site:\n\n` +
+                const messageText = `Bonjour K Dental Lab! Je suis le praticien ${name} de la clinique (${city}). Je viens de soumettre une demande sur le site:\n\n` +
                                     `- Type : ${requestType}\n` +
                                     `- Fichier : ${fileName}\n` +
                                     `- Équipement : ${scanner}\n` +
@@ -393,8 +393,8 @@ document.addEventListener('DOMContentLoaded', () => {
     let activeAdminTab = "leads"; // "leads" or "orders"
 
     const updateAdminTabCounts = () => {
-        const leads = JSON.parse(localStorage.getItem('espoirdent_leads') || '[]');
-        const orders = JSON.parse(localStorage.getItem('espoirdent_orders') || '[]');
+        const leads = JSON.parse(localStorage.getItem('k_dental_lab_leads') || '[]');
+        const orders = JSON.parse(localStorage.getItem('k_dental_lab_orders') || '[]');
         if (countLeadsTab) countLeadsTab.innerText = leads.length;
         if (countOrdersTab) countOrdersTab.innerText = orders.length;
 
@@ -416,7 +416,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (activeAdminTab === "leads") {
             // Render Leads
-            const leads = JSON.parse(localStorage.getItem('espoirdent_leads') || '[]');
+            const leads = JSON.parse(localStorage.getItem('k_dental_lab_leads') || '[]');
             
             // Set Table Head
             if (adminTableThead) {
@@ -459,7 +459,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         } else {
             // Render Orders
-            const orders = JSON.parse(localStorage.getItem('espoirdent_orders') || '[]');
+            const orders = JSON.parse(localStorage.getItem('k_dental_lab_orders') || '[]');
             
             // Set Table Head
             if (adminTableThead) {
@@ -519,7 +519,7 @@ document.addEventListener('DOMContentLoaded', () => {
         document.querySelectorAll('.admin-btn-delete').forEach(btn => {
             btn.addEventListener('click', () => {
                 const itemId = parseInt(btn.getAttribute('data-id'), 10);
-                const dbName = activeAdminTab === "leads" ? 'espoirdent_leads' : 'espoirdent_orders';
+                const dbName = activeAdminTab === "leads" ? 'k_dental_lab_leads' : 'k_dental_lab_orders';
                 const confirmMsg = activeAdminTab === "leads" 
                     ? 'Voulez-vous vraiment supprimer cette demande de devis ?' 
                     : 'Voulez-vous vraiment supprimer cette commande express ?';
@@ -535,7 +535,7 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     const showItemDetails = (itemId) => {
-        const dbName = activeAdminTab === "leads" ? 'espoirdent_leads' : 'espoirdent_orders';
+        const dbName = activeAdminTab === "leads" ? 'k_dental_lab_leads' : 'k_dental_lab_orders';
         const items = JSON.parse(localStorage.getItem(dbName) || '[]');
         const item = items.find(i => i.id === itemId);
 
@@ -626,7 +626,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Reset local database
     if (resetLeadsBtn) {
         resetLeadsBtn.addEventListener('click', () => {
-            const dbName = activeAdminTab === "leads" ? 'espoirdent_leads' : 'espoirdent_orders';
+            const dbName = activeAdminTab === "leads" ? 'k_dental_lab_leads' : 'k_dental_lab_orders';
             const confirmMsg = activeAdminTab === "leads"
                 ? 'Voulez-vous réinitialiser toutes les demandes de devis locales ?'
                 : 'Voulez-vous réinitialiser toutes les commandes express locales ?';
@@ -728,7 +728,7 @@ document.addEventListener('DOMContentLoaded', () => {
         { id: "design-barre", name: "Barre d'implant complète (arcade)", price: 50000 }
     ];
 
-    let cart = JSON.parse(localStorage.getItem('espoirdent_cart')) || [];
+    let cart = JSON.parse(localStorage.getItem('k_dental_lab_cart')) || [];
     let selectedPaymentMethod = "momo"; // default
     let currentCheckoutPath = "pay"; // "pay" or "contact"
     let uploadedSTLFile = null;
@@ -796,7 +796,7 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     const saveCart = () => {
-        localStorage.setItem('espoirdent_cart', JSON.stringify(cart));
+        localStorage.setItem('k_dental_lab_cart', JSON.stringify(cart));
     };
 
     const updateCartUI = () => {
@@ -1074,7 +1074,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const fileProofName = uploadedProofFile ? uploadedProofFile.name : 'N/A';
 
             // Save order in local storage (leads/orders database)
-            const orders = JSON.parse(localStorage.getItem('espoirdent_orders') || '[]');
+            const orders = JSON.parse(localStorage.getItem('k_dental_lab_orders') || '[]');
             const newOrder = {
                 id: Date.now(),
                 name,
@@ -1091,14 +1091,14 @@ document.addEventListener('DOMContentLoaded', () => {
                 status: 'new'
             };
             orders.push(newOrder);
-            localStorage.setItem('espoirdent_orders', JSON.stringify(orders));
+            localStorage.setItem('k_dental_lab_orders', JSON.stringify(orders));
 
             // Prefill dentist coordinates for next orders
-            localStorage.setItem('espoirdent_name', name);
-            localStorage.setItem('espoirdent_phone', phone);
-            localStorage.setItem('espoirdent_email', email);
-            localStorage.setItem('espoirdent_city', city);
-            localStorage.setItem('espoirdent_scanner', scanner);
+            localStorage.setItem('k_dental_lab_name', name);
+            localStorage.setItem('k_dental_lab_phone', phone);
+            localStorage.setItem('k_dental_lab_email', email);
+            localStorage.setItem('k_dental_lab_city', city);
+            localStorage.setItem('k_dental_lab_scanner', scanner);
 
             // WhatsApp Message Compile
             let message = `🛒 *NOUVELLE COMMANDE - ESPOIRDENT B2B*\n`;
@@ -1181,11 +1181,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Load prefilled client details in Cart
     const loadPrefilledCartFields = () => {
-        const savedName = localStorage.getItem('espoirdent_name');
-        const savedPhone = localStorage.getItem('espoirdent_phone');
-        const savedEmail = localStorage.getItem('espoirdent_email');
-        const savedCity = localStorage.getItem('espoirdent_city');
-        const savedScanner = localStorage.getItem('espoirdent_scanner');
+        const savedName = localStorage.getItem('k_dental_lab_name');
+        const savedPhone = localStorage.getItem('k_dental_lab_phone');
+        const savedEmail = localStorage.getItem('k_dental_lab_email');
+        const savedCity = localStorage.getItem('k_dental_lab_city');
+        const savedScanner = localStorage.getItem('k_dental_lab_scanner');
 
         if (savedName && document.getElementById('cart-client-name')) document.getElementById('cart-client-name').value = savedName;
         if (savedPhone && document.getElementById('cart-client-whatsapp')) document.getElementById('cart-client-whatsapp').value = savedPhone;
