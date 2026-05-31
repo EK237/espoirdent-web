@@ -670,12 +670,62 @@ document.addEventListener('DOMContentLoaded', () => {
     // 7. B2B online Shopping Cart Drawer (Take.app WhatsApp funnel)
     // ----------------------------------------------------
     const products = [
-        { id: "zircone-ht", name: "Zircone HT", price: 55000 },
-        { id: "ips-emax", name: "IPS e.max", price: 70000 },
-        { id: "pmma", name: "PMMA", price: 20000 },
-        { id: "guide-3d", name: "Guide 3D", price: 45000 },
-        { id: "aligneur", name: "Aligneur", price: 35000 },
-        { id: "stellite", name: "Stellite", price: 75000 }
+        // 1. Prothèses Fixes
+        { id: "zircone-post", name: "Zircone postérieur", price: 20000 },
+        { id: "zircone-ant", name: "Zircone haute esthétique (Antérieur)", price: 25000 },
+        { id: "zircone-strat", name: "Zircone stratifiée", price: 30000 },
+        { id: "bolt-design", name: "Solution Bolt design (Bridge)", price: 40000 },
+        { id: "crown-emax", name: "Couronne IPS Emax (Pressé)", price: 45000 },
+        { id: "ccm-cocr", name: "Couronne CCM (Co-Cr)", price: 25000 },
+        { id: "ccm-titane", name: "Couronne CCM (Alliage Titane)", price: 45000 },
+        { id: "pivot-cocr", name: "Pivot / Chape Co-Cr", price: 10000 },
+        { id: "facette-zirc", name: "Facette Zircone", price: 35000 },
+        { id: "facette-emax-std", name: "Facette Emax Standard", price: 30000 },
+        { id: "facette-ips-emax", name: "Facette IPS Emax", price: 40000 },
+        { id: "inlay-onlay-emax", name: "Inlay / Onlay Emax", price: 35000 },
+        { id: "pmma-complet", name: "Prothèse acrylique complète (PMMA CAD/CAM)", price: 30000 },
+        { id: "bridge-maryland-pmma", name: "Bridge du Maryland (PMMA 3D)", price: 15000 },
+        { id: "bridge-zirc", name: "Bridge Zircone CAD/CAM", price: 20000 },
+        { id: "bridge-emax", name: "Bridge Emax (Pressé)", price: 45000 },
+
+        // 2. Implants Dentaires
+        { id: "implant-zirc-mono", name: "Couronne Zircone sur implant (monolithique)", price: 30000 },
+        { id: "implant-pfz", name: "Couronne Zircone sur implant PFZ", price: 35000 },
+        { id: "implant-zirc-strat", name: "Couronne Zircone sur implant (stratifiée)", price: 40000 },
+        { id: "implant-cocr", name: "Couronne sur implant (Co-Cr)", price: 35000 },
+        { id: "implant-titane", name: "Couronne sur implant (Alliage Titane)", price: 55000 },
+        { id: "metal-plein-cocr", name: "Couronne métal plein (Co-Cr)", price: 20000 },
+        { id: "pilier-titane-droit", name: "Pilier Titane droit", price: 35000 },
+        { id: "pilier-titane-mu", name: "Pilier Titane multi-unité", price: 50000 },
+        { id: "pilier-zirc", name: "Pilier Zircone", price: 60000 },
+        { id: "bridge-implant-zirc", name: "Bridge complet Zircone (14 couronnes)", price: 250000 },
+        { id: "implant-arcade-complete", name: "Implant arcade complète (Barre Ti + 14 couronnes + gencive)", price: 640000 },
+        { id: "guide-3d", name: "Guide chirurgical (Résine 3D)", price: 65000 },
+
+        // 3. Prothèses Amovibles
+        { id: "base-valplast", name: "Base flexible (Valplast)", price: 30000 },
+        { id: "base-pmma", name: "Base résine acrylique (PMMA)", price: 7000 },
+        { id: "ajout-dent-base", name: "Ajout de dent sur base", price: 3000 },
+        { id: "stellite-cocr", name: "Stellite Co-Cr (1 arcade)", price: 20000 },
+        { id: "stellite-partielle", name: "Stellite Partielle Co-Cr", price: 15780 },
+        { id: "stellite-titane", name: "Stellite Titane (1 arcade)", price: 45000 },
+        { id: "stellite-titane-pur", name: "Stellite Titane pur (1 arcade)", price: 55000 },
+        { id: "ajout-dent-structure", name: "Ajout de dent sur structure", price: 5000 },
+
+        // 4. Appareils Orthodontiques
+        { id: "dilatateur-rapide", name: "Dilatateur d'arcade rapide (Supérieur)", price: 55000 },
+        { id: "arc-lingual", name: "Arc lingual inférieur", price: 25000 },
+        { id: "gouttiere-nocturne", name: "Gouttière nocturne", price: 15000 },
+        { id: "correcteur-habitudes", name: "Correcteur de mauvaises habitudes", price: 40000 },
+        { id: "invisalign-20", name: "Invisalign / Aligneur transparent (20 max)", price: 450000 },
+
+        // 5. Conception CAO
+        { id: "design-scan-3d", name: "Numérisation 3D (Full Mouth depuis plâtre)", price: 10000 },
+        { id: "design-structure", name: "Structure métallique (par Quadran)", price: 10000 },
+        { id: "design-crown-bridge", name: "Conception Couronne/Bridge (par unité)", price: 5000 },
+        { id: "design-implant", name: "Conception Couronne sur implant (par unité)", price: 10000 },
+        { id: "design-malone", name: "Bridge de Malone complet (arcade)", price: 50000 },
+        { id: "design-barre", name: "Barre d'implant complète (arcade)", price: 50000 }
     ];
 
     let cart = JSON.parse(localStorage.getItem('espoirdent_cart')) || [];

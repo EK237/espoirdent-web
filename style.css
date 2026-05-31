@@ -2215,3 +2215,85 @@ section {
     }
 }
 
+/* ==========================================================================
+   Editorial Pricing Table Styles
+   ========================================================================== */
+.pricing-category-block {
+    background: rgba(250, 248, 245, 0.015);
+    border: 1px solid rgba(176, 152, 82, 0.12);
+    border-radius: 4px;
+    padding: 32px;
+    margin-bottom: 48px;
+}
+
+.editorial-pricing-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 16px;
+    font-family: var(--font-sans);
+}
+
+.editorial-pricing-table th,
+.editorial-pricing-table td {
+    padding: 16px 20px;
+    text-align: left;
+    border-bottom: 1px solid rgba(176, 152, 82, 0.12);
+}
+
+.editorial-pricing-table th {
+    font-family: var(--font-serif);
+    font-size: 1.05rem;
+    color: var(--accent-gold);
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    background-color: rgba(176, 152, 82, 0.03);
+}
+
+.editorial-pricing-table tr {
+    transition: background-color 0.2s ease;
+}
+
+.editorial-pricing-table tr:hover {
+    background-color: rgba(250, 248, 245, 0.02);
+}
+
+.editorial-pricing-table td.product-name {
+    font-weight: 700;
+    color: var(--bg-cream);
+    font-size: 0.95rem;
+}
+
+.editorial-pricing-table td.product-desc {
+    color: var(--text-muted);
+    font-size: 0.88rem;
+    max-width: 400px;
+    line-height: 1.5;
+}
+
+.editorial-pricing-table td.product-price {
+    font-weight: 700;
+    color: var(--accent-gold);
+    font-size: 1rem;
+    white-space: nowrap;
+}
+
+.editorial-pricing-table td .add-to-cart-btn {
+    white-space: nowrap;
+}
+
+@media (max-width: 768px) {
+    .pricing-category-block {
+        padding: 16px;
+    }
+    
+    .editorial-pricing-table th,
+    .editorial-pricing-table td {
+        padding: 12px 10px;
+    }
+    
+    .editorial-pricing-table td.product-desc {
+        min-width: 200px;
+    }
+}
+
+

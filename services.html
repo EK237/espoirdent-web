@@ -70,121 +70,423 @@
         <!-- Services Detailed list -->
         <section class="services-details-section section-bg-dark" id="services-details-section">
             <div class="section-texture"></div>
-            <div class="container services-detail-list">
+            <div class="container">
                 
-                <!-- Service 1: Fixed Prosthetics (Conjointe) -->
-                <div class="service-detail-row reveal" id="conjointe">
-                    <div class="service-detail-content">
-                        <span class="section-tag">Prothèse Fixe</span>
-                        <h3>Couronnes & Bridges haute esthétique</h3>
-                        <p>Grâce au flux numérique, nous éliminons les marges d'erreur traditionnelles. Nos couronnes s'insèrent en bouche avec une friction idéale et des contacts d'une grande justesse anatomique.</p>
-                        <ul class="service-features-list">
-                            <li style="display: flex; flex-direction: column; gap: 8px; margin-bottom: 16px;">
-                                <div><i class="fa-solid fa-check"></i> <strong>Zircone Multicouche (High Translucency) :</strong> Allie une résistance à la flexion supérieure à 1100 MPa avec une transition de teinte naturelle.</div>
-                                <div style="display: flex; align-items: center; gap: 12px; margin-left: 24px;">
-                                    <span style="font-weight: 700; color: var(--accent-gold);">55 000 FCFA / unité</span>
-                                    <button class="add-to-cart-btn btn btn-accent btn-sm" data-id="zircone-ht" style="padding: 6px 12px; font-size: 0.75rem;"><i class="fa-solid fa-cart-plus"></i> Commander</button>
-                                </div>
-                            </li>
-                            <li style="display: flex; flex-direction: column; gap: 8px; margin-bottom: 16px;">
-                                <div><i class="fa-solid fa-check"></i> <strong>Disilicate de Lithium (e.max usiné/pressé) :</strong> La référence mondiale pour les facettes esthétiques et les restaurations unitaires antérieures.</div>
-                                <div style="display: flex; align-items: center; gap: 12px; margin-left: 24px;">
-                                    <span style="font-weight: 700; color: var(--accent-gold);">70 000 FCFA / unité</span>
-                                    <button class="add-to-cart-btn btn btn-accent btn-sm" data-id="ips-emax" style="padding: 6px 12px; font-size: 0.75rem;"><i class="fa-solid fa-cart-plus"></i> Commander</button>
-                                </div>
-                            </li>
-                            <li style="display: flex; flex-direction: column; gap: 8px; margin-bottom: 16px;">
-                                <div><i class="fa-solid fa-check"></i> <strong>Provisoires PMMA Usinés :</strong> Pour un guidage gingival optimal et une esthétique immédiate de longue durée.</div>
-                                <div style="display: flex; align-items: center; gap: 12px; margin-left: 24px;">
-                                    <span style="font-weight: 700; color: var(--accent-gold);">20 000 FCFA / unité</span>
-                                    <button class="add-to-cart-btn btn btn-accent btn-sm" data-id="pmma" style="padding: 6px 12px; font-size: 0.75rem;"><i class="fa-solid fa-cart-plus"></i> Commander</button>
-                                </div>
-                            </li>
-                        </ul>
-                        <div style="margin-top: 36px;">
-                            <a href="contact.html?service=fixe" class="btn btn-primary">Demander la grille tarifaire complète</a>
-                        </div>
+                <!-- Category 1: Fixed Prosthetics -->
+                <div class="pricing-category-block reveal" id="conjointe" style="margin-bottom: 64px;">
+                    <div class="category-header-editorial" style="margin-bottom: 24px; border-bottom: 1px solid var(--border-gold); padding-bottom: 16px;">
+                        <span class="section-tag" style="color: var(--accent-gold); font-weight: 600; text-transform: uppercase; font-size: 0.8rem; letter-spacing: 1px;">Série de Prothèses Fixes</span>
+                        <h3 style="font-family: var(--font-serif); font-size: 2.2rem; color: var(--bg-cream); margin: 8px 0;">Couronnes, Bridges & Facettes</h3>
+                        <p style="color: var(--text-muted); max-width: 800px; font-size: 1rem; line-height: 1.6;">Des restaurations hautement esthétiques usinées par CAD/CAM (CAO/FAO) ou pressées avec des tolérances micrométriques pour une insertion parfaite en bouche.</p>
                     </div>
-                    <div class="service-detail-visual">
-                        <img src="assets/service_3d_printed_dental.png" alt="Prothèses unitaires et modèles 3D en résine imprimés au laboratoire">
+                    <div class="pricing-table-wrapper" style="overflow-x: auto;">
+                        <table class="editorial-pricing-table">
+                            <thead>
+                                <tr>
+                                    <th>Restauration / Produit</th>
+                                    <th>Description & Matériaux</th>
+                                    <th>Prix Unitaire</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="product-name">Couronne / Inlay Zircone (Postérieur)</td>
+                                    <td class="product-desc">Usinée par CAD/CAM, haute résistance mécanique pour les secteurs postérieurs.</td>
+                                    <td class="product-price">20 000 FCFA</td>
+                                    <td><button class="add-to-cart-btn btn btn-accent btn-sm" data-id="zircone-post"><i class="fa-solid fa-cart-plus"></i> Commander</button></td>
+                                </tr>
+                                <tr>
+                                    <td class="product-name">Couronne / Inlay Zircone (Antérieur)</td>
+                                    <td class="product-desc">Zircone haute esthétique combinant translucidité naturelle et solidité.</td>
+                                    <td class="product-price">25 000 FCFA</td>
+                                    <td><button class="add-to-cart-btn btn btn-accent btn-sm" data-id="zircone-ant"><i class="fa-solid fa-cart-plus"></i> Commander</button></td>
+                                </tr>
+                                <tr>
+                                    <td class="product-name">Zircone Stratifiée</td>
+                                    <td class="product-desc">Zircone multi-couche avec montage de céramique cosmétique artisanale.</td>
+                                    <td class="product-price">30 000 FCFA</td>
+                                    <td><button class="add-to-cart-btn btn btn-accent btn-sm" data-id="zircone-strat"><i class="fa-solid fa-cart-plus"></i> Commander</button></td>
+                                </tr>
+                                <tr>
+                                    <td class="product-name">Solution Bolt design</td>
+                                    <td class="product-desc">Design spécial pour résoudre les problèmes de contre-dépouilles dans les bridges en zircone.</td>
+                                    <td class="product-price">40 000 FCFA</td>
+                                    <td><button class="add-to-cart-btn btn btn-accent btn-sm" data-id="bolt-design"><i class="fa-solid fa-cart-plus"></i> Commander</button></td>
+                                </tr>
+                                <tr>
+                                    <td class="product-name">Couronne IPS Emax</td>
+                                    <td class="product-desc">Céramique de disilicate de lithium pressée pour une esthétique absolue.</td>
+                                    <td class="product-price">45 000 FCFA</td>
+                                    <td><button class="add-to-cart-btn btn btn-accent btn-sm" data-id="crown-emax"><i class="fa-solid fa-cart-plus"></i> Commander</button></td>
+                                </tr>
+                                <tr>
+                                    <td class="product-name">Couronne CCM (Co-Cr)</td>
+                                    <td class="product-desc">Couronne céramo-métallique sur alliage Cobalt-Chrome biocompatible.</td>
+                                    <td class="product-price">25 000 FCFA</td>
+                                    <td><button class="add-to-cart-btn btn btn-accent btn-sm" data-id="ccm-cocr"><i class="fa-solid fa-cart-plus"></i> Commander</button></td>
+                                </tr>
+                                <tr>
+                                    <td class="product-name">Couronne CCM (Titane)</td>
+                                    <td class="product-desc">Céramo-métallique sur base d'alliage Titane léger et hypoallergénique.</td>
+                                    <td class="product-price">45 000 FCFA</td>
+                                    <td><button class="add-to-cart-btn btn btn-accent btn-sm" data-id="ccm-titane"><i class="fa-solid fa-cart-plus"></i> Commander</button></td>
+                                </tr>
+                                <tr>
+                                    <td class="product-name">Pivot / Chape Co-Cr</td>
+                                    <td class="product-desc">Inlay-core / pivot de reconstruction radiculaire en alliage Co-Cr.</td>
+                                    <td class="product-price">10 000 FCFA</td>
+                                    <td><button class="add-to-cart-btn btn btn-accent btn-sm" data-id="pivot-cocr"><i class="fa-solid fa-cart-plus"></i> Commander</button></td>
+                                </tr>
+                                <tr>
+                                    <td class="product-name">Facette Zircone</td>
+                                    <td class="product-desc">Fines facettes en zircone avec micro-stratification de porcelaine.</td>
+                                    <td class="product-price">35 000 FCFA</td>
+                                    <td><button class="add-to-cart-btn btn btn-accent btn-sm" data-id="facette-zirc"><i class="fa-solid fa-cart-plus"></i> Commander</button></td>
+                                </tr>
+                                <tr>
+                                    <td class="product-name">Facette Emax Standard</td>
+                                    <td class="product-desc">Facette cosmétique en disilicate de lithium, haute qualité standard.</td>
+                                    <td class="product-price">30 000 FCFA</td>
+                                    <td><button class="add-to-cart-btn btn btn-accent btn-sm" data-id="facette-emax-std"><i class="fa-solid fa-cart-plus"></i> Commander</button></td>
+                                </tr>
+                                <tr>
+                                    <td class="product-name">Facette IPS Emax</td>
+                                    <td class="product-desc">Facette esthétique haut de gamme, polissage et personnalisation avancés.</td>
+                                    <td class="product-price">40 000 FCFA</td>
+                                    <td><button class="add-to-cart-btn btn btn-accent btn-sm" data-id="facette-ips-emax"><i class="fa-solid fa-cart-plus"></i> Commander</button></td>
+                                </tr>
+                                <tr>
+                                    <td class="product-name">Inlay / Onlay Emax</td>
+                                    <td class="product-desc">Restauration partielle esthétique pour préserver la structure dentaire saine.</td>
+                                    <td class="product-price">35 000 FCFA</td>
+                                    <td><button class="add-to-cart-btn btn btn-accent btn-sm" data-id="inlay-onlay-emax"><i class="fa-solid fa-cart-plus"></i> Commander</button></td>
+                                </tr>
+                                <tr>
+                                    <td class="product-name">Prothèse Acrylique Complète (PMMA)</td>
+                                    <td class="product-desc">Base acrylique usinée par disque PMMA CAD/CAM pour une stabilité accrue.</td>
+                                    <td class="product-price">30 000 FCFA</td>
+                                    <td><button class="add-to-cart-btn btn btn-accent btn-sm" data-id="pmma-complet"><i class="fa-solid fa-cart-plus"></i> Commander</button></td>
+                                </tr>
+                                <tr>
+                                    <td class="product-name">Bridge du Maryland (PMMA)</td>
+                                    <td class="product-desc">Bridge provisoire collé avec ailettes métalliques, impression 3D résine.</td>
+                                    <td class="product-price">15 000 FCFA</td>
+                                    <td><button class="add-to-cart-btn btn btn-accent btn-sm" data-id="bridge-maryland-pmma"><i class="fa-solid fa-cart-plus"></i> Commander</button></td>
+                                </tr>
+                                <tr>
+                                    <td class="product-name">Bridge Zircone CAD/CAM</td>
+                                    <td class="product-desc">Bridge anatomique usiné par ordinateur (prix par élément).</td>
+                                    <td class="product-price">20 000 FCFA</td>
+                                    <td><button class="add-to-cart-btn btn btn-accent btn-sm" data-id="bridge-zirc"><i class="fa-solid fa-cart-plus"></i> Commander</button></td>
+                                </tr>
+                                <tr>
+                                    <td class="product-name">Bridge Emax (Pressé)</td>
+                                    <td class="product-desc">Pont de restauration tout-céramique esthétique (prix par élément).</td>
+                                    <td class="product-price">45 000 FCFA</td>
+                                    <td><button class="add-to-cart-btn btn btn-accent btn-sm" data-id="bridge-emax"><i class="fa-solid fa-cart-plus"></i> Commander</button></td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
 
-                <!-- Service 2: Implantology (Implant) - Visual Left, Text Right -->
-                <div class="service-detail-row reverse reveal" id="implant">
-                    <div class="service-detail-content">
-                        <span class="section-tag">Implantologie</span>
-                        <h3>Solutions implantaires personnalisées</h3>
-                        <p>Nous concevons l'ensemble des éléments implantaires en respectant l'axe idéal d'insertion et le profil d'émergence biologique de la gencive du patient.</p>
-                        <ul class="service-features-list">
-                            <li style="margin-bottom: 12px;"><i class="fa-solid fa-check"></i> <strong>Piliers Personnalisés (Custom Abutments) :</strong> Conçus en titane ou en zircone sur base titane (Ti-Base) pour toutes les grandes marques d'implants.</li>
-                            <li style="display: flex; flex-direction: column; gap: 8px; margin-bottom: 16px;">
-                                <div><i class="fa-solid fa-check"></i> <strong>Guides Chirurgicaux 3D :</strong> Planification précise à partir des fichiers DICOM (scanner CBCT) et STL pour sécuriser l'axe implantaire.</div>
-                                <div style="display: flex; align-items: center; gap: 12px; margin-left: 24px;">
-                                    <span style="font-weight: 700; color: var(--accent-gold);">45 000 FCFA / guide</span>
-                                    <button class="add-to-cart-btn btn btn-accent btn-sm" data-id="guide-3d" style="padding: 6px 12px; font-size: 0.75rem;"><i class="fa-solid fa-cart-plus"></i> Commander</button>
-                                </div>
-                            </li>
-                            <li><i class="fa-solid fa-check"></i> <strong>Barres & Bridges transvissés :</strong> Usinés en titane monobloc pour des réhabilitations complètes type All-on-4 ou All-on-6.</li>
-                        </ul>
-                        <div style="margin-top: 36px;">
-                            <a href="contact.html?service=implant" class="btn btn-primary">Soumettre un scanner 3D</a>
-                        </div>
+                <!-- Category 2: Implants -->
+                <div class="pricing-category-block reveal" id="implant" style="margin-bottom: 64px;">
+                    <div class="category-header-editorial" style="margin-bottom: 24px; border-bottom: 1px solid var(--border-gold); padding-bottom: 16px;">
+                        <span class="section-tag" style="color: var(--accent-gold); font-weight: 600; text-transform: uppercase; font-size: 0.8rem; letter-spacing: 1px;">Implantologie Numérique</span>
+                        <h3 style="font-family: var(--font-serif); font-size: 2.2rem; color: var(--bg-cream); margin: 8px 0;">Couronnes, Piliers & Guides</h3>
+                        <p style="color: var(--text-muted); max-width: 800px; font-size: 1rem; line-height: 1.6;">Planification 3D et usinage de dispositifs implantaires personnalisés pour toutes les grandes marques d'implants.</p>
                     </div>
-                    <div class="service-detail-visual">
-                        <img src="assets/hero_digital_dental_design.png" alt="Planification et conception CAO de piliers implantaires personnalisés">
+                    <div class="pricing-table-wrapper" style="overflow-x: auto;">
+                        <table class="editorial-pricing-table">
+                            <thead>
+                                <tr>
+                                    <th>Dispositif Implantaire</th>
+                                    <th>Description & Matériaux</th>
+                                    <th>Prix Unitaire</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="product-name">Couronne Zircone sur Implant (Monolithique)</td>
+                                    <td class="product-desc">Zircone pleine masse vissée ou scellée sur embase.</td>
+                                    <td class="product-price">30 000 FCFA</td>
+                                    <td><button class="add-to-cart-btn btn btn-accent btn-sm" data-id="implant-zirc-mono"><i class="fa-solid fa-cart-plus"></i> Commander</button></td>
+                                </tr>
+                                <tr>
+                                    <td class="product-name">Couronne Zircone sur Implant (PFZ)</td>
+                                    <td class="product-desc">Zircone haute esthétique avec translucidité optimisée.</td>
+                                    <td class="product-price">35 000 FCFA</td>
+                                    <td><button class="add-to-cart-btn btn btn-accent btn-sm" data-id="implant-pfz"><i class="fa-solid fa-cart-plus"></i> Commander</button></td>
+                                </tr>
+                                <tr>
+                                    <td class="product-name">Couronne Zircone sur Implant (Stratifiée)</td>
+                                    <td class="product-desc">Structure zircone avec montage de céramique esthétique.</td>
+                                    <td class="product-price">40 000 FCFA</td>
+                                    <td><button class="add-to-cart-btn btn btn-accent btn-sm" data-id="implant-zirc-strat"><i class="fa-solid fa-cart-plus"></i> Commander</button></td>
+                                </tr>
+                                <tr>
+                                    <td class="product-name">Couronne sur Implant Co-Cr</td>
+                                    <td class="product-desc">Céramo-métallique sur implant, alliage Cobalt-Chrome.</td>
+                                    <td class="product-price">35 000 FCFA</td>
+                                    <td><button class="add-to-cart-btn btn btn-accent btn-sm" data-id="implant-cocr"><i class="fa-solid fa-cart-plus"></i> Commander</button></td>
+                                </tr>
+                                <tr>
+                                    <td class="product-name">Couronne sur Implant Titane</td>
+                                    <td class="product-desc">Céramo-métallique sur implant, alliage Titane.</td>
+                                    <td class="product-price">55 000 FCFA</td>
+                                    <td><button class="add-to-cart-btn btn btn-accent btn-sm" data-id="implant-titane"><i class="fa-solid fa-cart-plus"></i> Commander</button></td>
+                                </tr>
+                                <tr>
+                                    <td class="product-name">Couronne métal plein Co-Cr</td>
+                                    <td class="product-desc">Couronne entièrement métallique non-esthétique pour secteurs postérieurs.</td>
+                                    <td class="product-price">20 000 FCFA</td>
+                                    <td><button class="add-to-cart-btn btn btn-accent btn-sm" data-id="metal-plein-cocr"><i class="fa-solid fa-cart-plus"></i> Commander</button></td>
+                                </tr>
+                                <tr>
+                                    <td class="product-name">Pilier Titane droit</td>
+                                    <td class="product-desc">Pilier implantaire personnalisé droit usiné en Titane médical.</td>
+                                    <td class="product-price">35 000 FCFA</td>
+                                    <td><button class="add-to-cart-btn btn btn-accent btn-sm" data-id="pilier-titane-droit"><i class="fa-solid fa-cart-plus"></i> Commander</button></td>
+                                </tr>
+                                <tr>
+                                    <td class="product-name">Pilier Titane multi-unité</td>
+                                    <td class="product-desc">Pilier implantaire angulé ou complexe pour bridges transvissés.</td>
+                                    <td class="product-price">50 000 FCFA</td>
+                                    <td><button class="add-to-cart-btn btn btn-accent btn-sm" data-id="pilier-titane-mu"><i class="fa-solid fa-cart-plus"></i> Commander</button></td>
+                                </tr>
+                                <tr>
+                                    <td class="product-name">Pilier Zircone</td>
+                                    <td class="product-desc">Pilier personnalisé en zircone hautement esthétique sur base titane.</td>
+                                    <td class="product-price">60 000 FCFA</td>
+                                    <td><button class="add-to-cart-btn btn btn-accent btn-sm" data-id="pilier-zirc"><i class="fa-solid fa-cart-plus"></i> Commander</button></td>
+                                </tr>
+                                <tr>
+                                    <td class="product-name">Bridge Complet Zircone (14 couronnes)</td>
+                                    <td class="product-desc">Bridge complet vissé sur implants, 14 dents usinées en Zircone.</td>
+                                    <td class="product-price">250 000 FCFA</td>
+                                    <td><button class="add-to-cart-btn btn btn-accent btn-sm" data-id="bridge-implant-zirc"><i class="fa-solid fa-cart-plus"></i> Commander</button></td>
+                                </tr>
+                                <tr>
+                                    <td class="product-name">Implant Arcade Complète Premium</td>
+                                    <td class="product-desc">Inclut la barre titane usinée, 14 couronnes zircone, et la gencive cosmétique.</td>
+                                    <td class="product-price">640 000 FCFA</td>
+                                    <td><button class="add-to-cart-btn btn btn-accent btn-sm" data-id="implant-arcade-complete"><i class="fa-solid fa-cart-plus"></i> Commander</button></td>
+                                </tr>
+                                <tr>
+                                    <td class="product-name">Guide Chirurgical</td>
+                                    <td class="product-desc">Guide de positionnement implantaire imprimé en résine chirurgicale 3D.</td>
+                                    <td class="product-price">65 000 FCFA</td>
+                                    <td><button class="add-to-cart-btn btn btn-accent btn-sm" data-id="guide-3d"><i class="fa-solid fa-cart-plus"></i> Commander</button></td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
 
-                <!-- Service 3: Orthodontics (Aligneurs) -->
-                <div class="service-detail-row reveal" id="aligneurs">
-                    <div class="service-detail-content">
-                        <span class="section-tag">Orthodontie</span>
-                        <h3>Aligneurs Invisibles (Gouttières)</h3>
-                        <p>Offrez à vos patients une alternative esthétique et confortable aux bagues métalliques traditionnelles. Nous planifions la séquence des mouvements dentaires sur logiciel dédié.</p>
-                        <ul class="service-features-list">
-                            <li style="margin-bottom: 12px;"><i class="fa-solid fa-check"></i> <strong>Planification Numérique (Setup 3D) :</strong> Simulation interactive des déplacements dentaires, validée par nos techniciens et soumise à votre accord.</li>
-                            <li style="margin-bottom: 12px;"><i class="fa-solid fa-check"></i> <strong>Impression 3D Ultra-Précise :</strong> Modèles physiques de chaque étape de traitement pour un thermoformage parfait.</li>
-                            <li style="display: flex; flex-direction: column; gap: 8px; margin-bottom: 16px;">
-                                <div><i class="fa-solid fa-check"></i> <strong>Aligneur Transparent (l'unité par étape) :</strong> Thermoformé sur modèle imprimé en 3D avec un matériau thermoplastique premium pour une force constante et invisible.</div>
-                                <div style="display: flex; align-items: center; gap: 12px; margin-left: 24px;">
-                                    <span style="font-weight: 700; color: var(--accent-gold);">35 000 FCFA / aligneur</span>
-                                    <button class="add-to-cart-btn btn btn-accent btn-sm" data-id="aligneur" style="padding: 6px 12px; font-size: 0.75rem;"><i class="fa-solid fa-cart-plus"></i> Commander</button>
-                                </div>
-                            </li>
-                        </ul>
-                        <div style="margin-top: 36px;">
-                            <a href="contact.html?service=aligneurs" class="btn btn-primary">Demander un setup 3D test</a>
-                        </div>
+                <!-- Category 3: Removable Prosthetics -->
+                <div class="pricing-category-block reveal" id="adjointe" style="margin-bottom: 64px;">
+                    <div class="category-header-editorial" style="margin-bottom: 24px; border-bottom: 1px solid var(--border-gold); padding-bottom: 16px;">
+                        <span class="section-tag" style="color: var(--accent-gold); font-weight: 600; text-transform: uppercase; font-size: 0.8rem; letter-spacing: 1px;">Prothèses Amovibles</span>
+                        <h3 style="font-family: var(--font-serif); font-size: 2.2rem; color: var(--bg-cream); margin: 8px 0;">Stellites & Bases Flexibles</h3>
+                        <p style="color: var(--text-muted); max-width: 800px; font-size: 1rem; line-height: 1.6;">Solutions amovibles alliant la précision du métal fritté par laser à la légèreté des résines biocompatibles.</p>
                     </div>
-                    <div class="service-detail-visual">
-                        <img src="assets/about_dental_lab_team.png" alt="Techniciens validant un plan de traitement d'aligneurs orthodontiques invisibles">
+                    <div class="pricing-table-wrapper" style="overflow-x: auto;">
+                        <table class="editorial-pricing-table">
+                            <thead>
+                                <tr>
+                                    <th>Solution Amovible</th>
+                                    <th>Description & Matériaux</th>
+                                    <th>Prix Unitaire</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="product-name">Base Flexible (Valplast)</td>
+                                    <td class="product-desc">Prothèse amovible en nylon flexible biocompatible sans crochets métalliques.</td>
+                                    <td class="product-price">30 000 FCFA</td>
+                                    <td><button class="add-to-cart-btn btn btn-accent btn-sm" data-id="base-valplast"><i class="fa-solid fa-cart-plus"></i> Commander</button></td>
+                                </tr>
+                                <tr>
+                                    <td class="product-name">Base en Résine Acrylique (PMMA)</td>
+                                    <td class="product-desc">Base acrylique standard pour arcade complète usinée par ordinateur.</td>
+                                    <td class="product-price">7 000 FCFA</td>
+                                    <td><button class="add-to-cart-btn btn btn-accent btn-sm" data-id="base-pmma"><i class="fa-solid fa-cart-plus"></i> Commander</button></td>
+                                </tr>
+                                <tr>
+                                    <td class="product-name">Ajout de dent sur base</td>
+                                    <td class="product-desc">Prix par élément dentaire ajouté sur une base résine.</td>
+                                    <td class="product-price">3 000 FCFA</td>
+                                    <td><button class="add-to-cart-btn btn btn-accent btn-sm" data-id="ajout-dent-base"><i class="fa-solid fa-cart-plus"></i> Commander</button></td>
+                                </tr>
+                                <tr>
+                                    <td class="product-name">Stellite Co&Cr (1 arcade)</td>
+                                    <td class="product-desc">Structure de châssis métallique en alliage Chrome-Cobalt.</td>
+                                    <td class="product-price">20 000 FCFA</td>
+                                    <td><button class="add-to-cart-btn btn btn-accent btn-sm" data-id="stellite-cocr"><i class="fa-solid fa-cart-plus"></i> Commander</button></td>
+                                </tr>
+                                <tr>
+                                    <td class="product-name">Stellite Partielle Co&Cr</td>
+                                    <td class="product-desc">Structure métallique pour édentement partiel localisé.</td>
+                                    <td class="product-price">15 780 FCFA</td>
+                                    <td><button class="add-to-cart-btn btn btn-accent btn-sm" data-id="stellite-partielle"><i class="fa-solid fa-cart-plus"></i> Commander</button></td>
+                                </tr>
+                                <tr>
+                                    <td class="product-name">Stellite Titane (1 arcade)</td>
+                                    <td class="product-desc">Châssis métallique léger et résistant en alliage Titane.</td>
+                                    <td class="product-price">45 000 FCFA</td>
+                                    <td><button class="add-to-cart-btn btn btn-accent btn-sm" data-id="stellite-titane"><i class="fa-solid fa-cart-plus"></i> Commander</button></td>
+                                </tr>
+                                <tr>
+                                    <td class="product-name">Stellite Titane pur (1 arcade)</td>
+                                    <td class="product-desc">Châssis en Titane pur, biocompatibilité maximale, ultra-léger.</td>
+                                    <td class="product-price">55 000 FCFA</td>
+                                    <td><button class="add-to-cart-btn btn btn-accent btn-sm" data-id="stellite-titane-pur"><i class="fa-solid fa-cart-plus"></i> Commander</button></td>
+                                </tr>
+                                <tr>
+                                    <td class="product-name">Ajout de dent sur structure</td>
+                                    <td class="product-desc">Prix par élément dentaire ajouté sur châssis stellite.</td>
+                                    <td class="product-price">5 000 FCFA</td>
+                                    <td><button class="add-to-cart-btn btn btn-accent btn-sm" data-id="ajout-dent-structure"><i class="fa-solid fa-cart-plus"></i> Commander</button></td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
 
-                <!-- Service 4: Removable Prosthetics (Adjointe) - Visual Left, Text Right -->
-                <div class="service-detail-row reverse reveal" id="adjointe">
-                    <div class="service-detail-content">
-                        <span class="section-tag">Prothèse Amovible</span>
-                        <h3>Châssis Stellites par Frittage Laser</h3>
-                        <p>La prothèse adjointe bénéficie de la légèreté et de la précision du métal imprimé en 3D. Fini les Stellites trop serrés ou douloureux pour les patients.</p>
-                        <ul class="service-features-list">
-                            <li style="display: flex; flex-direction: column; gap: 8px; margin-bottom: 16px;">
-                                <div><i class="fa-solid fa-check"></i> <strong>Stellites en Chrome-Cobalt :</strong> Dessinés par CAO pour optimiser l'insertion des crochets et imprimés par frittage laser de poudre métallique.</div>
-                                <div style="display: flex; align-items: center; gap: 12px; margin-left: 24px;">
-                                    <span style="font-weight: 700; color: var(--accent-gold);">75 000 FCFA / châssis</span>
-                                    <button class="add-to-cart-btn btn btn-accent btn-sm" data-id="stellite" style="padding: 6px 12px; font-size: 0.75rem;"><i class="fa-solid fa-cart-plus"></i> Commander</button>
-                                </div>
-                            </li>
-                            <li style="margin-bottom: 12px;"><i class="fa-solid fa-check"></i> <strong>Prothèses Résine partielles/complètes :</strong> Impression 3D de bases en résine biocompatible teintée de grade médical.</li>
-                            <li><i class="fa-solid fa-check"></i> <strong>Modélisation combinée :</strong> Liaison parfaite entre éléments fixes (couronnes fraisées) et amovibles.</li>
-                        </ul>
-                        <div style="margin-top: 36px;">
-                            <a href="contact.html?service=adjointe" class="btn btn-primary">Discuter d'un cas adjoint</a>
-                        </div>
+                <!-- Category 4: Orthodontics -->
+                <div class="pricing-category-block reveal" id="aligneurs" style="margin-bottom: 64px;">
+                    <div class="category-header-editorial" style="margin-bottom: 24px; border-bottom: 1px solid var(--border-gold); padding-bottom: 16px;">
+                        <span class="section-tag" style="color: var(--accent-gold); font-weight: 600; text-transform: uppercase; font-size: 0.8rem; letter-spacing: 1px;">Appareils Orthodontiques</span>
+                        <h3 style="font-family: var(--font-serif); font-size: 2.2rem; color: var(--bg-cream); margin: 8px 0;">Aligneurs & Dispositifs Cliniques</h3>
+                        <p style="color: var(--text-muted); max-width: 800px; font-size: 1rem; line-height: 1.6;">Planification numérique 3D des déplacements dentaires et fabrication d'appareils de haute précision.</p>
                     </div>
-                    <div class="service-detail-visual">
-                        <img src="assets/cta_modern_dental_clinic.png" alt="Vue d'une clinique moderne où sont posées les restaurations prothétiques finales">
+                    <div class="pricing-table-wrapper" style="overflow-x: auto;">
+                        <table class="editorial-pricing-table">
+                            <thead>
+                                <tr>
+                                    <th>Appareil Orthodontique</th>
+                                    <th>Description & Spécifications</th>
+                                    <th>Prix Unitaire</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="product-name">Dilatateur d'arcade rapide</td>
+                                    <td class="product-desc">Dispositif supérieur d'expansion palatine rapide.</td>
+                                    <td class="product-price">55 000 FCFA</td>
+                                    <td><button class="add-to-cart-btn btn btn-accent btn-sm" data-id="dilatateur-rapide"><i class="fa-solid fa-cart-plus"></i> Commander</button></td>
+                                </tr>
+                                <tr>
+                                    <td class="product-name">Arc lingual inférieur</td>
+                                    <td class="product-desc">Dispositif de maintien d'espace d'arcade inférieure.</td>
+                                    <td class="product-price">25 000 FCFA</td>
+                                    <td><button class="add-to-cart-btn btn btn-accent btn-sm" data-id="arc-lingual"><i class="fa-solid fa-cart-plus"></i> Commander</button></td>
+                                </tr>
+                                <tr>
+                                    <td class="product-name">Gouttière nocturne</td>
+                                    <td class="product-desc">Épaisseur de 1,0 à 3,0 mm, texture souple ou dure selon indication (bruxisme).</td>
+                                    <td class="product-price">15 000 FCFA</td>
+                                    <td><button class="add-to-cart-btn btn btn-accent btn-sm" data-id="gouttiere-nocturne"><i class="fa-solid fa-cart-plus"></i> Commander</button></td>
+                                </tr>
+                                <tr>
+                                    <td class="product-name">Correcteur de mauvaises habitudes</td>
+                                    <td class="product-desc">Gouttière myofonctionnelle d'interposition pour enfants.</td>
+                                    <td class="product-price">40 000 FCFA</td>
+                                    <td><button class="add-to-cart-btn btn btn-accent btn-sm" data-id="correcteur-habitudes"><i class="fa-solid fa-cart-plus"></i> Commander</button></td>
+                                </tr>
+                                <tr>
+                                    <td class="product-name">Invisalign / Aligneur transparent</td>
+                                    <td class="product-desc">Séquence d'alignement invisible imprimée en 3D (traitement de 20 gouttières max).</td>
+                                    <td class="product-price">450 000 FCFA</td>
+                                    <td><button class="add-to-cart-btn btn btn-accent btn-sm" data-id="invisalign-20"><i class="fa-solid fa-cart-plus"></i> Commander</button></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Category 5: Design Services -->
+                <div class="pricing-category-block reveal" id="conception" style="margin-bottom: 64px;">
+                    <div class="category-header-editorial" style="margin-bottom: 24px; border-bottom: 1px solid var(--border-gold); padding-bottom: 16px;">
+                        <span class="section-tag" style="color: var(--accent-gold); font-weight: 600; text-transform: uppercase; font-size: 0.8rem; letter-spacing: 1px;">Services de Conception CAO (24-72h)</span>
+                        <h3 style="font-family: var(--font-serif); font-size: 2.2rem; color: var(--bg-cream); margin: 8px 0;">Design 3D Exportable</h3>
+                        <p style="color: var(--text-muted); max-width: 800px; font-size: 1rem; line-height: 1.6;">Pour les cabinets équipés d'imprimantes 3D ou d'usineuses souhaitant sous-traiter uniquement le design numérique 3D.</p>
+                    </div>
+                    <div class="pricing-table-wrapper" style="overflow-x: auto;">
+                        <table class="editorial-pricing-table">
+                            <thead>
+                                <tr>
+                                    <th>Service de Design 3D</th>
+                                    <th>Description des livrables</th>
+                                    <th>Prix Unitaire</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="product-name">Numérisation 3D</td>
+                                    <td class="product-desc">Numérisation et création du modèle 3D depuis empreinte plâtre (Full Mouth).</td>
+                                    <td class="product-price">10 000 FCFA</td>
+                                    <td><button class="add-to-cart-btn btn btn-accent btn-sm" data-id="design-scan-3d"><i class="fa-solid fa-cart-plus"></i> Commander</button></td>
+                                </tr>
+                                <tr>
+                                    <td class="product-name">Structure Métallique par Quadran</td>
+                                    <td class="product-desc">Conception numérique de châssis stellite exportable en STL.</td>
+                                    <td class="product-price">10 000 FCFA</td>
+                                    <td><button class="add-to-cart-btn btn btn-accent btn-sm" data-id="design-structure"><i class="fa-solid fa-cart-plus"></i> Commander</button></td>
+                                </tr>
+                                <tr>
+                                    <td class="product-name">Conception Couronnes et Bridges</td>
+                                    <td class="product-desc">Design par couronne d'un élément anatomique unitaire ou plural.</td>
+                                    <td class="product-price">5 000 FCFA</td>
+                                    <td><button class="add-to-cart-btn btn btn-accent btn-sm" data-id="design-crown-bridge"><i class="fa-solid fa-cart-plus"></i> Commander</button></td>
+                                </tr>
+                                <tr>
+                                    <td class="product-name">Conception Implant</td>
+                                    <td class="product-desc">Design par couronne d'une restauration vissée sur pilier ou Ti-Base.</td>
+                                    <td class="product-price">10 000 FCFA</td>
+                                    <td><button class="add-to-cart-btn btn btn-accent btn-sm" data-id="design-implant"><i class="fa-solid fa-cart-plus"></i> Commander</button></td>
+                                </tr>
+                                <tr>
+                                    <td class="product-name">Bridge sur implant (Malone complet)</td>
+                                    <td class="product-desc">Design d'un bridge transvissé complet type Malone, arcade complète.</td>
+                                    <td class="product-price">50 000 FCFA</td>
+                                    <td><button class="add-to-cart-btn btn btn-accent btn-sm" data-id="design-malone"><i class="fa-solid fa-cart-plus"></i> Commander</button></td>
+                                </tr>
+                                <tr>
+                                    <td class="product-name">Barre d'implant</td>
+                                    <td class="product-desc">Conception CAO d'une barre d'implant d'arcade complète.</td>
+                                    <td class="product-price">5 000 FCFA</td>
+                                    <td><button class="add-to-cart-btn btn btn-accent btn-sm" data-id="design-barre"><i class="fa-solid fa-cart-plus"></i> Commander</button></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Notes & Commercial Conditions -->
+                <div class="notes-conditions-block reveal" style="margin-top: 64px; border-top: 1px solid var(--border-gold); padding-top: 48px; display: grid; grid-template-columns: 1fr; gap: 32px;">
+                    <div style="background: rgba(176, 152, 82, 0.03); border: 1px solid rgba(176, 152, 82, 0.15); padding: 24px; border-radius: 4px;">
+                        <h4 style="font-family: var(--font-serif); font-size: 1.4rem; color: var(--bg-cream); margin-bottom: 16px;"><i class="fa-solid fa-clipboard-list" style="color: var(--accent-gold); margin-right: 8px;"></i> Notes Importantes</h4>
+                        <ul class="editorial-list" style="color: var(--text-muted); line-height: 1.8; font-size: 0.95rem; list-style-type: square; padding-left: 20px;">
+                            <li>Tous nos matériaux sont rigoureusement approuvés par les normes <strong>CE/FDA</strong>.</li>
+                            <li>La tarification appliquée correspond à notre formule économique standard : fabrication sous <strong>2 à 3 semaines</strong> après réception physique des empreintes au Laboratoire (sauf pour les services de conception pure).</li>
+                            <li>Les tarifs affichés ne comprennent pas les frais logistiques de collecte et de livraison en dehors de notre zone de gratuité.</li>
+                            <li>Pour toute demande technique spéciale ou travail sur-mesure non répertorié, notre équipe technique est disponible pour s'accorder avec votre cabinet.</li>
+                        </ul>
+                    </div>
+                    <div style="background: rgba(176, 152, 82, 0.03); border: 1px solid rgba(176, 152, 82, 0.15); padding: 24px; border-radius: 4px;">
+                        <h4 style="font-family: var(--font-serif); font-size: 1.4rem; color: var(--bg-cream); margin-bottom: 16px;"><i class="fa-solid fa-file-contract" style="color: var(--accent-gold); margin-right: 8px;"></i> Conditions Commerciales</h4>
+                        <ul class="editorial-list" style="color: var(--text-muted); line-height: 1.8; font-size: 0.95rem; list-style-type: square; padding-left: 20px;">
+                            <li>Les prix indiqués sont net et Toutes Taxes Comprises (TTC).</li>
+                            <li>Ces tarifs s'appliquent exclusivement aux travaux de conception et de fabrication en laboratoire de prothèse.</li>
+                            <li><strong>Conditions de règlement :</strong> Acompte de <strong>70%</strong> à la commande avant le lancement de la production, et solde de <strong>30%</strong> (majoré d'éventuels frais logistiques) exigible avant la livraison finale des dispositifs.</li>
+                        </ul>
                     </div>
                 </div>
 
